@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import {Link, NavLink, Redirect} from 'react-router-dom';
+import {Button, Popup} from 'semantic-ui-react';
+import MebelAddForm from '../forms/MebelAddForm';
 
 
 
@@ -46,12 +48,19 @@ class LoginPage extends Component{
       var {logged} = this.state;
       if (!logged){
         return(
-          
+
             <div onSubmit={this.handleSubmit} className="FormCenter">
               <div className="PageSwitch">
                 <NavLink to="/login" activeClassName="PageSwitcher PageSwitcher--Active" className="PageSwitcher"> Zaloguj</NavLink>
                 <NavLink exact to="/" activeClassName="PageSwitcher PageSwitcher--Active" className="PageSwitcher">Zarejestruj</NavLink>
               </div>
+              <Popup className="mebelform"
+                trigger={<Button positive>Dodaj mebla kumpel</Button>}
+                content={<MebelAddForm submit={this.submit}/>}
+                on='click'
+                hideOnScroll
+                wide
+              />
                 <form className="FormFields">
                   {/*Pole tekstowe - login*/}
                   <div className="FormField">
@@ -73,18 +82,18 @@ class LoginPage extends Component{
                     <button className="FormField__Button mr-20"> Zaloguj</button>
                     <Link to="/furnitures" className="FormField__Link">Stwórz nowe konto</Link>
                   </div>
-                </form> 
+                </form>
             </div>
         )
     }
     else{
       this.props.logUser(this.state.login);
       return(
-        
+
         <Redirect to='/furnitures/list' />
       )
     }
   }
-  
+
 }
 export default LoginPage;
