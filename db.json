@@ -1,0 +1,138 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "login": "czoppeq",
+      "password": "haslo",
+      "firstName": "John",
+      "lastName": "Doe",
+      "email": "john@gmail.com"
+    },
+    {
+      "id": "2",
+      "login": "milok",
+      "password": "haslo123",
+      "firstName": "Miłke",
+      "lastName": "MIłkówski",
+      "email": "siemka@gmail.com"
+    },
+    {
+      "id": "3",
+      "login": "brodi",
+      "password": "tajne",
+      "firstName": "Michaił",
+      "lastName": "Kliczko",
+      "email": "john@gmail.com"
+    },
+    {
+      "login": "asd",
+      "firstName": "asasdasd",
+      "lastName": "asdasd",
+      "password": "dasdasd",
+      "email": "asdad@o2.pl",
+      "id": "rIdSPmW"
+    },
+    {
+      "login": "asd",
+      "firstName": "asasdasd",
+      "lastName": "asdasd",
+      "password": "dasdasd",
+      "email": "asdad@o2.pl",
+      "id": "7BbQWhr"
+    },
+    {
+      "login": "asd",
+      "firstName": "asasdasd",
+      "lastName": "asdasd",
+      "password": "dasdasd",
+      "email": "asdad@o2.pl",
+      "id": "yBGozHD"
+    },
+    {
+      "login": "asd",
+      "firstName": "asasdasd",
+      "lastName": "asdasd",
+      "password": "dasdasd",
+      "email": "asdad@o2.pl",
+      "id": "IQ4Bwfk"
+    },
+    {
+      "login": "asd",
+      "firstName": "asasdasd",
+      "lastName": "asdasd",
+      "password": "dasdasd",
+      "email": "asdad@o2.pl",
+      "id": "5iMco6V"
+    }
+  ],
+  "furnitures": [
+    {
+      "id": "1",
+      "name": "Szafa Andrzej",
+      "location": "lokacja",
+      "texture": "jest jakaś",
+      "icon": "tu jest ikona",
+      "category": "szafy",
+      "description": "dobry opis to jest szafy"
+    },
+    {
+      "id": "2",
+      "name": "Krzesełek Bodziek",
+      "location": "lokacja123",
+      "texture": "jest jakaś132",
+      "icon": "tu jest ikona12",
+      "category": "krzesła",
+      "description": "dobry opis to jest krzesła"
+    },
+    {
+      "id": "3",
+      "name": "Chleb Stacjonary",
+      "location": "lokacja33",
+      "texture": "jest jakaś33",
+      "icon": "tu jest ikona3",
+      "category": "okna",
+      "description": "dobry opis to jest chleba"
+    },
+    {
+      "id": "4",
+      "name": "Okiennica przejściowa",
+      "location": "lokacja3324",
+      "texture": "jest jakaś3344",
+      "icon": "tu jest ikona344",
+      "category": "okna",
+      "description": "dobry opis to jest okiennicy"
+    },
+    {
+      "id": "5",
+      "name": "Taborecik wielki",
+      "location": "lokacja3312",
+      "texture": "jest jakaś3321",
+      "icon": "tu jest ikona333",
+      "category": "krzesła",
+      "description": "dobry opis to jest taborecika"
+    }
+  ],
+  "transform": [
+    {
+      "id": "1",
+      "x": "1.2",
+      "y": "2.2",
+      "z": "0.4",
+      "furnitureId": "1"
+    },
+    {
+      "id": "2",
+      "x": "1.1",
+      "y": "0.4",
+      "z": "1.95",
+      "furnitureId": "2"
+    },
+    {
+      "id": "3",
+      "x": "4.2",
+      "y": "1.2",
+      "z": "22.4",
+      "furnitureId": "3"
+    }
+  ]
+}
