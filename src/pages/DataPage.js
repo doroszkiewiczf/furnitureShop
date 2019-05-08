@@ -1,13 +1,15 @@
 import React, {Component} from 'react';
 import {Route} from 'react-router-dom';
-import { SideNav, Nav as Essa} from 'react-sidenav'
+import { SideNav, Nav as NavSide} from 'react-sidenav'
 import styled from "styled-components";
 import ItemPage from './ItemPage';
 import LoginPage from './LoginPage';
 import ItemList from './ItemList';
 import {Button, Popup} from 'semantic-ui-react';
 import MebelAddForm from '../forms/MebelAddForm';
-import Navbar from 'react-bootstrap/Navbar'
+import { LinkContainer} from "react-router-bootstrap";
+import { Link } from "react-router-dom";
+import { Nav, Navbar, NavItem } from "react-bootstrap";
 
 
 
@@ -109,12 +111,17 @@ class DataPage extends Component{
                   >
                   {
                     categories.map((item, index) =>(
-                      <Essa id={index} key={index}>{item}</Essa>
+                      <NavSide id={index} key={index}>{item}</NavSide>
                     )
                   )}
-
                 </SideNav>
               </div>
+            
+              <div className="App__NavBar">
+              Siemka
+              </div>
+
+
               <body className="App__InfoContainer">
               <Popup className="mebelform"
                 trigger={<Button positive>Dodaj mebla kumpel</Button>}
@@ -123,26 +130,12 @@ class DataPage extends Component{
                 hideOnScroll
                 wide
               />
-                <div>
+              <Route path="/furnitures/list" component={() =>
+                (<ItemList category={categories[selectedPath]} furnitures={furnitures} />)}
+                />
+              <Route exact path="/furnitures/essa" component={ItemPage}/>
+              <Route exact path="/furnitures/login" component={LoginPage}/>
 
-                {/*
-                  furnitures.map(item =>(
-                  categories[selectedPath] === item.category&&
-                  (
-                  <div className="App__ItemInfo" key={item.id}>
-                    <span>Numer: {item.id}<br/></span>
-                    <span>Kategoria: {item.category}<br/></span>
-                    <span>{item.name}<br/></span>
-                  </div>)
-
-                )
-                )*/}
-                <Route path="/furnitures/list" component={() =>
-                  (<ItemList category={categories[selectedPath]} furnitures={furnitures} />)}
-                  />
-                <Route exact path="/furnitures/essa" component={ItemPage}/>
-                <Route exact path="/furnitures/login" component={LoginPage}/>
-                </div>
 
               </body>
 

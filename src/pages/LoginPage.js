@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {Link, NavLink, Redirect} from 'react-router-dom';
-import {Button, Popup} from 'semantic-ui-react';
 
 
 
