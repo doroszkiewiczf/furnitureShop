@@ -98,12 +98,6 @@ class DataPage extends Component{
       else{
         return(
 
-          <div>
-          <div>
-          <Navbar bg="dark" variant="dark">
-            <Navbar.Brand href="furnitures/list">Navbar</Navbar.Brand>
-          </Navbar>
-          </div>
             <AppContainer onSubmit={this.handleSubmit} className="FormCenter">
             
               <div className="App__SideMenu">
@@ -121,6 +115,7 @@ class DataPage extends Component{
 
                 </SideNav>
               </div>
+              <body className="App__InfoContainer">
               <Popup className="mebelform"
                 trigger={<Button positive>Dodaj mebla kumpel</Button>}
                 content={<MebelAddForm submit={this.submit}/>}
@@ -128,7 +123,6 @@ class DataPage extends Component{
                 hideOnScroll
                 wide
               />
-              <body className="App__InfoContainer">
                 <div>
 
                 {/*
@@ -153,7 +147,6 @@ class DataPage extends Component{
               </body>
 
             </AppContainer>
-            </div>
         )
       }
     }

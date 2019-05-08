@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {Link, NavLink, Redirect} from 'react-router-dom';
 import {Button, Popup} from 'semantic-ui-react';
-import MebelAddForm from '../forms/MebelAddForm';
 
 
 
@@ -54,13 +53,6 @@ class LoginPage extends Component{
                 <NavLink to="/login" activeClassName="PageSwitcher PageSwitcher--Active" className="PageSwitcher"> Zaloguj</NavLink>
                 <NavLink exact to="/" activeClassName="PageSwitcher PageSwitcher--Active" className="PageSwitcher">Zarejestruj</NavLink>
               </div>
-              <Popup className="mebelform"
-                trigger={<Button positive>Dodaj mebla kumpel</Button>}
-                content={<MebelAddForm submit={this.submit}/>}
-                on='click'
-                hideOnScroll
-                wide
-              />
                 <form className="FormFields">
                   {/*Pole tekstowe - login*/}
                   <div className="FormField">
