@@ -5,10 +5,11 @@ import styled from "styled-components";
 import ItemPage from './ItemPage';
 import LoginPage from './LoginPage';
 import ItemList from './ItemList';
+import TestPage from './TestPage'
 import {Button, Popup} from 'semantic-ui-react';
 import MebelAddForm from '../forms/MebelAddForm';
 import { LinkContainer} from "react-router-bootstrap";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { Nav, Navbar, NavItem } from "react-bootstrap";
 
 
@@ -43,8 +44,9 @@ class DataPage extends Component{
   }
 
   onItemSelection = (arg) => {
-    this.setState({ selectedPath: arg.path })
-}
+    this.setState({ selectedPath: arg.path });
+    this.props.history.push('/furnitures/category/'+ this.state.categories[arg.id]);
+  }
 
   handleChange = e =>{
 
@@ -100,8 +102,13 @@ class DataPage extends Component{
       else{
         return(
 
+          <div>
+            <div className="NavBar">
+              <NavLink className="NavBarItem" to="/furnitures/info">Info</NavLink>
+              <NavLink className="NavBarItem" to="/furnitures/account">Login</NavLink>
+            </div>
             <AppContainer onSubmit={this.handleSubmit} className="FormCenter">
-            
+
               <div className="App__SideMenu">
                 <SideNav
                   className="App__SideMeny_Item"
@@ -116,10 +123,6 @@ class DataPage extends Component{
                   )}
                 </SideNav>
               </div>
-            
-              <div className="App__NavBar">
-              Siemka
-              </div>
 
 
               <body className="App__InfoContainer">
@@ -130,16 +133,16 @@ class DataPage extends Component{
                 hideOnScroll
                 wide
               />
-              <Route path="/furnitures/list" component={() =>
-                (<ItemList category={categories[selectedPath]} furnitures={furnitures} />)}
-                />
               <Route exact path="/furnitures/essa" component={ItemPage}/>
               <Route exact path="/furnitures/login" component={LoginPage}/>
+              <Route path="/furnitures/category/:category" component={() =>
+                (<TestPage category={categories[selectedPath]} furnitures={furnitures} />)}
+                />
 
 
               </body>
-
             </AppContainer>
+          </div>
         )
       }
     }
