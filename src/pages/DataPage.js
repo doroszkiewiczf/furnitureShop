@@ -1,10 +1,19 @@
 import React, {Component} from 'react';
 import {Route} from 'react-router-dom';
-import { SideNav, Nav } from 'react-sidenav'
+import { SideNav, Nav as NavSide} from 'react-sidenav'
 import styled from "styled-components";
 import ItemPage from './ItemPage';
 import LoginPage from './LoginPage';
-import ItemList from './ItemList'
+import ItemList from './ItemList';
+import TestPage from './TestPage';
+import InfoPage from './InfoPage';
+import AccountPage from './AccountPage';
+import {Button, Popup} from 'semantic-ui-react';
+import MebelAddForm from '../forms/MebelAddForm';
+import { LinkContainer} from "react-router-bootstrap";
+import { NavLink } from "react-router-dom";
+import { Nav, Navbar, NavItem } from "react-bootstrap";
+
 
 
 
@@ -37,8 +46,9 @@ class DataPage extends Component{
   }
 
   onItemSelection = (arg) => {
-    this.setState({ selectedPath: arg.path })
-}
+    this.setState({ selectedPath: arg.path });
+    this.props.history.push('/furnitures/category/'+ this.state.categories[arg.id]);
+  }
 
   handleChange = e =>{
 
@@ -46,15 +56,19 @@ class DataPage extends Component{
   handleSubmit = e => {
   }
 
+  furnitureSubmit = (data) => {
+    console.log(data)
+  }
+
   componentDidMount(){
     let furnit,usr
-  var categoriesList = [];
-  Promise.all([
-    fetch('http://localhost:3000/users').then(value => value.json()),
-    fetch('http://localhost:3000/furnitures').then(value => value.json())
-  ]).then( json => {
-       
-     
+    var categoriesList = [];
+    Promise.all([
+      fetch('http://localhost:3000/users').then(value => value.json()),
+      fetch('http://localhost:3000/furnitures').then(value => value.json())
+    ]).then( json => {
+
+
       usr = json[0]
       furnit = json[1]
 
@@ -81,7 +95,7 @@ class DataPage extends Component{
     });
   }
 
- 
+
 
     render(){
       var { isLoaded, selectedPath, furnitures, categories} = this.state;
@@ -91,50 +105,52 @@ class DataPage extends Component{
       if (!isLoaded){
         return <div>Loading</div>;
       }
-      else{        
+      else{
         return(
-            
+
+          <div>
+            <div className="NavBar">
+              <NavLink className="NavBarItem" to="/furnitures/info">Info</NavLink>
+              <NavLink className="NavBarItem" to="/furnitures/account">Login</NavLink>
+            </div>
             <AppContainer onSubmit={this.handleSubmit} className="FormCenter">
-         
+
               <div className="App__SideMenu">
-                <SideNav 
+                <SideNav
                   className="App__SideMeny_Item"
-                  selectedPath={this.state.selectedPath} 
+                  selectedPath={this.state.selectedPath}
                   onItemSelection={this.onItemSelection}
                   theme={theme}
                   >
                   {
                     categories.map((item, index) =>(
-                      <Nav id={index} key={index}>{item}</Nav>
+                      <NavSide id={index} key={index}>{item}</NavSide>
                     )
                   )}
                 </SideNav>
               </div>
 
-              <body className="App__InfoContainer">
-                <div>  
-                {/*
-                  furnitures.map(item =>(
-                  categories[selectedPath] === item.category&&
-                  (
-                  <div className="App__ItemInfo" key={item.id}>
-                    <span>Numer: {item.id}<br/></span>
-                    <span>Kategoria: {item.category}<br/></span>
-                    <span>{item.name}<br/></span>
-                  </div>)
-                  
-                )
-                )*/}
-                <Route path="/furnitures/list" component={() => 
-                  (<ItemList category={categories[selectedPath]} furnitures={furnitures} />)}
-                  />
-                <Route exact path="/furnitures/essa" component={ItemPage}/>
-                <Route exact path="/furnitures/login" component={LoginPage}/>
-                </div>
-                
-              </body>
 
+              <body className="App__InfoContainer">
+              <Popup className="mebelform"
+                trigger={<Button positive>Dodaj mebla kumpel</Button>}
+                content={<MebelAddForm submit={this.furnitureSubmit} category={this.state.categories} chuj="essa"/>}
+                on='click'
+                hideOnScroll
+                wide
+              />
+              <Route exact path="/furnitures/essa" component={ItemPage}/>
+              <Route exact path="/furnitures/login" component={LoginPage}/>
+              <Route exact path="/furnitures/info" component={InfoPage}/>
+              <Route exact path="/furnitures/account" component={AccountPage}/>
+              <Route path="/furnitures/category/:category" component={() =>
+                (<ItemList category={categories[selectedPath]} furnitures={furnitures} />)}
+                />
+
+
+              </body>
             </AppContainer>
+          </div>
         )
       }
     }

@@ -1,15 +1,6 @@
 import React, {Component} from 'react';
 
 class ItemList extends Component{
-    
-    constructor(){
-        super();
-
-        this.state={
-            furnitures: [],
-            selectedCategory: ''
-        }
-    }
 
     render(){
         return(
@@ -26,7 +17,6 @@ class ItemList extends Component{
                   
                 )
                   )}
-                Siemka
             </div>
         )
     }

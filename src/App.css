@@ -12,9 +12,6 @@ select:-webkit-autofill:focus {
   transition: background-color 5000s ease-in-out 0s;
 }
 
-.elo{
-  color:red;
-}
 
 .App {
   height: 100vh;
@@ -31,6 +28,23 @@ select:-webkit-autofill:focus {
   background-color: #2E4158;
   width: 15%;
   display: inline-block;
+  position: relative;
+  margin-left: 10px;
+}
+.NavBar{
+  color: white;
+  background-color: rgb(62, 169, 241);
+  height: 30px;
+  width: inherit;
+  margin: 10px;
+  display: flex;
+}
+.NavBarItem{
+  cursor: pointer;
+  font-size: .9em;
+  display: inline-block;
+  margin: 5px;
+  color: rgb(1, 27, 59);
 }
 .App__SideMeny_Item{
   border: #52C4B9;  
