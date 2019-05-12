@@ -3,11 +3,7 @@ import { Form, Button, Divider, Select} from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 
 const categoryOptions = [
-  {
-    key:'sralnia',
-    text:'sralnia',
-    value:'sralnia'
-  },
+  'sralnia','dupa','chuj'
 ]
 
 const sizes = ['small']
@@ -108,8 +104,19 @@ validate = (data) => {
 }
 */
 
+
+
 componentDidMount(){
     var name = document.getElementById("name");
+    var select = document.getElementById("selekt")
+    var alal = this.props.category
+    for (var i=0; i<alal.length; i++){
+      var opt = alal[i];
+      var el = document.createElement("option");
+      el.textContent = opt;
+      el.value = opt;
+      select.appendChild(el);
+    }
 
    name.addEventListener("input", function (event) {
     if (name.validity.patternMismatch) {
@@ -117,10 +124,8 @@ componentDidMount(){
     } else {
       name.setCustomValidity("");
     }
-
-
-
-  })};
+    })
+}
 
 render (){
   const { data } = this.state;
@@ -159,7 +164,8 @@ render (){
      <Button type="button" active={!this.state.on} onClick={this.toggleWybierz}>Wybierz</Button>
      <Button type="button" active={this.state.on} onClick={this.togglePodaj}>Podaj własną</Button>
      <div className='pusty'></div>
-     {!this.state.on && <Select style = {{width: "100%"}} placeholder='WYBIERZ RYJU' options={categoryOptions}/>}
+     {!this.state.on && <select id="selekt" style = {{width: "100%"}} placeholder='WYBIERZ RYJU'>
+     </select>}
      {this.state.on && <Form.Field>
               <input type="text"
               id="category"

@@ -52,6 +52,10 @@ class LoginPage extends Component{
                 <NavLink to="/login" activeClassName="PageSwitcher PageSwitcher--Active" className="PageSwitcher"> Zaloguj</NavLink>
                 <NavLink exact to="/" activeClassName="PageSwitcher PageSwitcher--Active" className="PageSwitcher">Zarejestruj</NavLink>
               </div>
+<<<<<<< HEAD
+              
+=======
+>>>>>>> brenczaodpalinnego
                 <form className="FormFields">
                   {/*Pole tekstowe - login*/}
                   <div className="FormField">

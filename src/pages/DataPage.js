@@ -54,6 +54,10 @@ class DataPage extends Component{
   handleSubmit = e => {
   }
 
+  furnitureSubmit = (data) => {
+    console.log(data)
+  }
+
   componentDidMount(){
     let furnit,usr
     var categoriesList = [];
@@ -128,7 +132,7 @@ class DataPage extends Component{
               <body className="App__InfoContainer">
               <Popup className="mebelform"
                 trigger={<Button positive>Dodaj mebla kumpel</Button>}
-                content={<MebelAddForm submit={this.submit}/>}
+                content={<MebelAddForm submit={this.furnitureSubmit} category={this.state.categories} chuj="essa"/>}
                 on='click'
                 hideOnScroll
                 wide
