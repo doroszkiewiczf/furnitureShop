@@ -5,7 +5,9 @@ import styled from "styled-components";
 import ItemPage from './ItemPage';
 import LoginPage from './LoginPage';
 import ItemList from './ItemList';
-import TestPage from './TestPage'
+import TestPage from './TestPage';
+import InfoPage from './InfoPage';
+import AccountPage from './AccountPage';
 import {Button, Popup} from 'semantic-ui-react';
 import MebelAddForm from '../forms/MebelAddForm';
 import { LinkContainer} from "react-router-bootstrap";
@@ -139,8 +141,10 @@ class DataPage extends Component{
               />
               <Route exact path="/furnitures/essa" component={ItemPage}/>
               <Route exact path="/furnitures/login" component={LoginPage}/>
+              <Route exact path="/furnitures/info" component={InfoPage}/>
+              <Route exact path="/furnitures/account" component={AccountPage}/>
               <Route path="/furnitures/category/:category" component={() =>
-                (<TestPage category={categories[selectedPath]} furnitures={furnitures} />)}
+                (<ItemList category={categories[selectedPath]} furnitures={furnitures} />)}
                 />
 
 

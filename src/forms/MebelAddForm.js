@@ -10,20 +10,7 @@ const sizes = ['small']
 //['mini', 'tiny', 'small', 'large', 'big', 'huge', 'massive']
 
 class MebelAddForm extends React.Component {
-  state = {
-    data: {
-      name: '',
-      icon: '',
-      category: '',
-      description:'',
-      x:'',
-      y:'',
-      z:''
-    },
-    loading: false,
-    //errors:{}
-    on:false
-  };
+  
 
 onChange = e => this.setState({
   data: { ...this.state.data, [e.target.name]: e.target.value}});
@@ -32,13 +19,23 @@ onSubmit = () => {
   this.props.submit(this.state.data);
 }
 
-// constructor(){
-//     super();
-//
-//     this.state={
-//       on:false
-//     };
-//   }
+  constructor(){
+    super();
+
+    this.state = {
+      data: {
+        name: '',
+        icon: '',
+        category: '',
+        description:'',
+        x:'',
+        y:'',
+        z:''
+      },
+      loading: false,
+      on:false
+    };
+  }
 
   togglePodaj = () => {
     this.setState({
@@ -50,7 +47,7 @@ onSubmit = () => {
     this.setState({
       on: false
     })
-  }
+}
 
 /*onSubmit = () => {
   const errors = this.validate(this.state.data);
@@ -107,18 +104,9 @@ validate = (data) => {
 
 
 componentDidMount(){
-    var name = document.getElementById("name");
-    var select = document.getElementById("selekt")
-    var alal = this.props.category
-    for (var i=0; i<alal.length; i++){
-      var opt = alal[i];
-      var el = document.createElement("option");
-      el.textContent = opt;
-      el.value = opt;
-      select.appendChild(el);
-    }
 
-   name.addEventListener("input", function (event) {
+  var name = document.getElementById("name");
+  name.addEventListener("input", function (event) {
     if (name.validity.patternMismatch) {
       name.setCustomValidity("Używaj tylko liter.");
     } else {
@@ -128,6 +116,7 @@ componentDidMount(){
 }
 
 render (){
+
   const { data } = this.state;
 
   return (
@@ -165,6 +154,12 @@ render (){
      <Button type="button" active={this.state.on} onClick={this.togglePodaj}>Podaj własną</Button>
      <div className='pusty'></div>
      {!this.state.on && <select id="selekt" style = {{width: "100%"}} placeholder='WYBIERZ RYJU'>
+
+        {this.props.category.map((category, index) =>
+          <option key={index} value={index}>{category}</option>
+        )};        
+
+
      </select>}
      {this.state.on && <Form.Field>
               <input type="text"
