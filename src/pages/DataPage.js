@@ -1,12 +1,16 @@
 import React, {Component} from 'react';
 import {Route} from 'react-router-dom';
-import { SideNav, Nav } from 'react-sidenav'
+import { SideNav, Nav as NavSide} from 'react-sidenav'
 import styled from "styled-components";
 import ItemPage from './ItemPage';
 import LoginPage from './LoginPage';
 import ItemList from './ItemList';
 import {Button, Popup} from 'semantic-ui-react';
 import MebelAddForm from '../forms/MebelAddForm';
+import { LinkContainer} from "react-router-bootstrap";
+import { Link } from "react-router-dom";
+import { Nav, Navbar, NavItem } from "react-bootstrap";
+
 
 
 
@@ -54,11 +58,11 @@ class DataPage extends Component{
 
   componentDidMount(){
     let furnit,usr
-  var categoriesList = [];
-  Promise.all([
-    fetch('http://localhost:3000/users').then(value => value.json()),
-    fetch('http://localhost:3000/furnitures').then(value => value.json())
-  ]).then( json => {
+    var categoriesList = [];
+    Promise.all([
+      fetch('http://localhost:3000/users').then(value => value.json()),
+      fetch('http://localhost:3000/furnitures').then(value => value.json())
+    ]).then( json => {
 
 
       usr = json[0]
@@ -101,7 +105,7 @@ class DataPage extends Component{
         return(
 
             <AppContainer onSubmit={this.handleSubmit} className="FormCenter">
-
+            
               <div className="App__SideMenu">
                 <SideNav
                   className="App__SideMeny_Item"
@@ -111,12 +115,18 @@ class DataPage extends Component{
                   >
                   {
                     categories.map((item, index) =>(
-                      <Nav id={index} key={index}>{item}</Nav>
+                      <NavSide id={index} key={index}>{item}</NavSide>
                     )
                   )}
-
                 </SideNav>
               </div>
+            
+              <div className="App__NavBar">
+              Siemka
+              </div>
+
+
+              <body className="App__InfoContainer">
               <Popup className="mebelform"
                 trigger={<Button positive>Dodaj mebla kumpel</Button>}
                 content={<MebelAddForm submit={this.furnitureSubmit} category={this.state.categories} chuj="essa"/>}
@@ -124,27 +134,12 @@ class DataPage extends Component{
                 hideOnScroll
                 wide
               />
-              <body className="App__InfoContainer">
-                <div>
+              <Route path="/furnitures/list" component={() =>
+                (<ItemList category={categories[selectedPath]} furnitures={furnitures} />)}
+                />
+              <Route exact path="/furnitures/essa" component={ItemPage}/>
+              <Route exact path="/furnitures/login" component={LoginPage}/>
 
-                {/*
-                  furnitures.map(item =>(
-                  categories[selectedPath] === item.category&&
-                  (
-                  <div className="App__ItemInfo" key={item.id}>
-                    <span>Numer: {item.id}<br/></span>
-                    <span>Kategoria: {item.category}<br/></span>
-                    <span>{item.name}<br/></span>
-                  </div>)
-
-                )
-                )*/}
-                <Route path="/furnitures/list" component={() =>
-                  (<ItemList category={categories[selectedPath]} furnitures={furnitures} />)}
-                  />
-                <Route exact path="/furnitures/essa" component={ItemPage}/>
-                <Route exact path="/furnitures/login" component={LoginPage}/>
-                </div>
 
               </body>
 

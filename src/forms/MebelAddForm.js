@@ -128,7 +128,7 @@ componentDidMount(){
 }
 
 render (){
-  const { data,errors } = this.state;
+  const { data } = this.state;
 
   return (
         sizes.map(size => (
@@ -222,7 +222,7 @@ render (){
              onChange={this.onChange}
              />
             {/*   {errors.icon && <InlineError text={errors.icon} />} */}
-             </Form.Field>
+       </Form.Field>
 
       <div className='formaAddMebel'><b>Wymiary</b></div>
 
