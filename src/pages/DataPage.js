@@ -138,8 +138,10 @@ class DataPage extends Component{
             <div className="NavBar">
               <NavLink className="NavBarItem" to="/furnitures/info">Info</NavLink>
               <NavLink className="NavBarItem" to="/furnitures/account">Account</NavLink>
+              <NavLink className="NavBarItem" to="/furnitures/download">Aplikacja mobilna</NavLink>
+
             </div>
-            <AppContainer onSubmit={this.handleSubmit} className="FormCenter">
+            <AppContainer onSubmit={this.handleSubmit} className="FormCentesr">
 
               <div className="App__SideMenu">
                 <SideNav

@@ -13,7 +13,7 @@ class ItemList extends Component{
                   this.props.furnitures.map(item =>(
                   this.props.category === item.category&&
                   (
-                    <Modal trigger={
+                    <Modal key={item.id} trigger={
                         <div className="App__ItemInfo">
                           <span>Numer: {item.name}<br/></span>
                           <span>Kategoria: {item.category}<br/></span>

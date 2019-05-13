@@ -95,18 +95,18 @@ class App extends Component {
             </div>
             
             <Route path="/furnitures" component={DataPage}/>
-          </div>
-          <div className="App__Form">
-            
-            <Route exact path="/" component={SignUpPage}>
-            </Route>
+            <div className="App__Form">
+              <Route exact path="/" component={SignUpPage}>
+              </Route>
+              <Route exact path="/login" component={() => (<LoginPage logUser={this.logUser} />)}>
+              </Route>
+            </div>
+          
 
-            <Route exact path="/login" component={() => (<LoginPage logUser={this.logUser} />)}>
-            </Route>
-
-            
- 
           </div>
+
+          
+
       </div>
       </Router>
       
