@@ -56,8 +56,34 @@ class DataPage extends Component{
   handleSubmit = e => {
   }
 
-  furnitureSubmit = (data) => {
+  submitFurniture = (data) => {
     console.log(data)
+    console.log("------=====TRYING TO SEND========---------")
+    var furnitureData = {
+      "id": "6",
+      "name": data.name,
+      "location": "test/location",
+      "texture": "test/texture",
+      "icon": "text/icon",
+      "category": data.category,
+      "description": data.description
+    }
+  
+    fetch("http://localhost:3000/furnitures", {
+      method: "POST",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body:  JSON.stringify(data)
+    })
+    .then(function(response){ 
+      return response.json();   
+    })
+    .then(function(data){
+      console.log("WYSYŁANE TU COŚ BYŁO")
+      console.log(data)
+    });
   }
 
   componentDidMount(){
@@ -111,7 +137,7 @@ class DataPage extends Component{
           <div>
             <div className="NavBar">
               <NavLink className="NavBarItem" to="/furnitures/info">Info</NavLink>
-              <NavLink className="NavBarItem" to="/furnitures/account">Login</NavLink>
+              <NavLink className="NavBarItem" to="/furnitures/account">Account</NavLink>
             </div>
             <AppContainer onSubmit={this.handleSubmit} className="FormCenter">
 
@@ -134,7 +160,7 @@ class DataPage extends Component{
               <body className="App__InfoContainer">
               <Popup className="mebelform"
                 trigger={<Button positive>Dodaj mebla kumpel</Button>}
-                content={<MebelAddForm submit={this.furnitureSubmit} category={this.state.categories} chuj="essa"/>}
+                content={<MebelAddForm submit={this.submitFurniture} category={this.state.categories} />}
                 on='click'
                 hideOnScroll
                 wide
@@ -143,6 +169,7 @@ class DataPage extends Component{
               <Route exact path="/furnitures/login" component={LoginPage}/>
               <Route exact path="/furnitures/info" component={InfoPage}/>
               <Route exact path="/furnitures/account" component={AccountPage}/>
+              <Route exact path="/furnitures/test" component={TestPage}/> 
               <Route path="/furnitures/category/:category" component={() =>
                 (<ItemList category={categories[selectedPath]} furnitures={furnitures} />)}
                 />
