@@ -46,15 +46,17 @@ select:-webkit-autofill:focus {
   height: 30px;
   width: inherit;
   margin: 10px;
+  justify-content: space-between;
   display: flex;
+  padding-top: 4px;
 }
 .NavBarItem{
   cursor: pointer;
   font-size: .9em;
-  display: inline-block;
   margin: 5px;
   color: rgb(1, 27, 59);
 }
+
 .App__SideMeny_Item{
   border: #52C4B9;  
 }

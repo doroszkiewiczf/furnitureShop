@@ -36,17 +36,19 @@ class DataPage extends Component{
     super();
 
     this.state = {
-      users: [],
       furnitures: [],
       categories: [],
       testAttr: 'TESTOWOWOWO',
-      isLoaded: true,
+      isLoaded: false,
+      isLogged: false,
+      loggedUser: '',
       selectedPath: '0'
     };
   }
 
   onItemSelection = (arg) => {
     this.setState({ selectedPath: arg.path });
+    console.log('/furnitures/category/' + this.state.categories[arg.id])
     this.props.history.push('/furnitures/category/'+ this.state.categories[arg.id]);
   }
 
@@ -56,11 +58,15 @@ class DataPage extends Component{
   handleSubmit = e => {
   }
 
+  loginUser = (user) => {
+    this.setState({ isLogged: true})
+  }
+
   submitFurniture = (data) => {
     console.log(data)
     console.log("------=====TRYING TO SEND========---------")
     var furnitureData = {
-      "id": "6",
+      "id": "8",
       "name": data.name,
       "location": "test/location",
       "texture": "test/texture",
@@ -75,14 +81,14 @@ class DataPage extends Component{
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
-      body:  JSON.stringify(data)
+      body:  JSON.stringify(furnitureData)
     })
     .then(function(response){ 
       return response.json();   
     })
-    .then(function(data){
+    .then(function(furnitureData){
       console.log("WYSYŁANE TU COŚ BYŁO")
-      console.log(data)
+      console.log(furnitureData)
     });
   }
 
@@ -136,9 +142,19 @@ class DataPage extends Component{
 
           <div>
             <div className="NavBar">
-              <NavLink className="NavBarItem" to="/furnitures/info">Info</NavLink>
-              <NavLink className="NavBarItem" to="/furnitures/account">Account</NavLink>
-              <NavLink className="NavBarItem" to="/furnitures/download">Aplikacja mobilna</NavLink>
+              <div>
+                <NavLink className="NavBarItem" to="/furnitures/info">Info</NavLink>
+                <NavLink className="NavBarItem" to="/furnitures/account">Account</NavLink>
+                <NavLink className="NavBarItem" to="/furnitures/download">Aplikacja mobilna</NavLink>
+              </div>
+              <div>
+                {this.props.logged&&(
+                  <label className="NavBarItem">Zalogowany: {this.props.logged}</label>
+                )}
+                {/*!this.props.logged&&(
+                  <NavLink className="NavBarItem" to="/login" >Zaloguj</NavLink>
+                )*/}
+              </div>
 
             </div>
             <AppContainer onSubmit={this.handleSubmit} className="FormCentesr">

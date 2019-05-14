@@ -5,11 +5,6 @@ import LoginPage from './pages/LoginPage'
 import SignUpPage from './pages/SignUpPage'
 import DataPage from './pages/DataPage'
 
-
-
-
-
-
 class App extends Component {
 
   constructor(){
@@ -88,12 +83,9 @@ class App extends Component {
               >
               hltv
             </a>
-            <div>
-              {isLogged&&(
-                <div className="App__LoggedInfo">Siemka {this.state.loggedUser}</div>
-              )}
-            </div>
             
+            {/*<Route path="/furnitures" component={() => (<DataPage logged={this.state.loggedUser}/>)}>
+            </Route>*/}
             <Route path="/furnitures" component={DataPage}/>
             <div className="App__Form">
               <Route exact path="/" component={SignUpPage}>

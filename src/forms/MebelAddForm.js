@@ -113,6 +113,9 @@ componentDidMount(){
       name.setCustomValidity("");
     }
     })
+    var newState =  Object.assign({}, this.state);
+    newState.data.category = this.props.category[0]
+    this.setState(newState);
 }
 
 render (){

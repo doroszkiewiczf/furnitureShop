@@ -9,6 +9,7 @@ class ItemList extends Component{
     render(){
         return(
             <div>  
+              halalas
                 {
                   this.props.furnitures.map(item =>(
                   this.props.category === item.category&&

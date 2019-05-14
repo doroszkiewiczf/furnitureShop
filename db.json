@@ -79,6 +79,15 @@
       "icon": "tu jest ikona333",
       "category": "komody",
       "description": "dobry opis to jest komodore"
+    },
+    {
+      "id": "7",
+      "name": "elosieka",
+      "location": "test/location",
+      "texture": "test/texture",
+      "icon": "text/icon",
+      "category": "krzesła",
+      "description": "To jest bardzo dobre kszesło do siadaniania"
     }
   ],
   "transform": [
