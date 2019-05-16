@@ -1,42 +1,63 @@
 import React, {Component} from 'react';
-import {Modal, Header} from 'semantic-ui-react'
+import {Modal, Header, Card, Icon, Image} from 'semantic-ui-react'
 import { NavLink } from "react-router-dom";
+import pic from '../images/chlieb.jpg';
 
 class FavouritesPage extends Component{
 
-    onClick(){
+    constructor (x) {
+        super (x);
+        this.state={
+          iconColor: 'grey'
+        }
+      }
+    
+      handleClick (){
+        this.setState({
+          iconColor: 'blue'
+        })
+      }
+    
+      addToFavorite = (e) =>{
+        e.stopPropagation();
+        console.log('nie triggeruje modala');
+        this.setState({
+          iconColor: 'blue'
+        })
+    
+      }
 
-    }
     render(){
         if (this.props.furnitures){
             return(
-                <div>  
-                <div>
-                    <h3> Twoje ulubione meble: </h3>
-                </div>
-                    {  
-                    this.props.furnitures.map(item =>(
-                    (
-                        <Modal key={item.id} trigger={
-                            <div className="App__ItemInfo">
-                            <span>Numer: {item.name}<br/></span>
-                            <span>Kategoria: {item.category}<br/></span>
-                            <span>{item.name}<br/></span>
-                            </div>
-                            } closeIcon>
-                            <Modal.Header>Witam</Modal.Header>
-                            <Modal.Content image>
-                                <Modal.Description>
-                                <Header>{item.name}</Header>
-                                <p>{item.category}</p>
-                                <p>{item.description}</p>
-                                </Modal.Description>
-                            </Modal.Content>
-                            </Modal>
-                    )  
-                    )
-                    )}
-                </div>
+                <div><Card.Group>
+              {
+                this.props.furnitures.map(item =>(
+                (
+                  <Modal size="tiny" trigger={
+                   <Card style={{ width: '30%'}}>
+                      <Image src={pic} size='large'/>
+                       <Card.Content>
+                         <Card.Header>{item.name}</Card.Header>
+
+                         </Card.Content>
+
+                    </Card>
+
+                       } closeIcon>
+                        <Modal.Header>{item.name}</Modal.Header>
+                         <Modal.Content image>
+                           <Modal.Description>
+                             <Header>{item.category}</Header>
+                             <p>{item.description}</p>
+                             <p>Wymiary: {item.transform.x}x{item.transform.y}x{item.transform.z}</p>
+                           </Modal.Description>
+                        </Modal.Content>
+                        </Modal>
+              )
+              )
+                )}
+          </Card.Group>  </div>
             )
         }
         else{

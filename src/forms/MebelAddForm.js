@@ -131,7 +131,7 @@ render (){
      <input
      type="text"
      required minLength="2" maxLength="50"
-     pattern="[a-zA-Z]+"
+     pattern="([A-zÀ-ž\s]){2,}"
      id="name"
      name="name"
      placeholder="Nazwa"
