@@ -82,7 +82,7 @@ class LoginPage extends Component{
                   {/*Pole tekstowe - hasło*/}
                   <div className="FormField">
                     <label className="FormField__Label" htmlFor="password"> Hasło: </label>
-                    <input type="text" id="password" className="FormField__Input"
+                    <input type="password" id="password" className="FormField__Input"
                     placeholder="Podaj hasło twoje" name="password" value={this.state.password}
                     onChange={this.handleChange}/>
                   </div>

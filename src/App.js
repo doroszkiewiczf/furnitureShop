@@ -42,14 +42,6 @@ class App extends Component {
 
           
           <div className="App__Aside">
-            <a
-              className="App-link"
-              href="https://hltv.org"
-              target="_blank"
-              rel="noopener noreferrer"
-              >
-              hltv
-            </a>
             
             {<Route path="/furnitures" component={() => (<DataPage logged={this.state.loggedUser} history={this.props.history}/>)}>
             </Route>}

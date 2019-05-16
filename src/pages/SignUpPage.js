@@ -45,6 +45,7 @@ class SignUpPage extends Component{
     this.state.formErrors.accept = this.state.isAccepted === false ? "" : "Musisz dać akcept";
     
   }
+
   handleChange = e => {
     e.preventDefault();
     const target = e.target;
@@ -147,7 +148,7 @@ class SignUpPage extends Component{
                   {/*Pole tekstowe - hasło*/}
                   <div className="FormField">
                     <label className="FormField__Label" htmlFor="password"> Hasło: </label>
-                    <input type="text" id="password" className="FormField__Input"
+                    <input type="password" id="password" className="FormField__Input"
                     placeholder="Podaj hasło twoje" name="password" value={this.state.password}
                     onChange={this.handleChange}/>
                     {formErrors.password.length > 1 && (
@@ -170,7 +171,7 @@ class SignUpPage extends Component{
                   <div className="FormField">
                     <label className="FormField__Label" htmlFor="lastName"> Nazwisko: </label>
                     <input type="text" id="lastName" className="FormField__Input"
-                    placeholder="Podaj swoje nazewisko" name="lastName" value={this.state.lastName}
+                    placeholder="Podaj swoje nazwisko" name="lastName" value={this.state.lastName}
                     onChange={this.handleChange}/>
                     {formErrors.lastName.length > 1 && (
                     <span className="errorMessage">{formErrors.lastName}</span>
@@ -193,7 +194,7 @@ class SignUpPage extends Component{
                       <label className="FormField__CheckboxLabel">
                         <input className="FormField__Checkbox" type="checkbox" name="isAccepted"
                         value={isAccepted} onChange={this.handleChecked}/>
-                        Jestem pedałem opisane tutaj - 
+                        Akceptuje regulamin - 
                         <a href="https://hltv.org" target="_blank" rel="noopener noreferrer" className="FormField__TermsLink"> regulamin</a>
                       </label>
                       {formErrors.accept.length > 0 && (
@@ -205,7 +206,7 @@ class SignUpPage extends Component{
                     <button className="FormField__Button mr-20"> Zarejestruj</button>
                     <Link to="/login" className="FormField__Link">Mam już konto mordo</Link>
                   </div>
-                </form>  
+                </form> 
               </div>
         );
     }
