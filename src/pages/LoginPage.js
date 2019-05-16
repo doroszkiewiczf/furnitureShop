@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Link, NavLink, Redirect} from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
 
 
 
@@ -9,10 +10,10 @@ class LoginPage extends Component{
     super();
 
     this.state = {
-      users: [],
       login: '',
       password: '',
-      logged: false
+      logged: false,
+      wrongData: false
     };
   }
   handleChange = e =>{
@@ -28,23 +29,39 @@ class LoginPage extends Component{
       e.preventDefault();
 
       if (this.state.login&&this.state.password){
-        //this.props.logUser(this.state.login);
-        this.setState({
-          logged: true
-        })
-        console.log('Zalogowano here danymi:')
-        console.log(this.state);
-      }
-      else{
-        console.error("Nie da rady zalogować")
-      }
 
+        var user;
+
+        console.log("------=====TRYING TO LOGIN========---------")
+
+        fetch('http://localhost:8080/user/login?login='+this.state.login+'&password='+this.state.password, {
+          method: "GET",
+          credentials: 'same-origin',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          }
+        })
+        .then(value => value.json())
+         .then( json => {
+        
+        user = json
+        console.log(user);
+        this.props.history.push("/furnitures/info")
+        this.props.logUser(user);
+        }).catch((err) => {
+          console.log(err);
+          this.setState({
+            wrongData: true
+          })
+      });
+      }
   }
 
     render(){
 
       var {logged} = this.state;
-      if (!logged){
+
         return(
 
             <div onSubmit={this.handleSubmit} className="FormCenter">
@@ -69,6 +86,9 @@ class LoginPage extends Component{
                     placeholder="Podaj hasło twoje" name="password" value={this.state.password}
                     onChange={this.handleChange}/>
                   </div>
+                  {this.state.wrongData && (
+                    <span className="errorMessage">Błędny login lub hasło</span>
+                  )}
                   {/*Przycisk do akceptacji*/}
                   <div className="FormField">
                     <button className="FormField__Button mr-20"> Zaloguj</button>
@@ -78,14 +98,6 @@ class LoginPage extends Component{
             </div>
         )
     }
-    else{
-      this.props.logUser(this.state.login);
-      return(
-
-        <Redirect to='/furnitures/list' />
-      )
-    }
-  }
 
 }
-export default LoginPage;
+export default withRouter(LoginPage);

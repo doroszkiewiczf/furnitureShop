@@ -87,13 +87,13 @@ class SignUpPage extends Component{
           console.log("------=====TRYING TO SEND========---------")
           var data = {
             "login": this.state.login,
-            "firstName": this.state.firstName,
-            "lastName": this.state.lastName,
+            "name": this.state.firstName,
+            "vorname": this.state.lastName,
             "password": this.state.password,
             "email": this.state.email
           }
         
-          fetch("http://localhost:3000/users", {
+          fetch("http://localhost:8080/user/add", {
             method: "POST",
             headers: {
               'Accept': 'application/json',
@@ -107,6 +107,7 @@ class SignUpPage extends Component{
           .then(function(data){
             console.log("WYSYŁANE TU COŚ BYŁO")
             console.log(data)
+
           });
         }
         else{

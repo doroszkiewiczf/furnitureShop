@@ -2,15 +2,12 @@ import React from 'react';
 import { Form, Button, Divider, Select} from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 
-const categoryOptions = [
-  'sralnia','dupa','chuj'
-]
 
 const sizes = ['small']
 //['mini', 'tiny', 'small', 'large', 'big', 'huge', 'massive']
 
 class MebelAddForm extends React.Component {
-  
+
 
 onChange = e => this.setState({
   data: { ...this.state.data, [e.target.name]: e.target.value}});
@@ -37,16 +34,19 @@ onSubmit = () => {
     };
   }
 
-  togglePodaj = () => {
-    this.setState({
-      on: true
-    })
+  insertCategorySelected = () => {
+    let newState = Object.assign({}, this.state);
+    newState.data.category = "";
+    newState.on = true;
+    this.setState(newState);
   }
 
-  toggleWybierz = () => {
-    this.setState({
-      on: false
-    })
+  dropDownSelected = () => {
+    let newState = Object.assign({}, this.state);
+    newState.data.category = this.props.category[0];
+    newState.on = false;
+    this.setState(newState);
+
 }
 
 /*onSubmit = () => {
@@ -113,6 +113,9 @@ componentDidMount(){
       name.setCustomValidity("");
     }
     })
+    var newState =  Object.assign({}, this.state);
+    newState.data.category = this.props.category[0]
+    this.setState(newState);
 }
 
 render (){
@@ -128,7 +131,7 @@ render (){
      <input
      type="text"
      required minLength="2" maxLength="50"
-     pattern="[a-zA-Z]+"
+     pattern="([A-zÀ-ž\s]){2,}"
      id="name"
      name="name"
      placeholder="Nazwa"
@@ -140,24 +143,24 @@ render (){
 
      <Form.Field>
      <input type="text"
-     id="description"
-     name="description"
-     required
-     placeholder="Opis"
-     value={data.description}
-     onChange={this.onChange}
+      id="description"
+      name="description"
+      required
+      placeholder="Opis"
+      value={data.description}
+      onChange={this.onChange}
      />
      </Form.Field>
 
      <div className='formaAddMebel'><b>Kategoria</b></div>
-     <Button type="button" active={!this.state.on} onClick={this.toggleWybierz}>Wybierz</Button>
-     <Button type="button" active={this.state.on} onClick={this.togglePodaj}>Podaj własną</Button>
+     <Button type="button" active={!this.state.on} onClick={this.dropDownSelected}>Wybierz</Button>
+     <Button type="button" active={this.state.on} onClick={this.insertCategorySelected}>Podaj własną</Button>
      <div className='pusty'></div>
-     {!this.state.on && <select id="selekt" style = {{width: "100%"}} placeholder='WYBIERZ RYJU'>
+     {!this.state.on && <select id="selekt" style = {{width: "100%"}} placeholder='wybierz kategorię' onChange={this.onChange} name="category">
 
         {this.props.category.map((category, index) =>
-          <option key={index} value={index}>{category}</option>
-        )};        
+          <option key={index} value={category}>{category}</option>
+        )};
 
 
      </select>}

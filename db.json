@@ -23,46 +23,6 @@
       "firstName": "Michaił",
       "lastName": "Kliczko",
       "email": "john@gmail.com"
-    },
-    {
-      "login": "asd",
-      "firstName": "asasdasd",
-      "lastName": "asdasd",
-      "password": "dasdasd",
-      "email": "asdad@o2.pl",
-      "id": "rIdSPmW"
-    },
-    {
-      "login": "asd",
-      "firstName": "asasdasd",
-      "lastName": "asdasd",
-      "password": "dasdasd",
-      "email": "asdad@o2.pl",
-      "id": "7BbQWhr"
-    },
-    {
-      "login": "asd",
-      "firstName": "asasdasd",
-      "lastName": "asdasd",
-      "password": "dasdasd",
-      "email": "asdad@o2.pl",
-      "id": "yBGozHD"
-    },
-    {
-      "login": "asd",
-      "firstName": "asasdasd",
-      "lastName": "asdasd",
-      "password": "dasdasd",
-      "email": "asdad@o2.pl",
-      "id": "IQ4Bwfk"
-    },
-    {
-      "login": "asd",
-      "firstName": "asasdasd",
-      "lastName": "asdasd",
-      "password": "dasdasd",
-      "email": "asdad@o2.pl",
-      "id": "5iMco6V"
     }
   ],
   "furnitures": [
@@ -110,6 +70,24 @@
       "icon": "tu jest ikona333",
       "category": "krzesła",
       "description": "dobry opis to jest taborecika"
+    },
+    {
+      "id": "6",
+      "name": "Komoda królewska",
+      "location": "lokacja3312",
+      "texture": "jest jakaś3321",
+      "icon": "tu jest ikona333",
+      "category": "komody",
+      "description": "dobry opis to jest komodore"
+    },
+    {
+      "id": "7",
+      "name": "elosieka",
+      "location": "test/location",
+      "texture": "test/texture",
+      "icon": "text/icon",
+      "category": "krzesła",
+      "description": "To jest bardzo dobre kszesło do siadaniania"
     }
   ],
   "transform": [
