@@ -29,6 +29,11 @@ class ItemList extends Component{
                               <Header>{item.name}</Header>
                               <p>{item.category}</p>
                               <p>{item.description}</p>
+                              <p>X: {item.transform.x}</p>
+                              <p>Y: {item.transform.y}</p>
+                              <p>Z: {item.transform.z}</p>
+                              
+
                             </Modal.Description>
                           </Modal.Content>
                         </Modal>

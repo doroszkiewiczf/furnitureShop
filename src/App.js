@@ -21,46 +21,7 @@ class App extends Component {
   onItemSelection = (arg) => {
     this.setState({ selectedPath: arg.path })
   }
-  async componentWillMount(){
-
-  let furnit,usr
-  var categoriesList = [];
-  console.log("DATABASE TESTINGGGG")
-
-  fetch('http://localhost:8080/furniture/all',{
-  method: 'GET',
-  credentials: 'same-origin',
-  headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-  }}).then(value => value.json())
-    .then( json => {
-       
-      furnit = json
-      console.log(json);
-      // categoriesList.push(furnit[0].category)
-      // furnit.map(item => {
-      //   if (categoriesList.indexOf(item.category) < 0){
-      //     categoriesList.push(item.category);
-      //   }
-      // })
-      this.setState({
-        categories: categoriesList,
-        furnitures: furnit
-      })
-      console.log("Z BAZZZZZZY DANYCH załasdowane:");
-      console.log(this.state.users);
-      console.log(this.state.furnitures)
-      console.log(this.state.categories)
-      //json response
-    })
-  // const response = await fetch('http://localhost:8080/furniture/all',{
-  // });
-  // const body = await response.json();
-  // this.setState({ furnitures: body});
   
-  // console.log(body);
-}
 
   logUser = (value) => {
     this.setState({ 
