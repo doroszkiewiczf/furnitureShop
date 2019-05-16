@@ -13,9 +13,14 @@ import MebelAddForm from '../forms/MebelAddForm';
 import { LinkContainer} from "react-router-bootstrap";
 import { NavLink } from "react-router-dom";
 import { Nav, Navbar, NavItem } from "react-bootstrap";
+import {withRouter} from 'react-router-dom';
 
 
 
+
+// export const history = createBrowserHistory({
+//   forceRefresh: false
+// });
 
 const AppContainer = styled.div`\
   display: flex;
@@ -75,7 +80,7 @@ class DataPage extends Component{
       "description": data.description
     }
   
-    fetch("http://localhost:3000/furnitures", {
+    fetch("http://localhost:8080/furniture/add", {
       method: "POST",
       headers: {
         'Accept': 'application/json',
@@ -97,7 +102,7 @@ class DataPage extends Component{
     var categoriesList = [];
     Promise.all([
       fetch('http://localhost:3000/users').then(value => value.json()),
-      fetch('http://localhost:3000/furnitures').then(value => value.json())
+      fetch('http://localhost:8080/furniture/all').then(value => value.json())
     ]).then( json => {
 
 
@@ -146,14 +151,17 @@ class DataPage extends Component{
                 <NavLink className="NavBarItem" to="/furnitures/info">Info</NavLink>
                 <NavLink className="NavBarItem" to="/furnitures/account">Account</NavLink>
                 <NavLink className="NavBarItem" to="/furnitures/download">Aplikacja mobilna</NavLink>
+                <NavLink className="NavBarItem" to="/furnitures/favourite">Moje meble</NavLink>
+                
               </div>
+              
               <div>
                 {this.props.logged&&(
                   <label className="NavBarItem">Zalogowany: {this.props.logged}</label>
                 )}
-                {/*!this.props.logged&&(
+                {!this.props.logged&&(
                   <NavLink className="NavBarItem" to="/login" >Zaloguj</NavLink>
-                )*/}
+                )}
               </div>
 
             </div>
@@ -163,7 +171,7 @@ class DataPage extends Component{
                 <SideNav
                   className="App__SideMeny_Item"
                   selectedPath={this.state.selectedPath}
-                  onItemSelection={this.onItemSelection}
+                  onItemSelection={this.onItemSelection.bind(this)}
                   theme={theme}
                   >
                   {
@@ -177,12 +185,12 @@ class DataPage extends Component{
 
               <body className="App__InfoContainer">
               <Popup className="mebelform"
-                trigger={<Button positive>Dodaj mebla kumpel</Button>}
-                content={<MebelAddForm submit={this.submitFurniture} category={this.state.categories} />}
-                on='click'
-                hideOnScroll
-                wide
-              />
+                  trigger={<Button positive>Dodaj mebel</Button>}
+                  content={<MebelAddForm submit={this.submitFurniture} category={this.state.categories} />}
+                  on='click'
+                  hideOnScroll
+                  wide
+                />
               <Route exact path="/furnitures/essa" component={ItemPage}/>
               <Route exact path="/furnitures/login" component={LoginPage}/>
               <Route exact path="/furnitures/info" component={InfoPage}/>
@@ -200,4 +208,4 @@ class DataPage extends Component{
       }
     }
 }
-export default DataPage;
+export default withRouter(DataPage);

@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Link, NavLink, Redirect} from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
 
 
 
@@ -29,9 +30,8 @@ class LoginPage extends Component{
 
       if (this.state.login&&this.state.password){
         //this.props.logUser(this.state.login);
-        this.setState({
-          logged: true
-        })
+        this.props.history.push("/furnitures")
+        this.props.logUser(this.state.login);
         console.log('Zalogowano here danymi:')
         console.log(this.state);
       }
@@ -44,7 +44,7 @@ class LoginPage extends Component{
     render(){
 
       var {logged} = this.state;
-      if (!logged){
+
         return(
 
             <div onSubmit={this.handleSubmit} className="FormCenter">
@@ -78,14 +78,6 @@ class LoginPage extends Component{
             </div>
         )
     }
-    else{
-      this.props.logUser(this.state.login);
-      return(
-
-        <Redirect to='/furnitures/list' />
-      )
-    }
-  }
 
 }
-export default LoginPage;
+export default withRouter(LoginPage);
