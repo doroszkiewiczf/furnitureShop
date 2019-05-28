@@ -4,6 +4,9 @@ import './App.css';
 import LoginPage from './pages/LoginPage'
 import SignUpPage from './pages/SignUpPage'
 import DataPage from './pages/DataPage'
+import localStorage from 'local-storage'
+import sessionStorage from 'session-storage'
+
 
 class App extends Component {
 
@@ -28,6 +31,12 @@ class App extends Component {
       isLogged: true,
       loggedUser: value 
     })
+    localStorage.set('isLogged', true);
+    localStorage.set('user', this.state.loggedUser);
+    window.sessionStorage.setItem('isLogged', true);
+    window.sessionStorage.setItem('user', JSON.stringify(this.state.loggedUser));
+    console.log(JSON.parse(window.sessionStorage.getItem('isLogged')));
+    console.log(JSON.parse(window.sessionStorage.getItem('user')).login);
   }
 
 

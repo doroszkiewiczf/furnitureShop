@@ -5,6 +5,7 @@
   "dependencies": {
     "history": "^4.9.0",
     "json-server": "^0.14.2",
+    "local-storage": "^2.0.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.5",
     "react-alert": "^5.5.0",
@@ -17,6 +18,7 @@
     "react-sidenav": "^3.1.9",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^0.86.0",
+    "session-storage": "^1.0.1",
     "styled-components": "^4.2.0"
   },
   "scripts": {

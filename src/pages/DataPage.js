@@ -15,6 +15,9 @@ import { LinkContainer} from "react-router-bootstrap";
 import { NavLink } from "react-router-dom";
 import { Nav, Navbar, NavItem } from "react-bootstrap";
 import {withRouter} from 'react-router-dom';
+import localStorage from 'local-storage';
+import sessionStorage from 'session-storage'
+
 
 
 
@@ -51,6 +54,7 @@ class DataPage extends Component{
   onItemSelection = (arg) => {
     this.setState({ selectedPath: arg.path });
     console.log('/furnitures/category/' + this.state.categories[arg.id])
+    window.sessionStorage.setItem('currentCategory', arg.path);
     this.props.history.push('/furnitures/category/'+ this.state.categories[arg.id]);
   }
 
@@ -87,8 +91,6 @@ class DataPage extends Component{
     })
     .then(function(response){ 
       return response.json();
-      var furnit = response.json()
-
     })
     .then(function(furnitureData){
 
@@ -125,6 +127,7 @@ class DataPage extends Component{
   }
 
   componentDidMount(){
+
     let furnit
     var categoriesList = [];
     console.log("Getting furnitures from database")
@@ -156,12 +159,21 @@ class DataPage extends Component{
         console.log(this.state.categories)
         //json response
       })
+
+      let currentCategory = window.sessionStorage.getItem('currentCategory');
+      if (currentCategory){
+        this.setState({
+          selectedPath: currentCategory
+        })
+      }
   }
 
 
 
     render(){
       var { isLoaded, selectedPath, furnitures, categories} = this.state;
+      var user = JSON.parse(window.sessionStorage.getItem('user'));
+      var isLogged = JSON.parse(window.sessionStorage.getItem('isLogged'))
       console.log("SPRAWDZAM")
       console.log(this.props)
       console.log(this.state)
@@ -182,10 +194,10 @@ class DataPage extends Component{
               </div>
               
               <div>
-                {this.props.logged&&(
-                  <label className="NavBarItem">Zalogowany: {this.props.logged.login}</label>
+                {isLogged&&(
+                  <label className="NavBarItem">Zalogowany: {user.login}</label>
                 )}
-                {!this.props.logged&&(
+                {!isLogged&&(
                   <NavLink className="NavBarItem" to="/login" >Zaloguj</NavLink>
                 )}
               </div>
@@ -218,7 +230,7 @@ class DataPage extends Component{
                   wide
                 />
               <Route exact path="/furnitures/favourite" component={() =>
-                (<FavouritesPage furnitures={this.props.logged.furnitures} />)}/>
+                (<FavouritesPage furnitures={user.furnitures} />)}/>
               <Route exact path="/furnitures/login" component={LoginPage}/>
               <Route exact path="/furnitures/info" component={InfoPage}/>
               <Route exact path="/furnitures/account" component={AccountPage}/>
