@@ -94,7 +94,7 @@ class SignUpPage extends Component{
             "email": this.state.email
           }
         
-          fetch("http://localhost:8080/user/add", {
+          fetch("http://localhost:8080/add", {
             method: "POST",
             headers: {
               'Accept': 'application/json',
