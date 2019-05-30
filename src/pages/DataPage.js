@@ -9,7 +9,7 @@ import TestPage from './TestPage';
 import InfoPage from './InfoPage';
 import FavouritesPage from './FavouritesPage'
 import AccountPage from './AccountPage';
-import {Button, Popup} from 'semantic-ui-react';
+import {Button, Popup, Modal, Header, Icon, Message} from 'semantic-ui-react';
 import MebelAddForm from '../forms/MebelAddForm';
 import { LinkContainer} from "react-router-bootstrap";
 import { NavLink } from "react-router-dom";
@@ -46,7 +46,9 @@ class DataPage extends Component{
       isLoaded: false,
       isLogged: false,
       loggedUser: '',
-      selectedPath: '0'
+      selectedPath: '0',
+      isFormOpened: false,
+      modalOpen: false
     };
 
   }
@@ -58,6 +60,10 @@ class DataPage extends Component{
     this.props.history.push('/furnitures/category/'+ this.state.categories[arg.id]);
   }
 
+  handleClick = () => this.setState({ isFormOpened: !this.state.isFormOpened })
+
+  handleClose = () => this.setState({ modalOpen: false })
+
   handleChange = e =>{
 
   }
@@ -68,10 +74,18 @@ class DataPage extends Component{
     this.setState({ isLogged: true})
   }
 
+
+
   submitFurniture = (data) => {
     console.log(data)
     console.log("------=====TRYING TO SEND========---------")
-    
+
+    this.setState({
+      modalOpen: true,
+      isFormOpened: false
+    })
+
+
     var furnitureData = {
       "name": data.name,
       "location": "test/location",
@@ -89,7 +103,7 @@ class DataPage extends Component{
       },
       body:  JSON.stringify(furnitureData)
     })
-    .then(function(response){ 
+    .then(function(response){
       return response.json();
     })
     .then(function(furnitureData){
@@ -98,7 +112,7 @@ class DataPage extends Component{
       console.log("Mebel został wysłany")
       console.log(furnitureData)
       console.log(furnitureData.id)
-      
+
       // ---===== Wysyłanie wymiarów ====-----
       var transform = {
         "furnitureId": furnitureData.id,
@@ -114,7 +128,7 @@ class DataPage extends Component{
       },
       body:  JSON.stringify(transform)
     })
-    .then(function(response){ 
+    .then(function(response){
       return response.json();
     })
     .then(function(transform){
@@ -140,7 +154,7 @@ class DataPage extends Component{
         'Content-Type': 'application/json',
     }}).then(value => value.json())
       .then( json => {
-        
+
         furnit = json
         console.log(json);
         categoriesList.push(furnit[0].category)
@@ -190,9 +204,9 @@ class DataPage extends Component{
                 <NavLink className="NavBarItem" to="/furnitures/account">Account</NavLink>
                 <NavLink className="NavBarItem" to="/furnitures/download">Aplikacja mobilna</NavLink>
                 <NavLink className="NavBarItem" to="/furnitures/favourite">Moje meble</NavLink>
-                
+
               </div>
-              
+
               <div>
                 {isLogged&&(
                   <label className="NavBarItem">Zalogowany: {user.login}</label>
@@ -223,18 +237,37 @@ class DataPage extends Component{
 
               <body className="App__InfoContainer">
               <Popup className="mebelform"
-                  trigger={<Button positive>Dodaj mebel</Button>}
+                  trigger={<Button onClick={this.handleClick} positive>Dodaj mebel</Button>}
                   content={<MebelAddForm submit={this.submitFurniture} category={this.state.categories} />}
                   on='click'
+                  open={this.state.isFormOpened}
                   hideOnScroll
                   wide
                 />
+                <Modal
+                open={this.state.modalOpen}
+                onClose={this.handleClose}
+                basic
+                size='small'
+                centered={true}
+              >
+                <Modal.Content>
+                <Message success>
+                <h1>Mebel został poprawnie dodany.</h1>
+                <p>Teraz możesz dodać go do ulubionych.</p>
+                <Button color='green' onClick={this.handleClose}>
+                  <Icon name='checkmark' size='big'/> Zamknij to okno.
+                </Button>
+                  </Message>
+
+                </Modal.Content>
+              </Modal>
               <Route exact path="/furnitures/favourite" component={() =>
                 (<FavouritesPage furnitures={user.furnitures} />)}/>
               <Route exact path="/furnitures/login" component={LoginPage}/>
               <Route exact path="/furnitures/info" component={InfoPage}/>
               <Route exact path="/furnitures/account" component={AccountPage}/>
-              <Route exact path="/furnitures/test" component={TestPage}/> 
+              <Route exact path="/furnitures/test" component={TestPage}/>
               <Route path="/furnitures/category/:category" component={() =>
                 (<ItemList category={categories[selectedPath]} furnitures={furnitures} />)}
                 />

@@ -1,5 +1,5 @@
 input:-webkit-autofill,
-input:-webkit-autofill:hover, 
+input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 textarea:-webkit-autofill,
 textarea:-webkit-autofill:hover,
@@ -58,7 +58,7 @@ select:-webkit-autofill:focus {
 }
 
 .App__SideMeny_Item{
-  border: #52C4B9;  
+  border: #52C4B9;
 }
 .App__InfoContainer{
   margin-left: 10px;
@@ -66,7 +66,7 @@ select:-webkit-autofill:focus {
   background-color: #68B0AB;
   box-sizing: border-box;
   width: 100%;
-  padding-left: 6px; 
+  padding-left: 6px;
 }
 .App__LoggedInfo{
   position: relative;
@@ -228,4 +228,8 @@ select:-webkit-autofill:focus {
   display: inline-block;
   padding-bottom: 2px;
   margin-left: 5px;
+}
+
+.emptyDivider{
+  padding:5px;
 }

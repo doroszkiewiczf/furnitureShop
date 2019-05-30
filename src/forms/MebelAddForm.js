@@ -1,20 +1,26 @@
-import React from 'react';
-import { Form, Button, Divider, Select} from 'semantic-ui-react';
+import React, {Component} from 'react';
+import { Form, Button, Divider, Select, Message, Modal, Header, Icon} from 'semantic-ui-react';
 import PropTypes from 'prop-types';
-
 
 const sizes = ['small']
 //['mini', 'tiny', 'small', 'large', 'big', 'huge', 'massive']
 
 class MebelAddForm extends React.Component {
-  
 
 onChange = e => this.setState({
   data: { ...this.state.data, [e.target.name]: e.target.value}});
 
+
 onSubmit = () => {
   this.props.submit(this.state.data);
+  console.log("witam");
+
+  this.setState({
+    modalOpen: true
+  })
 }
+
+handleClose = () => this.setState({ modalOpen: false })
 
   constructor(){
     super();
@@ -23,6 +29,8 @@ onSubmit = () => {
       data: {
         name: '',
         icon: '',
+        model:'',
+        texture:'',
         category: '',
         description:'',
         x:'',
@@ -30,7 +38,8 @@ onSubmit = () => {
         z:''
       },
       loading: false,
-      on:false
+      on:false,
+      modalOpen: false
     };
   }
 
@@ -49,59 +58,15 @@ onSubmit = () => {
 
 }
 
-/*onSubmit = () => {
-  const errors = this.validate(this.state.data);
-  this.setState({errors});
-  //sprawdzanie czy errors jest puste
-  if (Object.keys(errors).length === 0) {
-    this.props.submit(this.state.data);
-  }
-};
-/*
-validate = (data) => {
-  const errors = {};
-  var letters = /^[A-Za-z]+$/;
-  var signs = /[+-,]/;
-
-  if (data.name){
-    if(!data.name.match(letters)){
-      errors.name = "Mordo, tylko LITERY"
-    }
-  }
-  if (!data.name) errors.name = "Nie może być puste mordo";
-
-  if (!data.icon) errors.icon = "Nie może być puste mordo";
-
-  if (!data.category) errors.category = "Nie może być puste mordo";
-
-  if (!data.description) errors.description = "Nie może być puste mordo";
-
-  if (!data.x) errors.x = "Nie może być puste mordo";
-//  if (data.x){
-  //  if(!data.x.match(signs)){
-    //  errors.x = "nie świruj, użyj KROPKI jak chcesz decimal";
-  //  }
-
-  if (!data.y) errors.y = "Nie może być puste mordo";
-  //if (data.y){
-    //if(!data.y.match(signs)){
-      //errors.y = "nie świruj, użyj KROPKI jak chcesz decimal";
-    //}
-  //}
-
-  if (!data.z) errors.z = "Nie może być puste mordo";
-  //if (data.z){
-    //if(!data.z.match(signs)){
-    //  errors.z = "nie świruj, użyj KROPKI jak chcesz decimal";
-    //}
-  //}
-
-  return errors;
-
+state = {
+  visible: true
 }
-*/
 
-
+toggle(){
+  this.setState({
+    visible: !this.state.visible
+  });
+}
 
 componentDidMount(){
 
@@ -119,7 +84,6 @@ componentDidMount(){
 }
 
 render (){
-
   const { data } = this.state;
 
   return (
@@ -155,12 +119,12 @@ render (){
      <div className='formaAddMebel'><b>Kategoria</b></div>
      <Button type="button" active={!this.state.on} onClick={this.dropDownSelected}>Wybierz</Button>
      <Button type="button" active={this.state.on} onClick={this.insertCategorySelected}>Podaj własną</Button>
-     <div className='pusty'></div>
+     <div className='emptyDivider'/>
      {!this.state.on && <select id="selekt" style = {{width: "100%"}} placeholder='wybierz kategorię' onChange={this.onChange} name="category">
 
         {this.props.category.map((category, index) =>
           <option key={index} value={category}>{category}</option>
-        )};        
+        )};
 
 
      </select>}
@@ -176,7 +140,7 @@ render (){
               </Form.Field>}
 
 
-     <div className='formaAddMebel'></div>
+
 {/*}     <Form.Field error={!!errors.category}>
            <input
              type="text"
@@ -221,6 +185,36 @@ render (){
              />
             {/*   {errors.icon && <InlineError text={errors.icon} />} */}
        </Form.Field>
+
+        <div className='formaAddMebel'><b>Model</b></div>
+
+       <Form.Field>
+            <input
+            type="file"
+            id="model"
+           // required
+            name="model"
+            placeholder="Ikona"
+            value={data.model}
+            onChange={this.onChange}
+            />
+           {/*   {errors.icon && <InlineError text={errors.icon} />} */}
+      </Form.Field>
+
+      <div className='formaAddMebel'><b>Tekstura</b></div>
+
+      <Form.Field>
+           <input
+           type="file"
+           id="texture"
+          // required
+           name="texture"
+           placeholder="Ikona"
+           value={data.texture}
+           onChange={this.onChange}
+           />
+          {/*   {errors.icon && <InlineError text={errors.icon} />} */}
+     </Form.Field>
 
       <div className='formaAddMebel'><b>Wymiary</b></div>
 
@@ -271,18 +265,14 @@ render (){
               </Form.Field>
 
       </Form.Group>
-   <Button type='submit'>ESSA</Button>
-         <Divider hidden />
+  {/* <Button type='submit'>ESSA</Button>*/}
+  <Button positive>Dodaj</Button>
        </Form>
      ))
 
   );
 }
 }
-
-MebelAddForm.propTypes = {
-  submit: PropTypes.func.isRequired
-};
 
 
 export default MebelAddForm;
