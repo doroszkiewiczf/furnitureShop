@@ -4,6 +4,9 @@ import PropTypes from 'prop-types';
 
 const sizes = ['small']
 //['mini', 'tiny', 'small', 'large', 'big', 'huge', 'massive']
+function getFileExtension(filename) {
+  return filename.slice((filename.lastIndexOf(".") - 1 >>> 0) + 2);
+}
 
 class MebelAddForm extends React.Component {
 
@@ -12,7 +15,7 @@ onChange = e => this.setState({
 
 
 onSubmit = () => {
-  this.props.submit(this.state.data);
+  this.props.submit(this.state);
   console.log("witam");
 
   this.setState({
@@ -28,15 +31,15 @@ handleClose = () => this.setState({ modalOpen: false })
     this.state = {
       data: {
         name: '',
-        icon: '',
-        model:'',
-        texture:'',
         category: '',
         description:'',
         x:'',
         y:'',
         z:''
       },
+      icon: null,
+      model: null,
+      texture: null,
       loading: false,
       on:false,
       modalOpen: false
@@ -57,16 +60,34 @@ handleClose = () => this.setState({ modalOpen: false })
     this.setState(newState);
 
 }
+fileSelectedHandler = e => {
 
-state = {
-  visible: true
+  const target = e.target;
+  let file = target.files[0];
+  let name = target.name;
+    
+    this.setState({
+      [name]: file
+    });
+
+  if (file){
+    let extension = getFileExtension(file.name);
+    console.log(extension)
+    if  (name === "icon" && extension!='png' && extension!='jpg'){
+      target.setCustomValidity("Wamagany plik: .png lub .jpg !!");
+    }else if (name === "model" && extension!='obj') {
+      target.setCustomValidity("Wamagany plik: .obj !!");
+    }else if (name === "texture" && extension!='mtl'){
+      target.setCustomValidity("Wamagany plik .mtl !!");
+    }else{
+      target.setCustomValidity("");
+    }
+  }
+  else{
+    target.setCustomValidity("Wybierz plik!");
+  }
 }
 
-toggle(){
-  this.setState({
-    visible: !this.state.visible
-  });
-}
 
 componentDidMount(){
 
@@ -78,9 +99,10 @@ componentDidMount(){
       name.setCustomValidity("");
     }
     })
-    var newState =  Object.assign({}, this.state);
-    newState.data.category = this.props.category[0]
-    this.setState(newState);
+
+  var newState =  Object.assign({}, this.state);
+  newState.data.category = this.props.category[0]
+  this.setState(newState);
 }
 
 render (){
@@ -120,14 +142,14 @@ render (){
      <Button type="button" active={!this.state.on} onClick={this.dropDownSelected}>Wybierz</Button>
      <Button type="button" active={this.state.on} onClick={this.insertCategorySelected}>Podaj własną</Button>
      <div className='emptyDivider'/>
-     {!this.state.on && <select id="selekt" style = {{width: "100%"}} placeholder='wybierz kategorię' onChange={this.onChange} name="category">
+     {!this.state.on && <Form.Field> <select id="selekt" style = {{width: "100%"}} placeholder='wybierz kategorię' onChange={this.onChange} name="category">
 
         {this.props.category.map((category, index) =>
           <option key={index} value={category}>{category}</option>
         )};
 
 
-     </select>}
+     </select> </Form.Field>}
      {this.state.on && <Form.Field>
               <input type="text"
               id="category"
@@ -177,11 +199,11 @@ render (){
              <input
              type="file"
              id="icon"
-            // required
+             required
              name="icon"
              placeholder="Ikona"
              value={data.icon}
-             onChange={this.onChange}
+             onChange={this.fileSelectedHandler}
              />
             {/*   {errors.icon && <InlineError text={errors.icon} />} */}
        </Form.Field>
@@ -192,11 +214,11 @@ render (){
             <input
             type="file"
             id="model"
-           // required
+            required
             name="model"
             placeholder="Ikona"
             value={data.model}
-            onChange={this.onChange}
+            onChange={this.fileSelectedHandler}
             />
            {/*   {errors.icon && <InlineError text={errors.icon} />} */}
       </Form.Field>
@@ -207,11 +229,11 @@ render (){
            <input
            type="file"
            id="texture"
-          // required
+           required
            name="texture"
            placeholder="Ikona"
            value={data.texture}
-           onChange={this.onChange}
+           onChange={this.fileSelectedHandler}
            />
           {/*   {errors.icon && <InlineError text={errors.icon} />} */}
      </Form.Field>

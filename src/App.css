@@ -68,6 +68,18 @@ select:-webkit-autofill:focus {
   width: 100%;
   padding-left: 6px;
 }
+.imageHere{
+  max-width: 200px;
+  max-height: 200px;
+  min-width: 100px;
+  min-height: 100px;
+  height: 70%;
+  width: 70%; 
+  display: block;
+  margin-left: auto;
+  margin-right: auto; 
+  
+}
 .App__LoggedInfo{
   position: relative;
   margin-right: 10px;
@@ -132,6 +144,7 @@ select:-webkit-autofill:focus {
 .FormCenter {
   padding: 25px 40px;
   margin-bottom: 100px;
+  text-align: center;
 }
 
 .FormTitle {
@@ -161,6 +174,9 @@ select:-webkit-autofill:focus {
 .FormField {
   margin-bottom: 15px;
 }
+.FormField--MiddleAlign{
+
+}
 
 .FormField__Label {
   display: block;
@@ -174,41 +190,66 @@ select:-webkit-autofill:focus {
   font-size: .7em;
   color: rgb(255, 60, 60);
 }
+
+
+.App_MainTag{
+  height: 35px;
+  width: 832.5px;
+  color: #FFF;
+  font-family: Gotham;
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 40px;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
 .FormField__Input {
-  width: 85%;
+  width: 60%;
   background-color: transparent;
   border: none;
   color: white;
   outline: none;
   border-bottom: 1px solid #445366;
-  font-size: 1em;
-  font-weight: 300;
-  padding-bottom: 10px;
-  margin-top: 10px;
+  font-family: "Gotham Light";
+  font-size: 18px;
+  line-height: 22px;
 }
 
 .FormField__Input::placeholder {
-  color: #616E7F;
+  color: rgba(211, 211, 211, 0.877);
 }
 
 .FormField__Button {
-  background-color: #52C4B9;
-  color: white;
+
+  margin-top: 7px;
   border: none;
   outline: none;
-  border-radius: 25px;
-  padding: 15px 70px;
-  font-size: .8em;
-  font-weight: 500;
-  margin-top: 10px;
+  height: 48px;
+  width: 200px;
+  border-radius: 24px;
+  background-color: #FFF;
+  color: rgb(12, 2, 2);
+  font-family: Gotham;
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 0;
+  text-align: center;
+}
+
+.FormField__Button--Active{
+  border: 1px solid #FFF;
+  background-color: #2E4158;
 }
 
 .FormField__Link {
-  color: #66707D;
-  text-decoration: none;
-  display: inline-block;
-  border-bottom: 1.5px solid #225E62;
-  padding-bottom: 5px;
+  height: 15px;
+  width: 162px;
+  color: #000;
+  font-family: "Gotham Light";
+  font-size: 14px;
+  line-height: 15px;
+  text-align: center;
 }
 
 .FormField__CheckboxLabel {

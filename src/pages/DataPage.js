@@ -16,7 +16,8 @@ import { NavLink } from "react-router-dom";
 import { Nav, Navbar, NavItem } from "react-bootstrap";
 import {withRouter} from 'react-router-dom';
 import localStorage from 'local-storage';
-import sessionStorage from 'session-storage'
+import sessionStorage from 'session-storage';
+import axios from 'axios';
 
 
 
@@ -84,15 +85,22 @@ class DataPage extends Component{
       modalOpen: true,
       isFormOpened: false
     })
+    let fileNamePattern = data.data.name.replace(/\s/g, "").normalize('NFD').replace(/[\u0300-\u036f]/g, "").replace(/\u0142/g, "l");
 
-
+    let locationName =fileNamePattern + "_model.obj";
+    let textureName = fileNamePattern + "_text.mtl";
+    let iconName = fileNamePattern + "_icon.jpg";
+    console.log("drukuje imie")
+    console.log(data.data.name)
+    console.log("pokazuje state")
+    console.log(data.data)
     var furnitureData = {
-      "name": data.name,
-      "location": "test/location",
-      "texture": "test/texture",
-      "icon": "text/icon",
-      "category": data.category,
-      "description": data.description,
+      "name": data.data.name,
+      "location": locationName,
+      "texture": textureName,
+      "icon": iconName,
+      "category": data.data.category,
+      "description": data.data.description,
     }
     // ------=====wysyłanie mebla====--------
     fetch("http://localhost:8080/furniture/add", {
@@ -116,9 +124,9 @@ class DataPage extends Component{
       // ---===== Wysyłanie wymiarów ====-----
       var transform = {
         "furnitureId": furnitureData.id,
-        "x": data.x,
-        "y": data.y,
-        "z": data.z
+        "x": data.data.x,
+        "y": data.data.y,
+        "z": data.data.z
       }
       fetch("http://localhost:8080/transform/add", {
       method: "POST",
@@ -135,9 +143,37 @@ class DataPage extends Component{
       console.log("Wymiary zostały wysłane")
       console.log(transform)
       console.log(transform.id)
+      });
 
-      });
-      });
+      /// 
+      console.log("Wysyłam pliki")
+
+      console.log("---===Wysyłanie obrazka===---")
+      const iconForm = new FormData();
+      iconForm.append('file', data.icon, iconName);
+      axios.post('http://localhost:8080/uploadFile', iconForm)
+        .then(res => {
+          console.log(res);
+        });
+      
+      console.log("---===Wysyłanie modelu===---")
+      const modelForm = new FormData();
+      modelForm.append('file', data.model, locationName);
+      axios.post('http://localhost:8080/uploadFile', modelForm)
+        .then(res => {
+          console.log(res);
+        });
+        
+      console.log("---===Wysyłanie tekstury===---")
+      const textureForm = new FormData();
+      textureForm.append('file', data.texture, textureName);
+      axios.post('http://localhost:8080/uploadFile', textureForm)
+        .then(res => {
+          console.log(res);
+        });
+    
+      
+    });
   }
 
   componentDidMount(){
@@ -188,9 +224,6 @@ class DataPage extends Component{
       var { isLoaded, selectedPath, furnitures, categories} = this.state;
       var user = JSON.parse(window.sessionStorage.getItem('user'));
       var isLogged = JSON.parse(window.sessionStorage.getItem('isLogged'))
-      console.log("SPRAWDZAM")
-      console.log(this.props)
-      console.log(this.state)
       if (!isLoaded){
         return <div>Loading</div>;
       }

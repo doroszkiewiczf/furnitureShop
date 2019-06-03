@@ -45,7 +45,10 @@ class ItemList extends Component{
                   <div>
                     <IconForm isFavourite={item.favourite}/>
                   </div>
-                  <Image src={pic} size='large'/>
+                  
+                    <img className = "imageHere"
+                      src={"http://localhost:8080/downloadFile/"+ item.icon} 
+                      />
                     <Card.Content>
                       <Card.Header>{item.name}</Card.Header>
 

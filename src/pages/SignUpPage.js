@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Link, NavLink} from 'react-router-dom';
+import logo from '../images/Logo.png';
 
 const formValid = formErrors => {
   let valid = true;
@@ -128,16 +129,22 @@ class SignUpPage extends Component{
       const {formErrors, isAccepted} = this.state;
         return(
             <div onSubmit={this.handleSubmit} className="FormCenter">
-              <div className="PageSwitch">
-                <NavLink to="/login" activeClassName="PageSwitcher PageSwitcher--Active" className="PageSwitcher"> Zaloguj</NavLink>
-                <NavLink exact to="/" activeClassName="PageSwitcher PageSwitcher--Active" className="PageSwitcher">Zarejestruj</NavLink>
+
+              <div style = {{ marginBottom: "50px"}}>
+                <img className = ".logo" src={logo}/>
               </div>
+
+              <div style = {{ marginBottom: "50px"}}>
+                <label className = "App_MainTag">
+                  Nice Furniture AR App
+                </label>
+              </div>
+
                 <form className="FormFields">
                   {/*Pole tekstowe - login*/}
                   <div className="FormField">
-                    <label className="FormField__Label" htmlFor="login"> Login: </label>
                     <input type="text" id="login" className="FormField__Input"
-                    placeholder="Podaj login" name="login" value={this.state.login} 
+                    placeholder="Login" name="login" value={this.state.login} 
                     onChange={this.handleChange}/>
                     {formErrors.login.length > 1 && (
                     <span className="errorMessage">{formErrors.login}</span>
@@ -147,9 +154,8 @@ class SignUpPage extends Component{
                   
                   {/*Pole tekstowe - hasło*/}
                   <div className="FormField">
-                    <label className="FormField__Label" htmlFor="password"> Hasło: </label>
                     <input type="password" id="password" className="FormField__Input"
-                    placeholder="Podaj hasło twoje" name="password" value={this.state.password}
+                    placeholder="Password" name="password" value={this.state.password}
                     onChange={this.handleChange}/>
                     {formErrors.password.length > 1 && (
                     <span className="errorMessage">{formErrors.password}</span>
@@ -158,9 +164,8 @@ class SignUpPage extends Component{
 
                   {/*Pole tekstowe - imie*/}
                   <div className="FormField">
-                    <label className="FormField__Label" htmlFor="firstName"> Imię: </label>
                     <input type="text" id="firstName" className="FormField__Input"
-                    placeholder="Podaj imię twoje" name="firstName" value={this.state.firstName}
+                    placeholder="Name" name="firstName" value={this.state.firstName}
                     onChange={this.handleChange}/>
                     {formErrors.firstName.length > 1 && (
                     <span className="errorMessage">{formErrors.firstName}</span>
@@ -169,9 +174,8 @@ class SignUpPage extends Component{
 
                   {/*Pole tekstowe - nazwisko*/}
                   <div className="FormField">
-                    <label className="FormField__Label" htmlFor="lastName"> Nazwisko: </label>
                     <input type="text" id="lastName" className="FormField__Input"
-                    placeholder="Podaj swoje nazwisko" name="lastName" value={this.state.lastName}
+                    placeholder="Last Name" name="lastName" value={this.state.lastName}
                     onChange={this.handleChange}/>
                     {formErrors.lastName.length > 1 && (
                     <span className="errorMessage">{formErrors.lastName}</span>
@@ -180,9 +184,8 @@ class SignUpPage extends Component{
 
                   {/*Pole tekstowe - email*/}
                   <div className="FormField">
-                    <label className="FormField__Label" htmlFor="email"> E-mail: </label>
                     <input type="text" id="email" className="FormField__Input"
-                    placeholder="Podaj swego mejla" name="email" value={this.state.email}
+                    placeholder="E-mail" name="email" value={this.state.email}
                     onChange={this.handleChange}/>
                     {formErrors.email.length > 1 && (
                     <span className="errorMessage">{formErrors.email}</span>
@@ -203,8 +206,15 @@ class SignUpPage extends Component{
                     </div>
                   {/*Przycisk do akceptacji*/}
                   <div className="FormField">
-                    <button className="FormField__Button mr-20"> Zarejestruj</button>
-                    <Link to="/login" className="FormField__Link">Mam już konto mordo</Link>
+                    <button className="FormField__Button"> Zarejestruj</button>
+                  </div>
+                  <div style = {{marginTop: "50px"}}>
+                    <label className="FormField__Link">Stwórz nowe konto</label>
+                  </div>
+                  <div>
+                    <Link to="/login" className="FormField__Link">
+                      <button className="FormField__Button FormField__Button--Active">Zaloguj</button>
+                    </Link>
                   </div>
                 </form> 
               </div>

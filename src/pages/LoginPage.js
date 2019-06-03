@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Link, NavLink, Redirect} from 'react-router-dom';
 import {withRouter} from 'react-router-dom';
 import axios from 'axios';
+import logo from '../images/Logo.png';
 
 
 
@@ -49,6 +50,8 @@ class LoginPage extends Component{
         
         user = json
         console.log(user);
+
+
         this.props.history.push("/furnitures/info")
         this.props.logUser(user);
         }).catch((err) => {
@@ -106,50 +109,51 @@ class LoginPage extends Component{
         return(
 
             <div onSubmit={this.handleSubmit} className="FormCenter">
-              <div className="PageSwitch">
-                <NavLink to="/login" activeClassName="PageSwitcher PageSwitcher--Active" className="PageSwitcher"> Zaloguj</NavLink>
-                <NavLink exact to="/" activeClassName="PageSwitcher PageSwitcher--Active" className="PageSwitcher">Zarejestruj</NavLink>
-              </div>
               
+              <div style = {{ marginBottom: "50px"}}>
+                <img className = ".logo" src={logo}/>
+              </div>
+
+              <div style = {{ marginBottom: "50px"}}>
+                <label className = "App_MainTag">
+                  Nice Furniture AR App
+                </label>
+              </div>
                 <form className="FormFields">
                   {/*Pole tekstowe - login*/}
                   <div className="FormField">
-                    <label className="FormField__Label" htmlFor="login" > Login: </label>
                     <input type="text" id="login" className="FormField__Input"
-                    placeholder="Podaj login" name="login" value={this.state.login}
+                    placeholder="Login" name="login" value={this.state.login}
                     onChange={this.handleChange}/>
                   </div>
 
                   {/*Pole tekstowe - hasło*/}
                   <div className="FormField">
-                    <label className="FormField__Label" htmlFor="password"> Hasło: </label>
                     <input type="password" id="password" className="FormField__Input"
-                    placeholder="Podaj hasło twoje" name="password" value={this.state.password}
+                    placeholder="Password" name="password" value={this.state.password}
                     onChange={this.handleChange}/>
                   </div>
                   {this.state.wrongData && (
                     <span className="errorMessage">Błędny login lub hasło</span>
                   )}
                   {/*Przycisk do akceptacji*/}
-                  <div className="FormField">
-                    <button className="FormField__Button mr-20"> Zaloguj</button>
-                    <Link to="/furnitures" className="FormField__Link">Stwórz nowe konto</Link>
+                  <div className="FormField FormField--MiddleAlign">
+                    <button className="FormField__Button"> Zaloguj</button>
                   </div>
+
+                  <div style = {{marginTop: "50px"}} >
+                    <label className="FormField__Link">Stwórz nowe konto</label>
+                  </div>
+
+                  <div className="FormField FormField--MiddleAlign">
+                    <Link to="/">
+                    <button exact to="/" className="FormField__Button FormField__Button--Active">
+                      Zarejestruj
+                    </button>
+                    </Link>
+                  </div>
+                  
                 </form>
-                <input
-                  type="file"
-                  id="icon"
-                  // required
-                  name="icon"
-                  placeholder="Ikona"
-                  onChange={this.fileSelectedHandler}
-                />
-                <img 
-                  src="http://localhost:8080/downloadFile/cukrzyca.jpg"
-                  alt="new"
-                />
-                <button onClick={this.fileUploadHandler}>
-                uploadFile </button>
             </div>
         )
     }
