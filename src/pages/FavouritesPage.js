@@ -30,7 +30,9 @@ class FavouritesPage extends Component{
     render(){
         if (this.props.furnitures){
             return(
+              
                 <div><Card.Group>
+                  Hello here
               {
                 this.props.furnitures.map(item =>(
                 (

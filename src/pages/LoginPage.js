@@ -5,6 +5,24 @@ import axios from 'axios';
 import logo from '../images/Logo.png';
 
 
+function handleResponse(response) {
+  return response.text().then(text => {
+      const data = text && JSON.parse(text);
+      console.log("Respone status isss:" + data)
+      if (!response.ok) {
+        console.log("Respone status is:" + response.status)
+          if (response.status === 401) {
+              // auto logout if 401 response returned from api
+              console.log("Respone status is:" + response.status)
+          }
+
+          const error = (data && data.message) || response.statusText;
+          return Promise.reject(error);
+      }
+
+      return data;
+  });
+}
 
 class LoginPage extends Component{
 
@@ -37,70 +55,91 @@ class LoginPage extends Component{
 
         console.log("------=====TRYING TO LOGIN========---------")
 
-        fetch('http://localhost:8080/user/login?login='+this.state.login+'&password='+this.state.password, {
-          method: "GET",
-          credentials: 'same-origin',
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          }
-        })
-        .then(value => value.json())
+      //   fetch('http://localhost:8080/user/login?login='+this.state.login+'&password='+this.state.password, {
+      //     method: "GET",
+      //     credentials: 'same-origin',
+      //     headers: {
+      //       'Accept': 'application/json',
+      //       'Content-Type': 'application/json'
+      //     }
+      //   })
+      //   .then(value => value.json())
+      //    .then( json => {
+        
+      //   user = json
+      //   console.log(user);
+
+
+      //   this.props.history.push("/furnitures/info")
+      //   this.props.logUser(user);
+      //   }).catch((err) => {
+      //     console.log(err);
+      //     this.setState({
+      //       wrongData: true
+      //     })
+      // });
+      console.log("------=====TRYING TO LOGIN========---------")
+      let username = this.state.login;
+      let password = this.state.password;
+      let authKey = "Basic " + window.btoa(username + ':' + password);
+      const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json',
+                       'Authorization': authKey },
+            //body: JSON.stringify({ username, password })
+         };
+        
+      fetch("http://localhost:8080/login", requestOptions)
+      .then(value => value.json())
          .then( json => {
         
         user = json
         console.log(user);
-
-
-        this.props.history.push("/furnitures/info")
+        user.authData = authKey;
         this.props.logUser(user);
+        this.props.history.push("/furnitures/info")
         }).catch((err) => {
           console.log(err);
           this.setState({
             wrongData: true
           })
       });
-      // console.log("------=====TRYING TO LOGIN========---------")
-      //     var data = {
-      //       "login": this.state.login,
-      //       "password": this.state.password,
-      //     }
-        
-      //     fetch("http://localhost:8080/login", {
-      //       method: "POST",
-      //       headers: {
-      //         'Accept': 'application/json',
-      //         'Content-Type': 'application/json'
-      //       },
-      //       body:  JSON.stringify(data)
-      //     })
-      //     .then(function(response){ 
-      //       return response.json();   
-      //     })
-      //     .then(function(data){
-      //       console.log("WYSYŁANE TU COŚ BYŁO")
-      //       console.log(data)
+      //let username = this.state.login;
+    //   let username = this.state.login;
+    //   let password = this.state.password;
+    //   let authKey = "Basic " + window.btoa(username + ':' + password);
+    //   console.log(authKey);
+    //   const requestOptions = {
+    //     method: 'POST',
+    //     headers: { 'Content-Type': 'application/json',
+    //                'Authorization': authKey },
+    //     //body: JSON.stringify({ username, password })
+    // };
 
-      //     })
-      }
-    }
+    // return fetch(`http://localhost:8080/login`, requestOptions)
+    //     .then(handleResponse)
+    //     .then(user => {
+    //         // login successful if there's a user in the response
+    //         if (user) {
+    //             // store user details and basic auth credentials in local storage 
+    //             // to keep user logged in between page refreshes
+    //             this.props.history.push("/furnitures/info")
+    //             this.props.logUser(user);
+    //             console.log("Zalogowano pomyślnie");
+    //             user.authdata = window.btoa(username + ':' + password);
+    //             localStorage.setItem('user', JSON.stringify(user));
+    //             console.log("Dane użytkownika");
+    //             console.log(JSON.stringify(user));
+    //         }
+    //         this.setState({
+    //                  wrongData: true
+    //                })
 
-    fileSelectedHandler = event => {
-      console.log(event.target.files[0])
-      this.setState({
-        selectedFile: event.target.files[0]
-      })
+    //         return user;
+    //     });
+       }
     }
-
-    fileUploadHandler = () => {
-      console.log("TRYING TO SEND THE FILE");
-      const data = new FormData();
-      data.append('file', this.state.selectedFile, this.state.selectedFile.name);
-      axios.post('http://localhost:8080/uploadFile', data)
-        .then(res => {
-          console.log(res);
-        });
-    }
+    
 
     render(){
 
@@ -147,7 +186,7 @@ class LoginPage extends Component{
 
                   <div className="FormField FormField--MiddleAlign">
                     <Link to="/">
-                    <button exact to="/" className="FormField__Button FormField__Button--Active">
+                    <button className="FormField__Button FormField__Button--Active">
                       Zarejestruj
                     </button>
                     </Link>

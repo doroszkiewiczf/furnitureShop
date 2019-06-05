@@ -18,6 +18,9 @@ import {withRouter} from 'react-router-dom';
 import localStorage from 'local-storage';
 import sessionStorage from 'session-storage';
 import axios from 'axios';
+import logo from '../images/Logo.png';
+import QRCode from '../images/QR_code.jpg'
+import accountIcon from '../images/Account.png'
 
 
 
@@ -32,7 +35,8 @@ const AppContainer = styled.div`\
 const theme = {
   selectionColor: "#00645c",
   selectionBgColor: "#00BCD4",
-  hoverBgColor: "#00BCD4"
+  hoverBgColor: "#00BCD4",
+  padding: "1px, 1px, 1px, 1px"
 };
 
 class DataPage extends Component{
@@ -47,9 +51,10 @@ class DataPage extends Component{
       isLoaded: false,
       isLogged: false,
       loggedUser: '',
-      selectedPath: '0',
+      selectedPath: '',
       isFormOpened: false,
-      modalOpen: false
+      modalOpen: false,
+      infoModalOpened: false
     };
 
   }
@@ -64,6 +69,10 @@ class DataPage extends Component{
   handleClick = () => this.setState({ isFormOpened: !this.state.isFormOpened })
 
   handleClose = () => this.setState({ modalOpen: false })
+
+  handleInfoModalClose = () => this.setState({ infoModalOpened: false})
+
+  handleInfoModalClick = () => this.setState({ infoModalOpened: !this.state.infoModalOpened})
 
   handleChange = e =>{
 
@@ -107,7 +116,8 @@ class DataPage extends Component{
       method: "POST",
       headers: {
         'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': JSON.parse(window.sessionStorage.getItem('user')).authData
       },
       body:  JSON.stringify(furnitureData)
     })
@@ -132,7 +142,8 @@ class DataPage extends Component{
       method: "POST",
       headers: {
         'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': JSON.parse(window.sessionStorage.getItem('user')).authData
       },
       body:  JSON.stringify(transform)
     })
@@ -148,10 +159,15 @@ class DataPage extends Component{
       /// 
       console.log("Wysyłam pliki")
 
+      var headers = {
+        'Content-Type': 'application/json',
+        'Authorization': JSON.parse(window.sessionStorage.getItem('user')).authData 
+    }
+      
       console.log("---===Wysyłanie obrazka===---")
       const iconForm = new FormData();
       iconForm.append('file', data.icon, iconName);
-      axios.post('http://localhost:8080/uploadFile', iconForm)
+      axios.post('http://localhost:8080/uploadFile', iconForm, {headers: headers})
         .then(res => {
           console.log(res);
         });
@@ -159,7 +175,7 @@ class DataPage extends Component{
       console.log("---===Wysyłanie modelu===---")
       const modelForm = new FormData();
       modelForm.append('file', data.model, locationName);
-      axios.post('http://localhost:8080/uploadFile', modelForm)
+      axios.post('http://localhost:8080/uploadFile', modelForm, {headers: headers})
         .then(res => {
           console.log(res);
         });
@@ -167,7 +183,7 @@ class DataPage extends Component{
       console.log("---===Wysyłanie tekstury===---")
       const textureForm = new FormData();
       textureForm.append('file', data.texture, textureName);
-      axios.post('http://localhost:8080/uploadFile', textureForm)
+      axios.post('http://localhost:8080/uploadFile', textureForm, {headers: headers})
         .then(res => {
           console.log(res);
         });
@@ -181,19 +197,20 @@ class DataPage extends Component{
     let furnit
     var categoriesList = [];
     console.log("Getting furnitures from database")
-
+    console.log(JSON.parse(window.sessionStorage.getItem('user')).authData);
     fetch('http://localhost:8080/furniture/all',{
     method: 'GET',
     credentials: 'same-origin',
     headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
+        'Authorization': JSON.parse(window.sessionStorage.getItem('user')).authData
     }}).then(value => value.json())
       .then( json => {
 
         furnit = json
         console.log(json);
-        categoriesList.push(furnit[0].category)
+        categoriesList.push("Favourite")
         furnit.map(item => {
           if (categoriesList.indexOf(item.category) < 0){
             categoriesList.push(item.category);
@@ -231,7 +248,22 @@ class DataPage extends Component{
         return(
 
           <div>
-            <div className="NavBar">
+            <div className="DataPage_TopContainer">
+              <div className="DataPage_ButtonContainer">
+                <button className="FormField__Button"> Add Product</button>
+                <button className="FormField__Button" style = {{ marginLeft: "14px"}} onClick={this.handleInfoModalClick} > Mobile App</button>
+              </div>
+              <div className="DataPage_LogoContainer">
+                <img className = "DataPage_logo" src={logo}/>
+              </div>
+              <div className="DataPage_AccountContainer">
+                <img className = "DataPage_AccountLogo" src={accountIcon}/>
+              </div>
+            </div>
+
+            <div className="DataPage_NavBar">
+
+              
               <div>
                 <NavLink className="NavBarItem" to="/furnitures/info">Info</NavLink>
                 <NavLink className="NavBarItem" to="/furnitures/account">Account</NavLink>
@@ -252,16 +284,18 @@ class DataPage extends Component{
             </div>
             <AppContainer onSubmit={this.handleSubmit} className="FormCentesr">
 
-              <div className="App__SideMenu">
+              <div className="DataPage__SideMenuContainer">
                 <SideNav
-                  className="App__SideMeny_Item"
+                  className="DataPage__SideMenu"
                   selectedPath={this.state.selectedPath}
                   onItemSelection={this.onItemSelection.bind(this)}
                   theme={theme}
                   >
                   {
                     categories.map((item, index) =>(
-                      <NavSide id={index} key={index}>{item}</NavSide>
+                      <NavSide className="DataPage_NavItem" id={index} key={index}>
+                        <button className="FormField__Button" style = {{marginTop : '0px'}}>{item}</button>
+                      </NavSide>
                     )
                   )}
                 </SideNav>
@@ -277,7 +311,7 @@ class DataPage extends Component{
                   hideOnScroll
                   wide
                 />
-                <Modal
+              <Modal
                 open={this.state.modalOpen}
                 onClose={this.handleClose}
                 basic
@@ -292,10 +326,62 @@ class DataPage extends Component{
                   <Icon name='checkmark' size='big'/> Zamknij to okno.
                 </Button>
                   </Message>
-
                 </Modal.Content>
               </Modal>
-              <Route exact path="/furnitures/favourite" component={() =>
+              
+              <Modal
+                open={this.state.infoModalOpened}
+                onClose={this.handleInfoModalClose}
+                size='small'
+                centered={true}
+                dimmer='blurring'
+                style = {{textAlign: "center"}}
+              >
+                <Modal.Header>
+                 <div className = "InfoModal_Title"> Get Mobile App!</div>
+                </Modal.Header>
+                  <Modal.Content>
+                    <Modal.Description>
+                      <h1 className = "InfoModal_Header">1. Download App from Google Play</h1>
+                      <a href="https://hltv.org" target="_blank" rel="noopener noreferrer" className="InfoModal_Link">
+                        Download link
+                      </a>
+                      <h1 className = "InfoModal_Header">2. Get QR code</h1>
+                      <a href="https://hltv.org" target="_blank" rel="noopener noreferrer"> 
+                        <img className = "InfoModal_QRCode" src={QRCode}/>
+                      </a>
+                      <h1 className = "InfoModal_Header">3. Enjoy your interior!</h1>
+                    </Modal.Description>
+                  </Modal.Content>
+              </Modal>
+
+              <Modal
+                open={this.state.infoModalOpened}
+                onClose={this.handleInfoModalClose}
+                size='small'
+                centered={true}
+                dimmer='blurring'
+                style = {{textAlign: "center"}}
+              >
+                <Modal.Header>
+                 <div className = "InfoModal_Title"> Get Mobile App!</div>
+                </Modal.Header>
+                  <Modal.Content>
+                    <Modal.Description>
+                      <h1 className = "InfoModal_Header">1. Download App from Google Play</h1>
+                      <a href="https://hltv.org" target="_blank" rel="noopener noreferrer" className="InfoModal_Link">
+                        Download link
+                      </a>
+                      <h1 className = "InfoModal_Header">2. Get QR code</h1>
+                      <a href="https://hltv.org" target="_blank" rel="noopener noreferrer"> 
+                        <img className = "InfoModal_QRCode" src={QRCode}/>
+                      </a>
+                      <h1 className = "InfoModal_Header">3. Enjoy your interior!</h1>
+                    </Modal.Description>
+                  </Modal.Content>
+              </Modal>
+
+              <Route exact path="/furnitures/category/Favourite" component={() =>
                 (<FavouritesPage furnitures={user.furnitures} />)}/>
               <Route exact path="/furnitures/login" component={LoginPage}/>
               <Route exact path="/furnitures/info" component={InfoPage}/>
