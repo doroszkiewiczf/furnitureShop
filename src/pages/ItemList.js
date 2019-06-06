@@ -41,10 +41,10 @@ class ItemList extends Component{
             this.state.furnituresList.map(item =>(
             this.props.category === item.category&&
             (
-              <Modal size="small" key={item.id} trigger={
+              <Modal size="small" key={item.id} dimmer='blurring' trigger={
                 <Card className="ItemList_CardStyle">
                   <div>
-                    <IconForm furniture={item} furnitureId={item.id}/>
+                    <IconForm furniture={item} furnitureId={item.id} favPage={false}/>
                   </div>
                   
                     <img className = "imageHere"

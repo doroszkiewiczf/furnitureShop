@@ -21,6 +21,7 @@ import axios from 'axios';
 import logo from '../images/Logotyp.png';
 import QRCode from '../images/QR_code.jpg'
 import accountIcon from '../images/Account.png'
+import googlePlay from '../images/googleplay.png'
 
 
 const AppContainer = styled.div`\
@@ -80,6 +81,9 @@ class DataPage extends Component{
 
   loginUser = (user) => {
     this.setState({ isLogged: true})
+  }
+  logMeOut = () => {
+
   }
 
 
@@ -207,7 +211,7 @@ class DataPage extends Component{
 
         furnit = json
         console.log(json);
-        categoriesList.push("Ulubione")
+        categoriesList.push("Favourites")
         furnit.map(item => {
           if (categoriesList.indexOf(item.category) < 0){
             categoriesList.push(item.category);
@@ -249,7 +253,7 @@ class DataPage extends Component{
               <div className="DataPage_ButtonContainer">
 
                 <Modal className="mebelform"
-                  trigger={<button className="FormField__Button FormField__Button--Orange"> Add Product</button>}
+                  trigger={<button className="FormField__Button FormField__Button--Orange"> Add Furniture</button>}
                   on='click'
                   size='small'
                   centered={true}
@@ -257,7 +261,7 @@ class DataPage extends Component{
                   style = {{width: "500px"}}
                 >
                 <Modal.Header>
-                 <div className = "InfoModal_Title"> Dodaj nowy mebel!</div>
+                 <div className = "InfoModal_Title"> Add New Furniture</div>
                 </Modal.Header>
                   <Modal.Content >
                   <MebelAddForm submit={this.submitFurniture} category={this.state.categories}/>
@@ -270,14 +274,14 @@ class DataPage extends Component{
               </div>
               <div className="DataPage_AccountContainer">
                 <div className = "DataPage__AccountText">
-                  <p style = {{lineHeight: "17px"}}>Zalogowano jako:
+                  <p style = {{lineHeight: "17px"}}>Logged as:
                   <br/><b>{JSON.parse(window.sessionStorage.getItem('user')).login}</b> 
                   </p>
                 </div>
                 
                 <img className = "DataPage_AccountLogo" src={accountIcon}/>
                 <div className = "DataPage__AccountLogout">
-                  <Link to="/" >
+                  <Link to="/" onClick={this.logMeOut}>
                     Wyloguj
                   </Link>
                   </div>
@@ -315,40 +319,14 @@ class DataPage extends Component{
               >
                 <Modal.Content>
                 <Message success>
-                <h1>Mebel został poprawnie dodany.</h1>
-                <p>Teraz możesz dodać go do ulubionych.</p>
+                <h1>Furniture added successfully.</h1>
                 <Button color='green' onClick={this.handleClose}>
-                  <Icon name='checkmark' size='big'/> Zamknij to okno.
+                  <Icon name='checkmark' size='big'/> Clsoe.
                 </Button>
                   </Message>
                 </Modal.Content>
               </Modal>
               
-              <Modal
-                open={this.state.infoModalOpened}
-                onClose={this.handleInfoModalClose}
-                size='small'
-                centered={true}
-                dimmer='blurring'
-                style = {{textAlign: "center"}}
-              >
-                <Modal.Header>
-                 <div className = "InfoModal_Title"> Get Mobile App!</div>
-                </Modal.Header>
-                  <Modal.Content>
-                    <Modal.Description>
-                      <h1 className = "InfoModal_Header">1. Download App from Google Play</h1>
-                      <a href="https://hltv.org" target="_blank" rel="noopener noreferrer" className="InfoModal_Link">
-                        Download link
-                      </a>
-                      <h1 className = "InfoModal_Header">2. Get QR code</h1>
-                      <a href="https://hltv.org" target="_blank" rel="noopener noreferrer"> 
-                        <img className = "InfoModal_QRCode" src={QRCode}/>
-                      </a>
-                      <h1 className = "InfoModal_Header">3. Enjoy your interior!</h1>
-                    </Modal.Description>
-                  </Modal.Content>
-              </Modal>
 
               <Modal
                 open={this.state.infoModalOpened}
@@ -364,8 +342,8 @@ class DataPage extends Component{
                   <Modal.Content>
                     <Modal.Description>
                       <h1 className = "InfoModal_Header">1. Download App from Google Play</h1>
-                      <a href="https://hltv.org" target="_blank" rel="noopener noreferrer" className="InfoModal_Link">
-                        Download link
+                      <a href="https://hltv.org" target="_blank" rel="noopener noreferrer"> 
+                        <img className = "InfoModal_Play" src={googlePlay}/>
                       </a>
                       <h1 className = "InfoModal_Header">2. Get QR code</h1>
                       <a href="https://hltv.org" target="_blank" rel="noopener noreferrer"> 
@@ -376,7 +354,7 @@ class DataPage extends Component{
                   </Modal.Content>
               </Modal>
 
-              <Route exact path="/furnitures/category/Ulubione" component={() =>
+              <Route exact path="/furnitures/category/Favourites" component={() =>
                 (<FavouritesPage furnitures={user.furnitures} />)}/>
               <Route path="/furnitures/category/:category" component={() =>
                 (<ItemList category={categories[selectedPath]} furnitures={furnitures} />)}

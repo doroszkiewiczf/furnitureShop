@@ -97,7 +97,7 @@ class LoginPage extends Component{
         console.log(user);
         user.authData = authKey;
         this.props.logUser(user);
-        this.props.history.push("/furnitures/info")
+        this.props.history.push("/furnitures/category/favourite")
         }).catch((err) => {
           console.log(err);
           this.setState({

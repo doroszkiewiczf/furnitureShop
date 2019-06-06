@@ -140,9 +140,9 @@ render (){
      />
      </Form.Field>
 
-     <div className='formaAddMebel'><b>Kategoria</b></div>
-     <Button type="button" active={!this.state.on} onClick={this.dropDownSelected}>Wybierz</Button>
-     <Button type="button" active={this.state.on} onClick={this.insertCategorySelected}>Podaj własną</Button>
+     <div className='formaAddMebel'><b>Category</b></div>
+     <Button primary type="button" class = "ui primary button"active={!this.state.on} onClick={this.dropDownSelected}>Choose</Button>
+     <Button primary type="button" class = "ui primary button"active={this.state.on} onClick={this.insertCategorySelected}>New Category</Button>
      <div className='emptyDivider'/>
      {!this.state.on && <Form.Field> <select id="selekt" style = {{width: "100%"}} placeholder='wybierz kategorię' onChange={this.onChange} name="category">
 
@@ -210,8 +210,7 @@ render (){
              />
              <label for="icon" >
               <div className = "MebelAddForm_InputLabel">
-                {this.state.icon ? <b>{this.state.icon.name}</b> : <b> !!Upload file!! </b>}
-                
+                {this.state.icon ? <b>{this.state.icon.name}</b> : <b> Upload file </b>}
               </div></label>
             {/*   {errors.icon && <InlineError text={errors.icon} />} */}
        </Form.Field>
@@ -228,7 +227,11 @@ render (){
             value={data.model}
             onChange={this.fileSelectedHandler}
             />
-            <label for="model" ><div className = "MebelAddForm_InputLabel">!!Upload file!!</div></label>
+            <label for="model" >
+            <div className = "MebelAddForm_InputLabel">
+                {this.state.model ? <b>{this.state.model.name}</b> : <b> Upload file </b>}
+              </div>
+            </label>
            {/*   {errors.icon && <InlineError text={errors.icon} />} */}
       </Form.Field>
 
@@ -244,7 +247,11 @@ render (){
            value={data.texture}
            onChange={this.fileSelectedHandler}
            />
-           <label for="texture" ><div className = "MebelAddForm_InputLabel">!!Upload file!!</div></label>
+           <label for="texture" >
+           <div className = "MebelAddForm_InputLabel">
+                {this.state.texture ? <b>{this.state.texture.name}</b> : <b> Upload file </b>}
+              </div>
+            </label>
           {/*   {errors.icon && <InlineError text={errors.icon} />} */}
      </Form.Field>
 

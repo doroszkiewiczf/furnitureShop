@@ -16,7 +16,7 @@ select:-webkit-autofill:focus {
   font: Gotham;
 }
 .App {
-  background-color: #F9F5E5;
+  background-color: white;
   color: white;
   font: Gotham;
 }
@@ -31,7 +31,7 @@ select:-webkit-autofill:focus {
 
   width: 100%;
   height: 100vh;
-  background-color: #FAF3DD;
+  background-color: white;
   vertical-align: inherit;
   display: inline-block;
 }
@@ -295,6 +295,10 @@ select:-webkit-autofill:focus {
   height: 100px;
   width: 100px;
 }
+.InfoModal_Play{
+  height: 100px;
+  width: 260px;
+}
 .InfoModal_Link{
   height: 15px;
   width: 162px;
@@ -329,6 +333,33 @@ input#name {
   font-size: 18px;
   line-height: 22px;
 }
+input#category {
+  width: 400px;
+  background-color: transparent;
+  border: none;
+  color: #333;
+  outline: none;
+  box-sizing: border-box;
+  border-bottom: 2px solid #1976D2;
+  box-shadow: 0 4px 4px -4px rgba(33,150,243,0.5);
+  font-family: "Gotham Light";
+  font-size: 16px;
+  line-height: 22px;
+}
+select#selekt{
+  width: 400px;
+  background-color: transparent;
+  border: none;
+  color: #333;
+  outline: none;
+  box-sizing: border-box;
+  border: 0.5px solid #1976D2;
+  box-shadow: 0 4px 4px 0px rgba(33,150,243,0.5);
+  font-family: "Gotham Light";
+  font-size: 16px;
+  line-height: 22px;
+}
+
 input#num{
   background-color: transparent;
   border: none;
@@ -338,7 +369,7 @@ input#num{
   border: 0.5px solid #1976D2;
   box-shadow: 0 4px 4px 0px rgba(33,150,243,0.5);
   font-family: "Gotham Light";
-  font-size: 18px;
+  font-size: 14px;
   line-height: 22px;
 }
 intput#category{
@@ -375,6 +406,7 @@ input[type="file"] + label {
   text-align: center;
 }
 .MebelAddForm_InputLabel{
+  padding-top: 3px;
   font-family: "Gotham Light";
   font-size: 18px;
   line-height: 22px;
