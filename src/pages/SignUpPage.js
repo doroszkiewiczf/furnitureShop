@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {Link, NavLink} from 'react-router-dom';
+import {Reveal} from 'semantic-ui-react';
 import logo from '../images/Logo.png';
+import top from '../images/top.png';
 
 const formValid = formErrors => {
   let valid = true;
@@ -39,12 +41,12 @@ class SignUpPage extends Component{
     };
   }
   handleChecked = e =>  {
-    
+
     this.setState({
       isAccepted: !this.state.isAccepted
     });
-    this.state.formErrors.accept = this.state.isAccepted === false ? "" : "Musisz dać akcept";
-    
+    this.state.formErrors.accept = this.state.isAccepted === false ? "" : "You have to accept the terms & conditions";
+
   }
 
   handleChange = e => {
@@ -56,19 +58,19 @@ class SignUpPage extends Component{
 
     switch(name){
       case "login":
-        formErrors.login = value.length < 3  ? "zła długość loginu" : "";
+        formErrors.login = value.length < 3  ? "Your login is too short" : "";
         break;
       case "password":
-        formErrors.password = value.length < 6 ? "za krótkie hasło here" : "";
+        formErrors.password = value.length < 6 ? "Your password is too short" : "";
         break;
       case "email":
-        formErrors.email = validateEmail(value) ? "" : "zły mail";
+        formErrors.email = validateEmail(value) ? "" : "Incorrect e-mail address";
         break;
       case "firstName":
-      formErrors.firstName = value.length < 3 ? "zbyt krótkie imię": "";
+      formErrors.firstName = value.length < 3 ? "Your first name is too short": "";
         break;
       case "lastName":
-        formErrors.lastName = value.length < 3 ? "zbyt krótkie nazwisko": "";
+        formErrors.lastName = value.length < 3 ? "Your last name is too short": "";
         break;
       default:
         break;
@@ -94,7 +96,7 @@ class SignUpPage extends Component{
             "password": this.state.password,
             "email": this.state.email
           }
-        
+
           fetch("http://localhost:8080/add", {
             method: "POST",
             headers: {
@@ -103,8 +105,8 @@ class SignUpPage extends Component{
             },
             body:  JSON.stringify(data)
           })
-          .then(function(response){ 
-            return response.json();   
+          .then(function(response){
+            return response.json();
           })
           .then(function(data){
             console.log("WYSYŁANE TU COŚ BYŁO")
@@ -122,15 +124,23 @@ class SignUpPage extends Component{
       }
   }
   handleSend() {
-    
+
   }
 
     render(){
       const {formErrors, isAccepted} = this.state;
         return(
+          <div>
+              <div className="TopImage">
+                  <div className="TopImage_Logo">
+                    <img src={logo} alt="Logo" className="logo-register"/>
+                      </div>
+                  <div className="TopImage_Text">HOME DECO AR</div>
+              </div>
+
             <div onSubmit={this.handleSubmit} className="FormCenter">
 
-              <div style = {{ marginBottom: "50px"}}>
+            {/*  <div style = {{ marginBottom: "50px"}}>
                 <img className = ".logo" src={logo}/>
               </div>
 
@@ -138,20 +148,20 @@ class SignUpPage extends Component{
                 <label className = "App_MainTag">
                   Nice Furniture AR App
                 </label>
-              </div>
+              </div>*/}
 
                 <form className="FormFields">
                   {/*Pole tekstowe - login*/}
                   <div className="FormField">
                     <input type="text" id="login" className="FormField__Input"
-                    placeholder="Login" name="login" value={this.state.login} 
+                    placeholder="Login" name="login" value={this.state.login}
                     onChange={this.handleChange}/>
                     {formErrors.login.length > 1 && (
                     <span className="errorMessage">{formErrors.login}</span>
                   )}
 
                   </div>
-                  
+
                   {/*Pole tekstowe - hasło*/}
                   <div className="FormField">
                     <input type="password" id="password" className="FormField__Input"
@@ -165,7 +175,7 @@ class SignUpPage extends Component{
                   {/*Pole tekstowe - imie*/}
                   <div className="FormField">
                     <input type="text" id="firstName" className="FormField__Input"
-                    placeholder="Name" name="firstName" value={this.state.firstName}
+                    placeholder="First Name" name="firstName" value={this.state.firstName}
                     onChange={this.handleChange}/>
                     {formErrors.firstName.length > 1 && (
                     <span className="errorMessage">{formErrors.firstName}</span>
@@ -197,8 +207,8 @@ class SignUpPage extends Component{
                       <label className="FormField__CheckboxLabel">
                         <input className="FormField__Checkbox" type="checkbox" name="isAccepted"
                         value={isAccepted} onChange={this.handleChecked}/>
-                        Akceptuje regulamin - 
-                        <a href="https://hltv.org" target="_blank" rel="noopener noreferrer" className="FormField__TermsLink"> regulamin</a>
+                        I have read and accept the<a href="https://hltv.org" target="_blank" rel="noopener noreferrer" className="FormField__TermsLink">terms & conditions</a>
+
                       </label>
                       {formErrors.accept.length > 0 && (
                         <span className="errorMessage">{formErrors.accept}</span>
@@ -206,17 +216,20 @@ class SignUpPage extends Component{
                     </div>
                   {/*Przycisk do akceptacji*/}
                   <div className="FormField">
-                    <button className="FormField__Button"> Zarejestruj</button>
+
+                    <button className="FormField__Button FormField__Button-SignUp-Register">Sign Up</button>
+
                   </div>
                   <div style = {{marginTop: "50px"}}>
-                    <label className="FormField__Link">Stwórz nowe konto</label>
+                    <label className="FormField__Link">Already a user?</label>
                   </div>
                   <div>
                     <Link to="/login" className="FormField__Link">
-                      <button className="FormField__Button FormField__Button--Active">Zaloguj</button>
+                      <button className="FormField__Button FormField__Buton-SignIn-Register">Sign In</button>
                     </Link>
                   </div>
-                </form> 
+                </form>
+              </div>
               </div>
         );
     }

@@ -12,24 +12,103 @@ select:-webkit-autofill:focus {
   transition: background-color 5000s ease-in-out 0s;
 }
 
-
+.body {
+  font: Gotham;
+}
 .App {
-  background-color: #F9F5E5;
+  background-color: #fff;
   color: white;
+  font: Gotham;
+}
+
+.homepage {
+  height: 100vh;
+  background: url(./images/tlo.png) no-repeat center center;
+  background-size: cover;
+}
+
+.Homepage_shape_box{
+  top:50%;
+  position: absolute;
+  left:47%;
+  transform: translate(-50%, -50%);
+}
+
+.textblock{
+  display:inline-block;
+  top: 80%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  text-align: center;
+  color:white;
+  width:100%;
+  font-size: 72px;
+  font-weight: 700;
+  line-height:90px;
+  position: absolute;
+}
+
+.TopImage{
+  width:100%;
+  height:300px;
+  background:url(./images/top.png) no-repeat center center;
+  background-size: cover;
+  display:block;
+  position:relative;
+  text-align:center;
+}
+
+.TopImage_Logo{
+    height: 150px;
+    width: 150px;
+    position:absolute;
+    left:50%;
+    top:40px;
+    transform:translate(-50%);
+}
+
+.logo-register{
+    height:100%;
+}
+
+.TopImage_Text{
+  display:inline-block;
+  color:white;
+  color: #FFF;
+  position:absolute;
+  left:50%;
+  top:80%;
+  transform: translate(-50%, -50%);
+  font-family: "Gotham";
+  font-size: 36px;
+  font-weight: 700;
+  width:100%;
 }
 
 .AddFurnitureButton{
   background-color: #358254;
+
   color: #358254;
 }
 
 .App__Aside {
-  position: absolute;
-  left: 5%;
-  width: 90%;
-  background-color: #FAF3DD;
+
+  width: 100%;
+  height: 100vh;
+  background-color: #fff;
   vertical-align: inherit;
   display: inline-block;
+}
+.FormCentesr.sc-bZQynM.bWlWqH{
+  height: 0;
+}
+.DataPage__CategoryTitle{
+  color: #4F4F4F;
+  font-size: 36px;
+  font-weight: 700;
+  font-family: Gotham;
+  margin-top: 7px;
+  margin-bottom: 7px;
 }
 .DataPage__SideMenuContainer{
   color: white;
@@ -37,7 +116,6 @@ select:-webkit-autofill:focus {
   width: 15%;
   display: inline-block;
   position: relative;
-  margin-left: 10px;
 }
 .DataPage__SideMenu{
   padding: 1px, 1px, 1px, 1px;
@@ -55,13 +133,17 @@ select:-webkit-autofill:focus {
 }
 .DataPage_TopContainer{
   display: flex;
+  margin-bottom: 10px;
 }
 .DataPage_AccountLogo{
-  height: 48px;
-  width: 48px;
-  background-color: #C8C8C8;
+  height: 72px;
+  width: 72px;
   margin-top: 30px;
   margin-right: 10px;
+  border-radius:50%;
+  box-shadow: 0 3px 7px 0 rgba(16, 28, 37, 0.5);
+  margin-bottom: 32px;
+  margin-left: 8px;
 }
 .DataPage_ButtonContainer{
   flex: 1;
@@ -87,20 +169,26 @@ select:-webkit-autofill:focus {
   border: 1px dashed green;
 }
 .DataPage_logo{
-  margin-top: 30px;
+  margin-top: 10px;
   height: 100px;
   width: 100px;
-  background-color: #BDBDBD;
+  margin-bottom: 20px;
 }
 .DataPage_NavItem{
   border-radius: 24px;
 
 }
 .DataPage_NavItem.sc-bdVaJa.kiiitP{
-  padding: 1px 1px 1px 1px;
+  padding: 3px 5px 3px 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 205px;
+  background-color: transparent;
 }
 .DataPage_NavItem.sc-bdVaJa.bneZnY{
-  padding: 4px 8px 4px 8px;
+  padding: 4px 2px 4px 2px;
+  max-width: 208px;
 }
 .NavBarItem{
   cursor: pointer;
@@ -112,10 +200,13 @@ select:-webkit-autofill:focus {
 .App__InfoContainer{
   margin-left: 10px;
   margin-right: 10px;
-  background-color: #68B0AB;
+  background-color: transparent;
   box-sizing: border-box;
   width: 100%;
+  height: calc(100vh - 146px);
   padding-left: 6px;
+  border: 1px solid #000000;
+
 }
 .imageHere{
   max-width: 200px;
@@ -123,11 +214,11 @@ select:-webkit-autofill:focus {
   min-width: 100px;
   min-height: 100px;
   height: 70%;
-  width: 70%; 
+  width: 70%;
   display: block;
   margin-left: auto;
-  margin-right: auto; 
-  
+  margin-right: auto;
+
 }
 .App__LoggedInfo{
   position: relative;
@@ -151,10 +242,14 @@ select:-webkit-autofill:focus {
 }
 
 .App__Form {
-  position: absolute;
+  /*position: absolute;
   left: 10%;
   width: 80%;
   background-color: #2E4158;
+  background: url(background.png) no-repeat center center;
+  background-size: cover;*/
+  height: 100vh;
+  background-color: #F9F5E5;
 
 }
 
@@ -285,21 +380,90 @@ select:-webkit-autofill:focus {
   line-height: 40px;
   text-align: center;
 }
+input#name {
+  width: 400px;
+  background-color: transparent;
+  border: none;
+  color: #333;
+  outline: none;
+  box-sizing: border-box;
+  border-bottom: 2px solid #1976D2;
+  box-shadow: 0 4px 4px -4px rgba(33,150,243,0.5);
+  font-family: "Gotham Light";
+  font-size: 18px;
+  line-height: 22px;
+}
+input#num{
+  background-color: transparent;
+  border: none;
+  color: #333;
+  outline: none;
+  box-sizing: border-box;
+  border: 0.5px solid #1976D2;
+  box-shadow: 0 4px 4px 0px rgba(33,150,243,0.5);
+  font-family: "Gotham Light";
+  font-size: 18px;
+  line-height: 22px;
+}
+intput#category{
+  width: 400px;
+  background-color: transparent;
+  border: none;
+  color: #333;
+  outline: none;
+  box-sizing: border-box;
+  border-bottom: 2px solid #1976D2;
+  box-shadow: 0 4px 4px -4px rgba(33,150,243,0.5);
+  font-family: "Gotham Light";
+  font-size: 16px;
+  line-height: 22px;
+}
+input[type="file"] {
+  opacity: 0;
+  position: absolute;
+  pointer-events: none;
+  width: 1px;
+  height: 1px;
+}
+input[type="file"] + label {
+  height: 30px;
+  background-color: transparent;
+  border: none;
+  color: #333;
+  outline: none;
+  box-sizing: border-box;
+  border: 0.5px solid #1976D2;
+  border-radius: 24px;
+  box-shadow: 0 4px 4px 0px rgba(33,150,243,0.5);
 
+  text-align: center;
+}
+.MebelAddForm_InputLabel{
+  font-family: "Gotham Light";
+  font-size: 18px;
+  line-height: 22px;
+}
+.ui.form .field>label{
+  display: none;
+}
 .FormField__Input {
   width: 400px;
   background-color: transparent;
   border: none;
-  color: white;
+  color: #333;
   outline: none;
-  border-bottom: 1px solid #445366;
+  box-sizing: border-box;
+  border-bottom: 2px solid #1976D2;
+  box-shadow: 0 4px 4px -4px rgba(33,150,243,0.5);
   font-family: "Gotham Light";
   font-size: 18px;
   line-height: 22px;
 }
 
 .FormField__Input::placeholder {
-  color: rgba(211, 211, 211, 0.877);
+  /*color: rgba(211, 211, 211, 0.877);*/
+  color: grey;
+
 }
 
 .FormField__Button {
@@ -319,6 +483,38 @@ select:-webkit-autofill:focus {
   text-align: center;
   cursor: pointer;
 }
+.FormField__Button--Blue{
+  background-color: #1976D2;
+  box-shadow: 0 6px 14px 0 rgba(16, 28, 37, 0.5);
+  color:white;
+  border: 2px solid #1976D2;
+}
+.FormField__Button--Green{
+  background-color: rgb(8, 167, 35);
+  box-shadow: 0 6px 14px 0 rgba(16, 28, 37, 0.5);
+  color:white;
+  border: 2px solid rgb(8, 167, 35);
+  width: 120px;
+  height: 42px;
+}
+.FormField__Button--BlueBox{
+  border: 2px solid #1976D2;
+  box-sizing: border-box;
+  color: #1976D2;
+}
+.FormField__Button--BlueBox:hover {
+  background-color: #1976D2;
+  box-shadow: 0 6px 14px 0 rgba(16, 28, 37, 0.5);
+  color:white;
+  border: 2px solid #1976D2;
+  transform: 3s;
+}
+.FormField__Button--Orange{
+  color:white;
+  border: 2px solid #FFB300;
+  background-color: #FFB300;
+  box-shadow: 0 6px 14px 0 #FFC107;
+}
 .FormField__Button--NoMargin{
   margin-top: 0px;
 }
@@ -328,12 +524,48 @@ select:-webkit-autofill:focus {
   background-color: #2E4158;
 }
 
+.FormField__Button-SignUp{
+    margin-top:36px;
+    margin-right:36px;
+    box-sizing: border-box;
+    color: #1976D2;
+    float:right;
+    border: 2px solid #1976D2;
+}
+
+.FormField__Button-SignIn{
+    margin-top:36px;
+    margin-right:24px;
+    background-color: #1976D2;
+    box-shadow: 0 6px 14px 0 rgba(33,150,243,0.5);
+    color:white;
+    float:right;
+    border: 2px solid #1976D2;
+}
+
+.FormField__Button-SignUp-Register{
+    background-color: #1976D2;
+    color:white;
+    box-shadow: 0 6px 14px 0 rgba(33,150,243,0.5);
+    border: 2px solid #1976D2;
+}
+
+.FormField__Buton-SignIn-Register{
+  color: #1976D2;
+  box-sizing: border-box;
+  border: 2px solid #1976D2;
+}
+
+.sc-EHOje.chXdSi{
+  height: 0;
+}
 .FormField__Link {
   height: 15px;
   width: 162px;
-  color: #000;
+  color: #333;
   font-family: "Gotham Light";
   font-size: 14px;
+  font-style:italic;
   line-height: 15px;
   text-align: center;
 }
@@ -346,17 +578,109 @@ select:-webkit-autofill:focus {
 .FormField__Checkbox {
   position: relative;
   top: 1.5px;
+  margin-right: 5px;
 }
 
 .FormField__TermsLink {
-  color: white;
-  border-bottom: 1px solid #199087;
+  color: #1976D2;
+  /*border-bottom: 1px solid #199087;*/
   text-decoration: none;
   display: inline-block;
   padding-bottom: 2px;
   margin-left: 5px;
 }
 
+a.ui.card.ItemList_CardStyle{
+  width: 300px;
+  height: 300px;
+}
+
 .emptyDivider{
   padding:5px;
+}
+.ui.medium.image.ItemList_ModalImage{
+
+}
+.description.ItemList_ModalDesc{
+  width: 300px;
+}
+.DataPage__AccountText{
+  padding: 50px 0;
+  color: #4F4F4F;
+  font-family: "Gotham";
+  font-size: 16px;
+  line-height: 18px;
+}
+.DataPage__AccountLogout{
+
+  color: #4F4F4F;
+  font-family: "Gotham";
+  font-size: 16px;
+  line-height: 18px;
+  position: absolute;
+  border-bottom: 0.5px solid #1976D2;
+  margin-right: 20px;
+  margin-top: 5px;
+  top: 0;
+  right: 0;
+}
+.ItemList_ModalDescText{
+  padding: 50px 0;
+  color: #4F4F4F;
+  font-family: "Gotham";
+  font-size: 20px;
+  line-height: 21px;
+}
+.ItemList_ModalDescText.light{
+  font-family: "Gotham Light";
+}
+.ItemList_ModalHeader.header{
+  text-align: center;
+
+}
+.ItemList_ModalHeaderText{
+  color: #4F4F4F;
+  font-size: 36px;
+  font-weight: 700;
+  font-family: Gotham;
+}
+.ItemList_CategoryText{
+  color: #4F4F4F;
+  font-family: Gotham;
+  font-size: 30px;
+  font-weight: 300;
+  line-height: 0;
+  padding-top: 10px;
+}
+.ItemList_CategoryContainer{
+  display:inline-block;
+  position: relative;
+}
+.mebelform{
+  padding: 30px;
+  font: Gotham;
+}
+.formaAddMebel{
+  font: Gotham;
+}
+.ItemList_CategoryIcon{
+  height: 12px;
+  width: 12px;
+  background-color: #4F4F4F;
+  border-radius: 50%;
+  position: relative; /* Declared position allows for location changes */
+  top: -4px; /* Moves the image 2px closer to the top of the page */
+}
+.ui.medium.image.ItemList_ModalImage{
+  max-height: 400px;
+  height: 100%;
+}
+.ui.image img, .ui.image svg{
+  max-height: 400px;
+}
+.DataPage_NavItem.sc-bdVaJa.fCRQmS{
+  padding: 2px;
+}
+.DataPage_NavItem.sc-bdVaJa.izmYAl{
+  padding: 0;
 }

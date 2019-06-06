@@ -65,7 +65,7 @@ class LoginPage extends Component{
       //   })
       //   .then(value => value.json())
       //    .then( json => {
-        
+
       //   user = json
       //   console.log(user);
 
@@ -88,11 +88,11 @@ class LoginPage extends Component{
                        'Authorization': authKey },
             //body: JSON.stringify({ username, password })
          };
-        
+
       fetch("http://localhost:8080/login", requestOptions)
       .then(value => value.json())
          .then( json => {
-        
+
         user = json
         console.log(user);
         user.authData = authKey;
@@ -121,7 +121,7 @@ class LoginPage extends Component{
     //     .then(user => {
     //         // login successful if there's a user in the response
     //         if (user) {
-    //             // store user details and basic auth credentials in local storage 
+    //             // store user details and basic auth credentials in local storage
     //             // to keep user logged in between page refreshes
     //             this.props.history.push("/furnitures/info")
     //             this.props.logUser(user);
@@ -139,19 +139,25 @@ class LoginPage extends Component{
     //     });
        }
     }
-    
+
 
     render(){
 
       var {logged} = this.state;
 
         return(
-
+          <div>
+          <div className="TopImage">
+              <div className="TopImage_Logo">
+                <img src={logo} alt="Logo" className="logo-register"/>
+                  </div>
+              <div className="TopImage_Text">HOME DECO AR</div>
+          </div>
             <div onSubmit={this.handleSubmit} className="FormCenter">
-              
-              <div style = {{ marginBottom: "50px"}}>
+
+            {/*  <div style = {{ marginBottom: "50px"}}>
                 <img className = ".logo" src={logo}/>
-              </div>
+              </div>*/}
 
               <div style = {{ marginBottom: "50px"}}>
                 <label className = "App_MainTag">
@@ -173,26 +179,27 @@ class LoginPage extends Component{
                     onChange={this.handleChange}/>
                   </div>
                   {this.state.wrongData && (
-                    <span className="errorMessage">Błędny login lub hasło</span>
+                    <span className="errorMessage">You have entered incorrect login information</span>
                   )}
                   {/*Przycisk do akceptacji*/}
                   <div className="FormField FormField--MiddleAlign">
-                    <button className="FormField__Button"> Zaloguj</button>
+                    <button className="FormField__Button FormField__Button-SignUp-Register"> Sign In</button>
                   </div>
 
                   <div style = {{marginTop: "50px"}} >
-                    <label className="FormField__Link">Stwórz nowe konto</label>
+                    <label className="FormField__Link">Don't have an account?</label>
                   </div>
 
                   <div className="FormField FormField--MiddleAlign">
-                    <Link to="/">
-                    <button className="FormField__Button FormField__Button--Active">
-                      Zarejestruj
+                    <Link to="/register">
+                    <button className="FormField__Button FormField__Buton-SignIn-Register">
+                      Sign Up
                     </button>
                     </Link>
                   </div>
-                  
+
                 </form>
+            </div>
             </div>
         )
     }

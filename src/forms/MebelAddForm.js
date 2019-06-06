@@ -73,11 +73,11 @@ fileSelectedHandler = e => {
   if (file){
     let extension = getFileExtension(file.name);
     console.log(extension)
-    if  (name === "icon" && extension!='png' && extension!='jpg'){
+    if  (name === "icon" && extension!=='png' && extension!=='jpg'){
       target.setCustomValidity("Wamagany plik: .png lub .jpg !!");
-    }else if (name === "model" && extension!='obj') {
+    }else if (name === "model" && extension!=='obj') {
       target.setCustomValidity("Wamagany plik: .obj !!");
-    }else if (name === "texture" && extension!='mtl'){
+    }else if (name === "texture" && extension!=='mtl'){
       target.setCustomValidity("Wamagany plik .mtl !!");
     }else{
       target.setCustomValidity("");
@@ -115,10 +115,12 @@ render (){
    {/* <Form.Field error={!!errors.name}> */}
       <Form.Field>
      <input
+     
      type="text"
      required minLength="2" maxLength="50"
      pattern="([A-zÀ-ž\s]){2,}"
      id="name"
+     className="FormField__Input"
      name="name"
      placeholder="Nazwa"
      value={data.name}
@@ -129,7 +131,7 @@ render (){
 
      <Form.Field>
      <input type="text"
-      id="description"
+      id="name"
       name="description"
       required
       placeholder="Opis"
@@ -138,13 +140,14 @@ render (){
      />
      </Form.Field>
 
-     <div className='formaAddMebel'><b>Kategoria</b></div>
-     <Button type="button" active={!this.state.on} onClick={this.dropDownSelected}>Wybierz</Button>
-     <Button type="button" active={this.state.on} onClick={this.insertCategorySelected}>Podaj własną</Button>
+     <div className='formaAddMebel'><b>Category</b></div>
+     <Button primary type="button" class = "ui primary button"active={!this.state.on} onClick={this.dropDownSelected}>Choose</Button>
+     <Button primary type="button" class = "ui primary button"active={this.state.on} onClick={this.insertCategorySelected}>New Category</Button>
      <div className='emptyDivider'/>
      {!this.state.on && <Form.Field> <select id="selekt" style = {{width: "100%"}} placeholder='wybierz kategorię' onChange={this.onChange} name="category">
 
         {this.props.category.map((category, index) =>
+          (index!==0)&&
           <option key={index} value={category}>{category}</option>
         )};
 
@@ -205,6 +208,10 @@ render (){
              value={data.icon}
              onChange={this.fileSelectedHandler}
              />
+             <label for="icon" >
+              <div className = "MebelAddForm_InputLabel">
+                {this.state.icon ? <b>{this.state.icon.name}</b> : <b> Upload file </b>}
+              </div></label>
             {/*   {errors.icon && <InlineError text={errors.icon} />} */}
        </Form.Field>
 
@@ -220,6 +227,11 @@ render (){
             value={data.model}
             onChange={this.fileSelectedHandler}
             />
+            <label for="model" >
+            <div className = "MebelAddForm_InputLabel">
+                {this.state.model ? <b>{this.state.model.name}</b> : <b> Upload file </b>}
+              </div>
+            </label>
            {/*   {errors.icon && <InlineError text={errors.icon} />} */}
       </Form.Field>
 
@@ -235,6 +247,11 @@ render (){
            value={data.texture}
            onChange={this.fileSelectedHandler}
            />
+           <label for="texture" >
+           <div className = "MebelAddForm_InputLabel">
+                {this.state.texture ? <b>{this.state.texture.name}</b> : <b> Upload file </b>}
+              </div>
+            </label>
           {/*   {errors.icon && <InlineError text={errors.icon} />} */}
      </Form.Field>
 
@@ -247,12 +264,13 @@ render (){
           type="number"
           min="0" max="5" step="0.01"
         //  required
-          id="x"
+          id="num"
           name="x"
           placeholder="X"
           value={data.x}
           onChange={this.onChange}
           />
+          
         {/*  {errors.x && <InlineError text={errors.x} />} */}
           </Form.Field>
 
@@ -262,7 +280,7 @@ render (){
             type="number"
             min="0" max="5" step="0.01"
           //  required
-            id="y"
+            id="num"
             name="y"
             placeholder="Y"
             value={data.y}
@@ -277,7 +295,7 @@ render (){
               min="0" max="5" step="0.01"
             //  required
               type="number"
-              id="z"
+              id="num"
               name="z"
               placeholder="Z"
               value={data.z}
@@ -288,7 +306,8 @@ render (){
 
       </Form.Group>
   {/* <Button type='submit'>ESSA</Button>*/}
-  <Button positive>Dodaj</Button>
+  
+  <button className="FormField__Button FormField__Button--Green">Dodaj </button>
        </Form>
      ))
 

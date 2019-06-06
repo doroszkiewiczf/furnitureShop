@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {Modal, Header, Card, Icon, Image} from 'semantic-ui-react'
 import pic from '../images/chlieb.jpg'
 import IconForm from '../forms/IconForm'
+import { relative } from 'upath';
+import categoryDot from '../images/categoryDot.png'
 
 class ItemList extends Component{
 
@@ -24,7 +26,6 @@ class ItemList extends Component{
             furnitures[i].favourite = true;
           }
         });
-        furnitures[i].description = "test desc";
       }
     this.setState({
       furnituresList: furnitures
@@ -40,10 +41,10 @@ class ItemList extends Component{
             this.state.furnituresList.map(item =>(
             this.props.category === item.category&&
             (
-              <Modal size="tiny" key={item.id} trigger={
-                <Card style={{ width: '30%'}}>
+              <Modal size="small" key={item.id} dimmer='blurring' trigger={
+                <Card className="ItemList_CardStyle">
                   <div>
-                    <IconForm isFavourite={item.favourite}/>
+                    <IconForm furniture={item} furnitureId={item.id} favPage={false}/>
                   </div>
                   
                     <img className = "imageHere"
@@ -56,13 +57,28 @@ class ItemList extends Component{
                 </Card>
 
                     } closeIcon>
-                    <Modal.Header>{item.name}</Modal.Header>
+                    <Modal.Header className = "ItemList_ModalHeader">
+                      <div className = "ItemList_ModalHeaderText">
+                        {item.name}
+                      </div> 
+                    </Modal.Header>
                       <Modal.Content image>
-                        <Modal.Description>
-                          <Header>{item.category}</Header>
-                          <p>{item.description}</p>
-                          <p>Wymiary: {item.transform.x}x{item.transform.y}x{item.transform.z}</p>
+                        <Modal.Description className="ItemList_ModalDesc">
+                          <Header>
+                            <div className = "ItemList_CategoryText">
+                              <img className = "ItemList_CategoryIcon"
+                                src={categoryDot} 
+                              />
+                                {" " + item.category}
+                            </div>
+                          </Header>
+                          <div className = "ItemList_ModalDescText">
+                            <p><strong>Wymiary:</strong>{item.transform.x}x{item.transform.y}x{item.transform.z}cm</p>
+                            <span><strong>Opis:</strong></span>
+                            <p style={{marginLeft: "20px", lineHeight: "17px"}}>{item.description}</p>
+                          </div>
                         </Modal.Description>
+                        <Image className="ItemList_ModalImage" wrapped size='medium' src={"http://localhost:8080/downloadFile/"+ item.icon} />
                     </Modal.Content>
                     </Modal>
 

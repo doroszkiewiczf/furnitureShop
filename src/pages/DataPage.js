@@ -12,17 +12,16 @@ import AccountPage from './AccountPage';
 import {Button, Popup, Modal, Header, Icon, Message} from 'semantic-ui-react';
 import MebelAddForm from '../forms/MebelAddForm';
 import { LinkContainer} from "react-router-bootstrap";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { Nav, Navbar, NavItem } from "react-bootstrap";
 import {withRouter} from 'react-router-dom';
 import localStorage from 'local-storage';
 import sessionStorage from 'session-storage';
 import axios from 'axios';
-import logo from '../images/Logo.png';
+import logo from '../images/Logotyp.png';
 import QRCode from '../images/QR_code.jpg'
 import accountIcon from '../images/Account.png'
-
-
+import googlePlay from '../images/googleplay.png'
 
 
 const AppContainer = styled.div`\
@@ -33,10 +32,10 @@ const AppContainer = styled.div`\
 `;
 
 const theme = {
-  selectionColor: "#00645c",
-  selectionBgColor: "#00BCD4",
-  hoverBgColor: "#00BCD4",
-  padding: "1px, 1px, 1px, 1px"
+  selectionColor: "transparent",
+  selectionBgColor: "transparent"
+  //hoverBgColor: "#00BCD4",
+  //padding: "1px, 1px, 1px, 1px"
 };
 
 class DataPage extends Component{
@@ -82,6 +81,9 @@ class DataPage extends Component{
 
   loginUser = (user) => {
     this.setState({ isLogged: true})
+  }
+  logMeOut = () => {
+
   }
 
 
@@ -197,7 +199,6 @@ class DataPage extends Component{
     let furnit
     var categoriesList = [];
     console.log("Getting furnitures from database")
-    console.log(JSON.parse(window.sessionStorage.getItem('user')).authData);
     fetch('http://localhost:8080/furniture/all',{
     method: 'GET',
     credentials: 'same-origin',
@@ -210,7 +211,7 @@ class DataPage extends Component{
 
         furnit = json
         console.log(json);
-        categoriesList.push("Favourite")
+        categoriesList.push("Favourites")
         furnit.map(item => {
           if (categoriesList.indexOf(item.category) < 0){
             categoriesList.push(item.category);
@@ -250,38 +251,43 @@ class DataPage extends Component{
           <div>
             <div className="DataPage_TopContainer">
               <div className="DataPage_ButtonContainer">
-                <button className="FormField__Button"> Add Product</button>
-                <button className="FormField__Button" style = {{ marginLeft: "14px"}} onClick={this.handleInfoModalClick} > Mobile App</button>
+
+                <Modal className="mebelform"
+                  trigger={<button className="FormField__Button FormField__Button--Orange"> Add Furniture</button>}
+                  on='click'
+                  size='small'
+                  centered={true}
+                  dimmer='blurring'
+                  style = {{width: "500px"}}
+                >
+                <Modal.Header>
+                 <div className = "InfoModal_Title"> Add New Furniture</div>
+                </Modal.Header>
+                  <Modal.Content >
+                  <MebelAddForm submit={this.submitFurniture} category={this.state.categories}/>
+                  </Modal.Content>
+                </Modal>
+                <button className="FormField__Button FormField__Button--Blue" style = {{ marginLeft: "14px"}} onClick={this.handleInfoModalClick} > Mobile App</button>
               </div>
               <div className="DataPage_LogoContainer">
                 <img className = "DataPage_logo" src={logo}/>
               </div>
               <div className="DataPage_AccountContainer">
+                <div className = "DataPage__AccountText">
+                  <p style = {{lineHeight: "17px"}}>Logged as:
+                  <br/><b>{JSON.parse(window.sessionStorage.getItem('user')).login}</b> 
+                  </p>
+                </div>
+                
                 <img className = "DataPage_AccountLogo" src={accountIcon}/>
+                <div className = "DataPage__AccountLogout">
+                  <Link to="/" onClick={this.logMeOut}>
+                    Wyloguj
+                  </Link>
+                  </div>
               </div>
             </div>
 
-            <div className="DataPage_NavBar">
-
-              
-              <div>
-                <NavLink className="NavBarItem" to="/furnitures/info">Info</NavLink>
-                <NavLink className="NavBarItem" to="/furnitures/account">Account</NavLink>
-                <NavLink className="NavBarItem" to="/furnitures/download">Aplikacja mobilna</NavLink>
-                <NavLink className="NavBarItem" to="/furnitures/favourite">Moje meble</NavLink>
-
-              </div>
-
-              <div>
-                {isLogged&&(
-                  <label className="NavBarItem">Zalogowany: {user.login}</label>
-                )}
-                {!isLogged&&(
-                  <NavLink className="NavBarItem" to="/login" >Zaloguj</NavLink>
-                )}
-              </div>
-
-            </div>
             <AppContainer onSubmit={this.handleSubmit} className="FormCentesr">
 
               <div className="DataPage__SideMenuContainer">
@@ -294,7 +300,7 @@ class DataPage extends Component{
                   {
                     categories.map((item, index) =>(
                       <NavSide className="DataPage_NavItem" id={index} key={index}>
-                        <button className="FormField__Button" style = {{marginTop : '0px'}}>{item}</button>
+                        <button className={"FormField__Button " + (this.state.selectedPath!=index ? 'FormField__Button--BlueBox' :'FormField__Button--Blue')} style = {{width : '100%'}}>{item}</button>
                       </NavSide>
                     )
                   )}
@@ -303,14 +309,7 @@ class DataPage extends Component{
 
 
               <body className="App__InfoContainer">
-              <Popup className="mebelform"
-                  trigger={<Button onClick={this.handleClick} positive>Dodaj mebel</Button>}
-                  content={<MebelAddForm submit={this.submitFurniture} category={this.state.categories} />}
-                  on='click'
-                  open={this.state.isFormOpened}
-                  hideOnScroll
-                  wide
-                />
+              
               <Modal
                 open={this.state.modalOpen}
                 onClose={this.handleClose}
@@ -320,40 +319,14 @@ class DataPage extends Component{
               >
                 <Modal.Content>
                 <Message success>
-                <h1>Mebel został poprawnie dodany.</h1>
-                <p>Teraz możesz dodać go do ulubionych.</p>
+                <h1>Furniture added successfully.</h1>
                 <Button color='green' onClick={this.handleClose}>
-                  <Icon name='checkmark' size='big'/> Zamknij to okno.
+                  <Icon name='checkmark' size='big'/> Clsoe.
                 </Button>
                   </Message>
                 </Modal.Content>
               </Modal>
               
-              <Modal
-                open={this.state.infoModalOpened}
-                onClose={this.handleInfoModalClose}
-                size='small'
-                centered={true}
-                dimmer='blurring'
-                style = {{textAlign: "center"}}
-              >
-                <Modal.Header>
-                 <div className = "InfoModal_Title"> Get Mobile App!</div>
-                </Modal.Header>
-                  <Modal.Content>
-                    <Modal.Description>
-                      <h1 className = "InfoModal_Header">1. Download App from Google Play</h1>
-                      <a href="https://hltv.org" target="_blank" rel="noopener noreferrer" className="InfoModal_Link">
-                        Download link
-                      </a>
-                      <h1 className = "InfoModal_Header">2. Get QR code</h1>
-                      <a href="https://hltv.org" target="_blank" rel="noopener noreferrer"> 
-                        <img className = "InfoModal_QRCode" src={QRCode}/>
-                      </a>
-                      <h1 className = "InfoModal_Header">3. Enjoy your interior!</h1>
-                    </Modal.Description>
-                  </Modal.Content>
-              </Modal>
 
               <Modal
                 open={this.state.infoModalOpened}
@@ -369,8 +342,8 @@ class DataPage extends Component{
                   <Modal.Content>
                     <Modal.Description>
                       <h1 className = "InfoModal_Header">1. Download App from Google Play</h1>
-                      <a href="https://hltv.org" target="_blank" rel="noopener noreferrer" className="InfoModal_Link">
-                        Download link
+                      <a href="https://hltv.org" target="_blank" rel="noopener noreferrer"> 
+                        <img className = "InfoModal_Play" src={googlePlay}/>
                       </a>
                       <h1 className = "InfoModal_Header">2. Get QR code</h1>
                       <a href="https://hltv.org" target="_blank" rel="noopener noreferrer"> 
@@ -381,12 +354,8 @@ class DataPage extends Component{
                   </Modal.Content>
               </Modal>
 
-              <Route exact path="/furnitures/category/Favourite" component={() =>
+              <Route exact path="/furnitures/category/Favourites" component={() =>
                 (<FavouritesPage furnitures={user.furnitures} />)}/>
-              <Route exact path="/furnitures/login" component={LoginPage}/>
-              <Route exact path="/furnitures/info" component={InfoPage}/>
-              <Route exact path="/furnitures/account" component={AccountPage}/>
-              <Route exact path="/furnitures/test" component={TestPage}/>
               <Route path="/furnitures/category/:category" component={() =>
                 (<ItemList category={categories[selectedPath]} furnitures={furnitures} />)}
                 />
