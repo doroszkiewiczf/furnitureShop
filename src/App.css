@@ -16,14 +16,78 @@ select:-webkit-autofill:focus {
   font: Gotham;
 }
 .App {
-  background-color: white;
+  background-color: #fff;
   color: white;
   font: Gotham;
 }
 
+.homepage {
+  height: 100vh;
+  background: url(./images/tlo.png) no-repeat center center;
+  background-size: cover;
+}
+
+.Homepage_shape_box{
+  top:50%;
+  position: absolute;
+  left:47%;
+  transform: translate(-50%, -50%);
+}
+
+.textblock{
+  display:inline-block;
+  top: 80%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  text-align: center;
+  color:white;
+  width:100%;
+  font-size: 72px;
+  font-weight: 700;
+  line-height:90px;
+  position: absolute;
+}
+
+.TopImage{
+  width:100%;
+  height:300px;
+  background:url(./images/top.png) no-repeat center center;
+  background-size: cover;
+  display:block;
+  position:relative;
+  text-align:center;
+}
+
+.TopImage_Logo{
+    height: 150px;
+    width: 150px;
+    position:absolute;
+    left:50%;
+    top:40px;
+    transform:translate(-50%);
+}
+
+.logo-register{
+    height:100%;
+}
+
+.TopImage_Text{
+  display:inline-block;
+  color:white;
+  color: #FFF;
+  position:absolute;
+  left:50%;
+  top:80%;
+  transform: translate(-50%, -50%);
+  font-family: "Gotham";
+  font-size: 36px;
+  font-weight: 700;
+  width:100%;
+}
+
 .AddFurnitureButton{
   background-color: #358254;
-  
+
   color: #358254;
 }
 
@@ -31,7 +95,7 @@ select:-webkit-autofill:focus {
 
   width: 100%;
   height: 100vh;
-  background-color: white;
+  background-color: #fff;
   vertical-align: inherit;
   display: inline-block;
 }
@@ -142,7 +206,7 @@ select:-webkit-autofill:focus {
   height: calc(100vh - 146px);
   padding-left: 6px;
   border: 1px solid #000000;
-  
+
 }
 .imageHere{
   max-width: 200px;
@@ -150,11 +214,11 @@ select:-webkit-autofill:focus {
   min-width: 100px;
   min-height: 100px;
   height: 70%;
-  width: 70%; 
+  width: 70%;
   display: block;
   margin-left: auto;
-  margin-right: auto; 
-  
+  margin-right: auto;
+
 }
 .App__LoggedInfo{
   position: relative;
@@ -186,7 +250,7 @@ select:-webkit-autofill:focus {
   background-size: cover;*/
   height: 100vh;
   background-color: #F9F5E5;
-  
+
 }
 
 
@@ -333,33 +397,6 @@ input#name {
   font-size: 18px;
   line-height: 22px;
 }
-input#category {
-  width: 400px;
-  background-color: transparent;
-  border: none;
-  color: #333;
-  outline: none;
-  box-sizing: border-box;
-  border-bottom: 2px solid #1976D2;
-  box-shadow: 0 4px 4px -4px rgba(33,150,243,0.5);
-  font-family: "Gotham Light";
-  font-size: 16px;
-  line-height: 22px;
-}
-select#selekt{
-  width: 400px;
-  background-color: transparent;
-  border: none;
-  color: #333;
-  outline: none;
-  box-sizing: border-box;
-  border: 0.5px solid #1976D2;
-  box-shadow: 0 4px 4px 0px rgba(33,150,243,0.5);
-  font-family: "Gotham Light";
-  font-size: 16px;
-  line-height: 22px;
-}
-
 input#num{
   background-color: transparent;
   border: none;
@@ -369,7 +406,7 @@ input#num{
   border: 0.5px solid #1976D2;
   box-shadow: 0 4px 4px 0px rgba(33,150,243,0.5);
   font-family: "Gotham Light";
-  font-size: 14px;
+  font-size: 18px;
   line-height: 22px;
 }
 intput#category{
@@ -402,11 +439,10 @@ input[type="file"] + label {
   border: 0.5px solid #1976D2;
   border-radius: 24px;
   box-shadow: 0 4px 4px 0px rgba(33,150,243,0.5);
-  
+
   text-align: center;
 }
 .MebelAddForm_InputLabel{
-  padding-top: 3px;
   font-family: "Gotham Light";
   font-size: 18px;
   line-height: 22px;
@@ -431,7 +467,7 @@ input[type="file"] + label {
 .FormField__Input::placeholder {
   /*color: rgba(211, 211, 211, 0.877);*/
   color: grey;
- 
+
 }
 
 .FormField__Button {
@@ -455,7 +491,7 @@ input[type="file"] + label {
   background-color: #1976D2;
   box-shadow: 0 6px 14px 0 rgba(16, 28, 37, 0.5);
   color:white;
-  border: 2px solid #1976D2; 
+  border: 2px solid #1976D2;
 }
 .FormField__Button--Green{
   background-color: rgb(8, 167, 35);
@@ -470,12 +506,12 @@ input[type="file"] + label {
   box-sizing: border-box;
   color: #1976D2;
 }
-.FormField__Button--BlueBox:hover { 
+.FormField__Button--BlueBox:hover {
   background-color: #1976D2;
   box-shadow: 0 6px 14px 0 rgba(16, 28, 37, 0.5);
   color:white;
   border: 2px solid #1976D2;
-  transform: 3s; 
+  transform: 3s;
 }
 .FormField__Button--Orange{
   color:white;
@@ -491,15 +527,49 @@ input[type="file"] + label {
   border: 1px solid #FFF;
   background-color: #2E4158;
 }
+
+.FormField__Button-SignUp{
+    margin-top:36px;
+    margin-right:36px;
+    box-sizing: border-box;
+    color: #1976D2;
+    float:right;
+    border: 2px solid #1976D2;
+}
+
+.FormField__Button-SignIn{
+    margin-top:36px;
+    margin-right:24px;
+    background-color: #1976D2;
+    box-shadow: 0 6px 14px 0 rgba(33,150,243,0.5);
+    color:white;
+    float:right;
+    border: 2px solid #1976D2;
+}
+
+.FormField__Button-SignUp-Register{
+    background-color: #1976D2;
+    color:white;
+    box-shadow: 0 6px 14px 0 rgba(33,150,243,0.5);
+    border: 2px solid #1976D2;
+}
+
+.FormField__Buton-SignIn-Register{
+  color: #1976D2;
+  box-sizing: border-box;
+  border: 2px solid #1976D2;
+}
+
 .sc-EHOje.chXdSi{
   height: 0;
 }
 .FormField__Link {
   height: 15px;
   width: 162px;
-  color: #000;
+  color: #333;
   font-family: "Gotham Light";
   font-size: 14px;
+  font-style:italic;
   line-height: 15px;
   text-align: center;
 }
@@ -512,11 +582,12 @@ input[type="file"] + label {
 .FormField__Checkbox {
   position: relative;
   top: 1.5px;
+  margin-right: 5px;
 }
 
 .FormField__TermsLink {
-  color: white;
-  border-bottom: 1px solid #199087;
+  color: #1976D2;
+  /*border-bottom: 1px solid #199087;*/
   text-decoration: none;
   display: inline-block;
   padding-bottom: 2px;
@@ -532,7 +603,7 @@ a.ui.card.ItemList_CardStyle{
   padding:5px;
 }
 .ui.medium.image.ItemList_ModalImage{
-  
+
 }
 .description.ItemList_ModalDesc{
   width: 300px;
@@ -553,7 +624,7 @@ a.ui.card.ItemList_CardStyle{
   position: absolute;
   border-bottom: 0.5px solid #1976D2;
   margin-right: 20px;
-  margin-top: 5px; 
+  margin-top: 5px;
   top: 0;
   right: 0;
 }
@@ -569,7 +640,7 @@ a.ui.card.ItemList_CardStyle{
 }
 .ItemList_ModalHeader.header{
   text-align: center;
-  
+
 }
 .ItemList_ModalHeaderText{
   color: #4F4F4F;

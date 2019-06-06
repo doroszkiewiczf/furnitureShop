@@ -4,6 +4,7 @@ import './App.css';
 import LoginPage from './pages/LoginPage'
 import SignUpPage from './pages/SignUpPage'
 import DataPage from './pages/DataPage'
+import HomePage from './pages/HomePage'
 import localStorage from 'local-storage'
 import sessionStorage from 'session-storage'
 
@@ -24,12 +25,12 @@ class App extends Component {
   onItemSelection = (arg) => {
     this.setState({ selectedPath: arg.path })
   }
-  
+
 
   logUser = (value) => {
-    this.setState({ 
+    this.setState({
       isLogged: true,
-      loggedUser: value 
+      loggedUser: value
     })
     localStorage.set('isLogged', true);
     localStorage.set('user', this.state.loggedUser);
@@ -48,29 +49,29 @@ class App extends Component {
     return (
       <Router exact path='/'>
       <div className="App">
+          <Route exact path="/" component={HomePage}/>
 
-          
-          <div className="App__Aside">
-            
+          <div className="App__Asidee">
+
             {<Route path="/furnitures" component={() => (<DataPage logged={this.state.loggedUser} history={this.props.history}/>)}>
             </Route>}
             {/*<Route path="/furnitures" component={DataPage}/>*/}
             <div>
-              
-              <Route exact path="/" component={SignUpPage}>
+
+              <Route exact path="/register" component={SignUpPage}>
               </Route>
               <Route exact path="/login" component={() => (<LoginPage logUser={this.logUser} />)}>
               </Route>
             </div>
-          
+
 
           </div>
 
-          
+
 
       </div>
       </Router>
-      
+
     );
   }
 }
