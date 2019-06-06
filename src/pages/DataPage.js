@@ -23,8 +23,6 @@ import QRCode from '../images/QR_code.jpg'
 import accountIcon from '../images/Account.png'
 
 
-
-
 const AppContainer = styled.div`\
   display: flex;
   height: 100%;
@@ -197,7 +195,6 @@ class DataPage extends Component{
     let furnit
     var categoriesList = [];
     console.log("Getting furnitures from database")
-    console.log(JSON.parse(window.sessionStorage.getItem('user')).authData);
     fetch('http://localhost:8080/furniture/all',{
     method: 'GET',
     credentials: 'same-origin',
@@ -261,27 +258,6 @@ class DataPage extends Component{
               </div>
             </div>
 
-            <div className="DataPage_NavBar">
-
-              
-              <div>
-                <NavLink className="NavBarItem" to="/furnitures/info">Info</NavLink>
-                <NavLink className="NavBarItem" to="/furnitures/account">Account</NavLink>
-                <NavLink className="NavBarItem" to="/furnitures/download">Aplikacja mobilna</NavLink>
-                <NavLink className="NavBarItem" to="/furnitures/favourite">Moje meble</NavLink>
-
-              </div>
-
-              <div>
-                {isLogged&&(
-                  <label className="NavBarItem">Zalogowany: {user.login}</label>
-                )}
-                {!isLogged&&(
-                  <NavLink className="NavBarItem" to="/login" >Zaloguj</NavLink>
-                )}
-              </div>
-
-            </div>
             <AppContainer onSubmit={this.handleSubmit} className="FormCentesr">
 
               <div className="DataPage__SideMenuContainer">
@@ -291,6 +267,9 @@ class DataPage extends Component{
                   onItemSelection={this.onItemSelection.bind(this)}
                   theme={theme}
                   >
+                  <div className = "DataPage__CategoryTitle">
+                    Kategorie:
+                    </div>
                   {
                     categories.map((item, index) =>(
                       <NavSide className="DataPage_NavItem" id={index} key={index}>
@@ -383,10 +362,6 @@ class DataPage extends Component{
 
               <Route exact path="/furnitures/category/Favourite" component={() =>
                 (<FavouritesPage furnitures={user.furnitures} />)}/>
-              <Route exact path="/furnitures/login" component={LoginPage}/>
-              <Route exact path="/furnitures/info" component={InfoPage}/>
-              <Route exact path="/furnitures/account" component={AccountPage}/>
-              <Route exact path="/furnitures/test" component={TestPage}/>
               <Route path="/furnitures/category/:category" component={() =>
                 (<ItemList category={categories[selectedPath]} furnitures={furnitures} />)}
                 />

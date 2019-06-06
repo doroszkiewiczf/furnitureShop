@@ -146,7 +146,7 @@ class LoginPage extends Component{
       var {logged} = this.state;
 
         return(
-
+          <div className="App__Form">
             <div onSubmit={this.handleSubmit} className="FormCenter">
               
               <div style = {{ marginBottom: "50px"}}>
@@ -194,6 +194,7 @@ class LoginPage extends Component{
                   
                 </form>
             </div>
+          </div>
         )
     }
 

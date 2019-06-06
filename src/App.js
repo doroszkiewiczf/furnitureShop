@@ -55,7 +55,7 @@ class App extends Component {
             {<Route path="/furnitures" component={() => (<DataPage logged={this.state.loggedUser} history={this.props.history}/>)}>
             </Route>}
             {/*<Route path="/furnitures" component={DataPage}/>*/}
-            <div className="App__Form">
+            <div>
               
               <Route exact path="/" component={SignUpPage}>
               </Route>

@@ -128,6 +128,7 @@ class SignUpPage extends Component{
     render(){
       const {formErrors, isAccepted} = this.state;
         return(
+          <div className="App__Form">
             <div onSubmit={this.handleSubmit} className="FormCenter">
 
               <div style = {{ marginBottom: "50px"}}>
@@ -218,6 +219,7 @@ class SignUpPage extends Component{
                   </div>
                 </form> 
               </div>
+            </div>
         );
     }
 }

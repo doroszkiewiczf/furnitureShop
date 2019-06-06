@@ -20,21 +20,34 @@ select:-webkit-autofill:focus {
 
 .AddFurnitureButton{
   background-color: #358254;
+  
   color: #358254;
 }
 
 .App__Aside {
-  position: absolute;
-  left: 5%;
-  width: 90%;
+
+  width: 100%;
+  height: 100vh;
   background-color: #FAF3DD;
   vertical-align: inherit;
   display: inline-block;
+}
+.FormCentesr.sc-bZQynM.bWlWqH{
+  height: 0;
+}
+.DataPage__CategoryTitle{
+  color: #4F4F4F;
+  font-size: 36px;
+  font-weight: 700;
+  font-family: Gotham;
+  margin-top: 7px;
+  margin-bottom: 7px;
 }
 .DataPage__SideMenuContainer{
   color: white;
   background-color: transparent;
   width: 15%;
+  height: calc(100vh - 132px);
   display: inline-block;
   position: relative;
   margin-left: 10px;
@@ -97,10 +110,15 @@ select:-webkit-autofill:focus {
 
 }
 .DataPage_NavItem.sc-bdVaJa.kiiitP{
-  padding: 1px 1px 1px 1px;
+  padding: 3px 5px 3px 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 205px;
 }
 .DataPage_NavItem.sc-bdVaJa.bneZnY{
-  padding: 4px 8px 4px 8px;
+  padding: 4px 2px 4px 2px;
+  max-width: 208px;
 }
 .NavBarItem{
   cursor: pointer;
@@ -112,10 +130,13 @@ select:-webkit-autofill:focus {
 .App__InfoContainer{
   margin-left: 10px;
   margin-right: 10px;
-  background-color: #68B0AB;
+  background-color: transparent;
   box-sizing: border-box;
   width: 100%;
+  height: calc(100vh - 132px);
   padding-left: 6px;
+  border: 1px solid #000000;
+  
 }
 .imageHere{
   max-width: 200px;
@@ -151,11 +172,13 @@ select:-webkit-autofill:focus {
 }
 
 .App__Form {
-  position: absolute;
+  /*position: absolute;
   left: 10%;
   width: 80%;
-  background-color: #2E4158;
-
+  background-color: #2E4158;*/
+  height: 100vh;
+  background: url(background.png) no-repeat center center;
+  background-size: cover;
 }
 
 
@@ -357,6 +380,65 @@ select:-webkit-autofill:focus {
   margin-left: 5px;
 }
 
+a.ui.card.ItemList_CardStyle{
+  width: 300px;
+  height: 300px;
+}
+
 .emptyDivider{
   padding:5px;
+}
+.ui.medium.image.ItemList_ModalImage{
+  
+}
+.description.ItemList_ModalDesc{
+  width: 300px;
+}
+
+.ItemList_ModalDescText{
+  padding: 50px 0;
+  color: #4F4F4F;
+  font-family: "Gotham";
+  font-size: 20px;
+  line-height: 21px;
+}
+.ItemList_ModalDescText.light{
+  font-family: "Gotham Light";
+}
+.ItemList_ModalHeader.header{
+  text-align: center;
+  
+}
+.ItemList_ModalHeaderText{
+  color: #4F4F4F;
+  font-size: 36px;
+  font-weight: 700;
+  font-family: Gotham;
+}
+.ItemList_CategoryText{
+  color: #4F4F4F;
+  font-family: Gotham;
+  font-size: 30px;
+  font-weight: 300;
+  line-height: 0;
+  padding-top: 10px;
+}
+.ItemList_CategoryContainer{
+  display:inline-block;
+  position: relative;
+}
+.ItemList_CategoryIcon{
+  height: 12px;
+  width: 12px;
+  background-color: #4F4F4F;
+  border-radius: 50%;
+  position: relative; /* Declared position allows for location changes */
+  top: -4px; /* Moves the image 2px closer to the top of the page */
+}
+.ui.medium.image.ItemList_ModalImage{
+  max-height: 400px;
+  height: 100%;
+}
+.ui.image img, .ui.image svg{
+  max-height: 400px;
 }

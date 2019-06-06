@@ -73,11 +73,11 @@ fileSelectedHandler = e => {
   if (file){
     let extension = getFileExtension(file.name);
     console.log(extension)
-    if  (name === "icon" && extension!='png' && extension!='jpg'){
+    if  (name === "icon" && extension!=='png' && extension!=='jpg'){
       target.setCustomValidity("Wamagany plik: .png lub .jpg !!");
-    }else if (name === "model" && extension!='obj') {
+    }else if (name === "model" && extension!=='obj') {
       target.setCustomValidity("Wamagany plik: .obj !!");
-    }else if (name === "texture" && extension!='mtl'){
+    }else if (name === "texture" && extension!=='mtl'){
       target.setCustomValidity("Wamagany plik .mtl !!");
     }else{
       target.setCustomValidity("");
@@ -145,6 +145,7 @@ render (){
      {!this.state.on && <Form.Field> <select id="selekt" style = {{width: "100%"}} placeholder='wybierz kategorię' onChange={this.onChange} name="category">
 
         {this.props.category.map((category, index) =>
+          (index!==0)&&
           <option key={index} value={category}>{category}</option>
         )};
 
