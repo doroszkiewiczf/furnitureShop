@@ -115,10 +115,12 @@ render (){
    {/* <Form.Field error={!!errors.name}> */}
       <Form.Field>
      <input
+     
      type="text"
      required minLength="2" maxLength="50"
      pattern="([A-zÀ-ž\s]){2,}"
      id="name"
+     className="FormField__Input"
      name="name"
      placeholder="Nazwa"
      value={data.name}
@@ -129,7 +131,7 @@ render (){
 
      <Form.Field>
      <input type="text"
-      id="description"
+      id="name"
       name="description"
       required
       placeholder="Opis"
@@ -206,6 +208,11 @@ render (){
              value={data.icon}
              onChange={this.fileSelectedHandler}
              />
+             <label for="icon" >
+              <div className = "MebelAddForm_InputLabel">
+                {this.state.icon ? <b>{this.state.icon.name}</b> : <b> !!Upload file!! </b>}
+                
+              </div></label>
             {/*   {errors.icon && <InlineError text={errors.icon} />} */}
        </Form.Field>
 
@@ -221,6 +228,7 @@ render (){
             value={data.model}
             onChange={this.fileSelectedHandler}
             />
+            <label for="model" ><div className = "MebelAddForm_InputLabel">!!Upload file!!</div></label>
            {/*   {errors.icon && <InlineError text={errors.icon} />} */}
       </Form.Field>
 
@@ -236,6 +244,7 @@ render (){
            value={data.texture}
            onChange={this.fileSelectedHandler}
            />
+           <label for="texture" ><div className = "MebelAddForm_InputLabel">!!Upload file!!</div></label>
           {/*   {errors.icon && <InlineError text={errors.icon} />} */}
      </Form.Field>
 
@@ -248,12 +257,13 @@ render (){
           type="number"
           min="0" max="5" step="0.01"
         //  required
-          id="x"
+          id="num"
           name="x"
           placeholder="X"
           value={data.x}
           onChange={this.onChange}
           />
+          
         {/*  {errors.x && <InlineError text={errors.x} />} */}
           </Form.Field>
 
@@ -263,7 +273,7 @@ render (){
             type="number"
             min="0" max="5" step="0.01"
           //  required
-            id="y"
+            id="num"
             name="y"
             placeholder="Y"
             value={data.y}
@@ -278,7 +288,7 @@ render (){
               min="0" max="5" step="0.01"
             //  required
               type="number"
-              id="z"
+              id="num"
               name="z"
               placeholder="Z"
               value={data.z}
@@ -289,7 +299,8 @@ render (){
 
       </Form.Group>
   {/* <Button type='submit'>ESSA</Button>*/}
-  <Button positive>Dodaj</Button>
+  
+  <button className="FormField__Button FormField__Button--Green">Dodaj </button>
        </Form>
      ))
 

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Link, NavLink, Redirect} from 'react-router-dom';
 import {withRouter} from 'react-router-dom';
 import axios from 'axios';
-import logo from '../images/Logo.png';
+import logo from '../images/Logotyp.png';
 
 
 function handleResponse(response) {

@@ -12,13 +12,13 @@ import AccountPage from './AccountPage';
 import {Button, Popup, Modal, Header, Icon, Message} from 'semantic-ui-react';
 import MebelAddForm from '../forms/MebelAddForm';
 import { LinkContainer} from "react-router-bootstrap";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { Nav, Navbar, NavItem } from "react-bootstrap";
 import {withRouter} from 'react-router-dom';
 import localStorage from 'local-storage';
 import sessionStorage from 'session-storage';
 import axios from 'axios';
-import logo from '../images/Logo.png';
+import logo from '../images/Logotyp.png';
 import QRCode from '../images/QR_code.jpg'
 import accountIcon from '../images/Account.png'
 
@@ -31,10 +31,10 @@ const AppContainer = styled.div`\
 `;
 
 const theme = {
-  selectionColor: "#00645c",
-  selectionBgColor: "#00BCD4",
-  hoverBgColor: "#00BCD4",
-  padding: "1px, 1px, 1px, 1px"
+  selectionColor: "transparent",
+  selectionBgColor: "transparent"
+  //hoverBgColor: "#00BCD4",
+  //padding: "1px, 1px, 1px, 1px"
 };
 
 class DataPage extends Component{
@@ -207,7 +207,7 @@ class DataPage extends Component{
 
         furnit = json
         console.log(json);
-        categoriesList.push("Favourite")
+        categoriesList.push("Ulubione")
         furnit.map(item => {
           if (categoriesList.indexOf(item.category) < 0){
             categoriesList.push(item.category);
@@ -247,14 +247,40 @@ class DataPage extends Component{
           <div>
             <div className="DataPage_TopContainer">
               <div className="DataPage_ButtonContainer">
-                <button className="FormField__Button"> Add Product</button>
-                <button className="FormField__Button" style = {{ marginLeft: "14px"}} onClick={this.handleInfoModalClick} > Mobile App</button>
+
+                <Modal className="mebelform"
+                  trigger={<button className="FormField__Button FormField__Button--Orange"> Add Product</button>}
+                  on='click'
+                  size='small'
+                  centered={true}
+                  dimmer='blurring'
+                  style = {{width: "500px"}}
+                >
+                <Modal.Header>
+                 <div className = "InfoModal_Title"> Dodaj nowy mebel!</div>
+                </Modal.Header>
+                  <Modal.Content >
+                  <MebelAddForm submit={this.submitFurniture} category={this.state.categories}/>
+                  </Modal.Content>
+                </Modal>
+                <button className="FormField__Button FormField__Button--Blue" style = {{ marginLeft: "14px"}} onClick={this.handleInfoModalClick} > Mobile App</button>
               </div>
               <div className="DataPage_LogoContainer">
                 <img className = "DataPage_logo" src={logo}/>
               </div>
               <div className="DataPage_AccountContainer">
+                <div className = "DataPage__AccountText">
+                  <p style = {{lineHeight: "17px"}}>Zalogowano jako:
+                  <br/><b>{JSON.parse(window.sessionStorage.getItem('user')).login}</b> 
+                  </p>
+                </div>
+                
                 <img className = "DataPage_AccountLogo" src={accountIcon}/>
+                <div className = "DataPage__AccountLogout">
+                  <Link to="/" >
+                    Wyloguj
+                  </Link>
+                  </div>
               </div>
             </div>
 
@@ -267,13 +293,10 @@ class DataPage extends Component{
                   onItemSelection={this.onItemSelection.bind(this)}
                   theme={theme}
                   >
-                  <div className = "DataPage__CategoryTitle">
-                    Kategorie:
-                    </div>
                   {
                     categories.map((item, index) =>(
                       <NavSide className="DataPage_NavItem" id={index} key={index}>
-                        <button className="FormField__Button" style = {{marginTop : '0px'}}>{item}</button>
+                        <button className={"FormField__Button " + (this.state.selectedPath!=index ? 'FormField__Button--BlueBox' :'FormField__Button--Blue')} style = {{width : '100%'}}>{item}</button>
                       </NavSide>
                     )
                   )}
@@ -282,14 +305,7 @@ class DataPage extends Component{
 
 
               <body className="App__InfoContainer">
-              <Popup className="mebelform"
-                  trigger={<Button onClick={this.handleClick} positive>Dodaj mebel</Button>}
-                  content={<MebelAddForm submit={this.submitFurniture} category={this.state.categories} />}
-                  on='click'
-                  open={this.state.isFormOpened}
-                  hideOnScroll
-                  wide
-                />
+              
               <Modal
                 open={this.state.modalOpen}
                 onClose={this.handleClose}
@@ -360,7 +376,7 @@ class DataPage extends Component{
                   </Modal.Content>
               </Modal>
 
-              <Route exact path="/furnitures/category/Favourite" component={() =>
+              <Route exact path="/furnitures/category/Ulubione" component={() =>
                 (<FavouritesPage furnitures={user.furnitures} />)}/>
               <Route path="/furnitures/category/:category" component={() =>
                 (<ItemList category={categories[selectedPath]} furnitures={furnitures} />)}

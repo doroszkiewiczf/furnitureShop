@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Link, NavLink} from 'react-router-dom';
-import logo from '../images/Logo.png';
+import logo from '../images/Logotyp.png';
 
 const formValid = formErrors => {
   let valid = true;

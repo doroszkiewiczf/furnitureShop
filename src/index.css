@@ -1,7 +1,7 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: "Rajdhani",
+  font-family: "Gotham",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -9,7 +9,7 @@ body {
 
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Rajdhani",
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Gotham",
     monospace;
 }
 

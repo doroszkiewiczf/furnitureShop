@@ -12,10 +12,13 @@ select:-webkit-autofill:focus {
   transition: background-color 5000s ease-in-out 0s;
 }
 
-
+.body {
+  font: Gotham;
+}
 .App {
   background-color: #F9F5E5;
   color: white;
+  font: Gotham;
 }
 
 .AddFurnitureButton{
@@ -47,10 +50,8 @@ select:-webkit-autofill:focus {
   color: white;
   background-color: transparent;
   width: 15%;
-  height: calc(100vh - 132px);
   display: inline-block;
   position: relative;
-  margin-left: 10px;
 }
 .DataPage__SideMenu{
   padding: 1px, 1px, 1px, 1px;
@@ -68,13 +69,17 @@ select:-webkit-autofill:focus {
 }
 .DataPage_TopContainer{
   display: flex;
+  margin-bottom: 10px;
 }
 .DataPage_AccountLogo{
-  height: 48px;
-  width: 48px;
-  background-color: #C8C8C8;
+  height: 72px;
+  width: 72px;
   margin-top: 30px;
   margin-right: 10px;
+  border-radius:50%;
+  box-shadow: 0 3px 7px 0 rgba(16, 28, 37, 0.5);
+  margin-bottom: 32px;
+  margin-left: 8px;
 }
 .DataPage_ButtonContainer{
   flex: 1;
@@ -100,10 +105,10 @@ select:-webkit-autofill:focus {
   border: 1px dashed green;
 }
 .DataPage_logo{
-  margin-top: 30px;
+  margin-top: 10px;
   height: 100px;
   width: 100px;
-  background-color: #BDBDBD;
+  margin-bottom: 20px;
 }
 .DataPage_NavItem{
   border-radius: 24px;
@@ -115,6 +120,7 @@ select:-webkit-autofill:focus {
   align-items: center;
   justify-content: center;
   max-width: 205px;
+  background-color: transparent;
 }
 .DataPage_NavItem.sc-bdVaJa.bneZnY{
   padding: 4px 2px 4px 2px;
@@ -133,7 +139,7 @@ select:-webkit-autofill:focus {
   background-color: transparent;
   box-sizing: border-box;
   width: 100%;
-  height: calc(100vh - 132px);
+  height: calc(100vh - 146px);
   padding-left: 6px;
   border: 1px solid #000000;
   
@@ -175,10 +181,12 @@ select:-webkit-autofill:focus {
   /*position: absolute;
   left: 10%;
   width: 80%;
-  background-color: #2E4158;*/
-  height: 100vh;
+  background-color: #2E4158;
   background: url(background.png) no-repeat center center;
-  background-size: cover;
+  background-size: cover;*/
+  height: 100vh;
+  background-color: #F9F5E5;
+  
 }
 
 
@@ -308,21 +316,90 @@ select:-webkit-autofill:focus {
   line-height: 40px;
   text-align: center;
 }
-
-.FormField__Input {
+input#name {
   width: 400px;
   background-color: transparent;
   border: none;
-  color: white;
+  color: #333;
   outline: none;
-  border-bottom: 1px solid #445366;
+  box-sizing: border-box;
+  border-bottom: 2px solid #1976D2;
+  box-shadow: 0 4px 4px -4px rgba(33,150,243,0.5);
   font-family: "Gotham Light";
   font-size: 18px;
   line-height: 22px;
 }
-
+input#num{
+  background-color: transparent;
+  border: none;
+  color: #333;
+  outline: none;
+  box-sizing: border-box;
+  border: 0.5px solid #1976D2;
+  box-shadow: 0 4px 4px 0px rgba(33,150,243,0.5);
+  font-family: "Gotham Light";
+  font-size: 18px;
+  line-height: 22px;
+}
+intput#category{
+  width: 400px;
+  background-color: transparent;
+  border: none;
+  color: #333;
+  outline: none;
+  box-sizing: border-box;
+  border-bottom: 2px solid #1976D2;
+  box-shadow: 0 4px 4px -4px rgba(33,150,243,0.5);
+  font-family: "Gotham Light";
+  font-size: 16px;
+  line-height: 22px;
+}
+input[type="file"] {
+  opacity: 0;
+  position: absolute;
+  pointer-events: none;
+  width: 1px;
+  height: 1px;
+}
+input[type="file"] + label {
+  height: 30px;
+  background-color: transparent;
+  border: none;
+  color: #333;
+  outline: none;
+  box-sizing: border-box;
+  border: 0.5px solid #1976D2;
+  border-radius: 24px;
+  box-shadow: 0 4px 4px 0px rgba(33,150,243,0.5);
+  
+  text-align: center;
+}
+.MebelAddForm_InputLabel{
+  font-family: "Gotham Light";
+  font-size: 18px;
+  line-height: 22px;
+}
+.ui.form .field>label{
+  display: none;
+}
+.FormField__Input {
+  width: 400px;
+  background-color: transparent;
+  border: none;
+  color: #333;
+  outline: none;
+  box-sizing: border-box;
+  border-bottom: 2px solid #1976D2;
+  box-shadow: 0 4px 4px -4px rgba(33,150,243,0.5);
+  font-family: "Gotham Light";
+  font-size: 18px;
+  line-height: 22px;
+}
+ 
 .FormField__Input::placeholder {
-  color: rgba(211, 211, 211, 0.877);
+  /*color: rgba(211, 211, 211, 0.877);*/
+  color: grey;
+ 
 }
 
 .FormField__Button {
@@ -342,6 +419,38 @@ select:-webkit-autofill:focus {
   text-align: center;
   cursor: pointer;
 }
+.FormField__Button--Blue{
+  background-color: #1976D2;
+  box-shadow: 0 6px 14px 0 rgba(16, 28, 37, 0.5);
+  color:white;
+  border: 2px solid #1976D2; 
+}
+.FormField__Button--Green{
+  background-color: rgb(8, 167, 35);
+  box-shadow: 0 6px 14px 0 rgba(16, 28, 37, 0.5);
+  color:white;
+  border: 2px solid rgb(8, 167, 35);
+  width: 120px;
+  height: 42px;
+}
+.FormField__Button--BlueBox{
+  border: 2px solid #1976D2;
+  box-sizing: border-box;
+  color: #1976D2;
+}
+.FormField__Button--BlueBox:hover { 
+  background-color: #1976D2;
+  box-shadow: 0 6px 14px 0 rgba(16, 28, 37, 0.5);
+  color:white;
+  border: 2px solid #1976D2;
+  transform: 3s; 
+}
+.FormField__Button--Orange{
+  color:white;
+  border: 2px solid #FFB300;
+  background-color: #FFB300;
+  box-shadow: 0 6px 14px 0 #FFC107;
+}
 .FormField__Button--NoMargin{
   margin-top: 0px;
 }
@@ -350,7 +459,9 @@ select:-webkit-autofill:focus {
   border: 1px solid #FFF;
   background-color: #2E4158;
 }
-
+.sc-EHOje.chXdSi{
+  height: 0;
+}
 .FormField__Link {
   height: 15px;
   width: 162px;
@@ -394,7 +505,26 @@ a.ui.card.ItemList_CardStyle{
 .description.ItemList_ModalDesc{
   width: 300px;
 }
+.DataPage__AccountText{
+  padding: 50px 0;
+  color: #4F4F4F;
+  font-family: "Gotham";
+  font-size: 16px;
+  line-height: 18px;
+}
+.DataPage__AccountLogout{
 
+  color: #4F4F4F;
+  font-family: "Gotham";
+  font-size: 16px;
+  line-height: 18px;
+  position: absolute;
+  border-bottom: 0.5px solid #1976D2;
+  margin-right: 20px;
+  margin-top: 5px; 
+  top: 0;
+  right: 0;
+}
 .ItemList_ModalDescText{
   padding: 50px 0;
   color: #4F4F4F;
@@ -427,6 +557,13 @@ a.ui.card.ItemList_CardStyle{
   display:inline-block;
   position: relative;
 }
+.mebelform{
+  padding: 30px;
+  font: Gotham;
+}
+.formaAddMebel{
+  font: Gotham;
+}
 .ItemList_CategoryIcon{
   height: 12px;
   width: 12px;
@@ -441,4 +578,10 @@ a.ui.card.ItemList_CardStyle{
 }
 .ui.image img, .ui.image svg{
   max-height: 400px;
+}
+.DataPage_NavItem.sc-bdVaJa.fCRQmS{
+  padding: 2px;
+}
+.DataPage_NavItem.sc-bdVaJa.izmYAl{
+  padding: 0;
 }
