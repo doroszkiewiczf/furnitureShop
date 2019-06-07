@@ -1,28 +1,28 @@
 import React, { Component } from 'react';
 import {Link, NavLink} from 'react-router-dom';
-import {Reveal} from 'semantic-ui-react';
+import {Modal, Message, Button, Icon} from 'semantic-ui-react';
 import logo from '../images/Logo.png';
 import top from '../images/top.png';
-
+ 
 const formValid = formErrors => {
   let valid = true;
-
+ 
   Object.values(formErrors).forEach(val => {
     val.length > 0 && (valid = false);
   });
   return valid;
 }
-
+ 
 function validateEmail(email) {
   var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return re.test(String(email).toLowerCase());
 }
-
+ 
 class SignUpPage extends Component{
-
+ 
   constructor(){
     super();
-
+ 
     this.state = {
       login: '',
       firstName: '',
@@ -30,6 +30,8 @@ class SignUpPage extends Component{
       password: '',
       email: '',
       isAccepted: false,
+      modalOpen: false,
+      open: false,
       formErrors: {
         login: '-',
         firstName: '-',
@@ -41,21 +43,27 @@ class SignUpPage extends Component{
     };
   }
   handleChecked = e =>  {
-
+ 
     this.setState({
       isAccepted: !this.state.isAccepted
     });
     this.state.formErrors.accept = this.state.isAccepted === false ? "" : "You have to accept the terms & conditions";
-
+ 
   }
-
+ 
+  closeConfigShow = (closeOnEscape, closeOnDimmerClick) => () =>{
+    this.setState({ closeOnEscape, closeOnDimmerClick, open: true })
+  }
+ 
+  handleClose = () => this.setState({ modalOpen: false })
+ 
   handleChange = e => {
     e.preventDefault();
     const target = e.target;
     let value = target.value;
     let name = target.name;
     let formErrors = this.state.formErrors;
-
+ 
     switch(name){
       case "login":
         formErrors.login = value.length < 3  ? "Your login is too short" : "";
@@ -96,7 +104,11 @@ class SignUpPage extends Component{
             "password": this.state.password,
             "email": this.state.email
           }
-
+ 
+          this.setState({
+            modalOpen: true
+          })
+ 
           fetch("http://localhost:8080/add", {
             method: "POST",
             headers: {
@@ -111,7 +123,7 @@ class SignUpPage extends Component{
           .then(function(data){
             console.log("WYSYŁANE TU COŚ BYŁO")
             console.log(data)
-
+ 
           });
         }
         else{
@@ -124,11 +136,11 @@ class SignUpPage extends Component{
       }
   }
   handleSend() {
-
+ 
   }
-
+ 
     render(){
-      const {formErrors, isAccepted} = this.state;
+      const {formErrors, isAccepted, open, closeOnEscape, closeOnDimmerClick} = this.state;
         return(
           <div>
               <div className="TopImage">
@@ -137,19 +149,19 @@ class SignUpPage extends Component{
                       </div>
                   <div className="TopImage_Text">HOME DECO AR</div>
               </div>
-
+ 
             <div onSubmit={this.handleSubmit} className="FormCenter">
-
+ 
             {/*  <div style = {{ marginBottom: "50px"}}>
                 <img className = ".logo" src={logo}/>
               </div>
-
+ 
               <div style = {{ marginBottom: "50px"}}>
                 <label className = "App_MainTag">
                   Nice Furniture AR App
                 </label>
               </div>*/}
-
+ 
                 <form className="FormFields">
                   {/*Pole tekstowe - login*/}
                   <div className="FormField">
@@ -159,9 +171,9 @@ class SignUpPage extends Component{
                     {formErrors.login.length > 1 && (
                     <span className="errorMessage">{formErrors.login}</span>
                   )}
-
+ 
                   </div>
-
+ 
                   {/*Pole tekstowe - hasło*/}
                   <div className="FormField">
                     <input type="password" id="password" className="FormField__Input"
@@ -171,7 +183,7 @@ class SignUpPage extends Component{
                     <span className="errorMessage">{formErrors.password}</span>
                   )}
                   </div>
-
+ 
                   {/*Pole tekstowe - imie*/}
                   <div className="FormField">
                     <input type="text" id="firstName" className="FormField__Input"
@@ -181,7 +193,7 @@ class SignUpPage extends Component{
                     <span className="errorMessage">{formErrors.firstName}</span>
                   )}
                   </div>
-
+ 
                   {/*Pole tekstowe - nazwisko*/}
                   <div className="FormField">
                     <input type="text" id="lastName" className="FormField__Input"
@@ -191,7 +203,7 @@ class SignUpPage extends Component{
                     <span className="errorMessage">{formErrors.lastName}</span>
                   )}
                   </div>
-
+ 
                   {/*Pole tekstowe - email*/}
                   <div className="FormField">
                     <input type="text" id="email" className="FormField__Input"
@@ -201,14 +213,14 @@ class SignUpPage extends Component{
                     <span className="errorMessage">{formErrors.email}</span>
                   )}
                   </div>
-
+ 
                   {/*Check box do akceptacji*/}
                     <div className="FormField">
                       <label className="FormField__CheckboxLabel">
                         <input className="FormField__Checkbox" type="checkbox" name="isAccepted"
                         value={isAccepted} onChange={this.handleChecked}/>
                         I have read and accept the<a href="https://hltv.org" target="_blank" rel="noopener noreferrer" className="FormField__TermsLink">terms & conditions</a>
-
+ 
                       </label>
                       {formErrors.accept.length > 0 && (
                         <span className="errorMessage">{formErrors.accept}</span>
@@ -216,9 +228,30 @@ class SignUpPage extends Component{
                     </div>
                   {/*Przycisk do akceptacji*/}
                   <div className="FormField">
-
-                    <button className="FormField__Button FormField__Button-SignUp-Register">Sign Up</button>
-
+ 
+                    <button className="FormField__Button FormField__Button-SignUp-Register" onClick={this.closeConfigShow(false,false)}>Sign Up
+                    <Modal
+                    open={this.state.modalOpen}
+                    onClose={this.handleClose}
+                    closeOnEscape={closeOnEscape}
+                    closeOnDimmerClick={closeOnDimmerClick}
+                    basic
+                    size='small'
+                    centered={true}
+                    >
+                    <Modal.Content>
+                    <Message success>
+                    <h1>Your account has been successfully created!</h1>
+                    <p>You can log in now.</p>
+                    <Button color='green' onClick={this.handleClose}>
+                      <Icon name='checkmark' size='small'/> <Link to="/login" style={{color:"white"}}>Sign In</Link>
+                    </Button>
+                      </Message>
+ 
+                    </Modal.Content>
+                    </Modal>
+                    </button>
+ 
                   </div>
                   <div style = {{marginTop: "50px"}}>
                     <label className="FormField__Link">Already a user?</label>
@@ -234,5 +267,5 @@ class SignUpPage extends Component{
         );
     }
 }
-
+ 
 export default SignUpPage;

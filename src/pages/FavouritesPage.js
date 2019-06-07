@@ -15,31 +15,19 @@ class FavouritesPage extends Component{
         }
       }
     
-      handleClick (){
-        this.setState({
-          iconColor: 'blue'
-        })
-      }
-    
-      addToFavorite = (e) =>{
-        e.stopPropagation();
-        console.log('nie triggeruje modala');
-        this.setState({
-          iconColor: 'blue'
-        })
-    
-      }
+
 
     render(){
-        if (this.props.furnitures){
+      var furnitures = JSON.parse(window.sessionStorage.getItem('user')).furnitures;
+        if (furnitures !== 'undefined' && furnitures.length > 0){
           return(
             <div><Card.Group>
                 {
                   JSON.parse(window.sessionStorage.getItem('user')).furnitures.map(item =>(
-                    <Modal size="tiny" key={item.id} trigger={
+                    <Modal size="small" key={item.id} dimmer='blurring' trigger={
                       <Card className="ItemList_CardStyle">
-                        <div>
-                          <IconForm furniture={item} furnitureId={item.id} favPage={true}/>
+                        <div className = "IconFormClass">
+                          <IconForm furniture={item} furnitureId={item.id} favPage={true} size={"large"}/>
                         </div>
                         
                           <img className = "imageHere"
@@ -52,30 +40,43 @@ class FavouritesPage extends Component{
                       </Card>
       
                           } closeIcon>
-                                              <Modal.Header className = "ItemList_ModalHeader">
-                      <div className = "ItemList_ModalHeaderText">
-                        {item.name}
-                      </div> 
-                        </Modal.Header>
-                          <Modal.Content image>
-                            <Modal.Description className="ItemList_ModalDesc">
-                              <Header>
-                                <div className = "ItemList_CategoryText">
-                                  <img className = "ItemList_CategoryIcon"
-                                    src={categoryDot} 
-                                  />
-                                    {" " + item.category}
+                          <Modal.Header className = "ItemList_ModalHeader">
+                          <div className = "ItemList_ModalHeaderIcon">
+                          </div>
+                          <div className = "ItemList_ModalHeaderText">
+                          {item.name}
+                          </div>
+                          <div className = "DataPage_AccountContainer">
+                          
+                          </div>
+                              
+                          {/*
+                            <div className = "ItemList_ModalHeaderText">
+                            <IconForm style = {{width: "50px"}}furniture={item} furnitureId={item.id} favPage={false}/>
+                              {item.name}
+                            </div>*/}
+                            
+                          </Modal.Header>
+                            <Modal.Content image>
+                              <Modal.Description className="ItemList_ModalDesc">
+                                <Header>
+                                  {/*<div className = "ItemList_CategoryText">
+                                    <img className = "ItemList_CategoryIcon"
+                                      src={categoryDot} 
+                                    />
+                                      {" " + item.category}
+                                  </div>*/}
+                                </Header>
+                                <div className = "ItemList__DescText">
+                                  <p className = "ItemList_ModalDescText" style={{marginLeft: "20px", lineHeight: "17px"}}>{item.description}</p>
                                 </div>
-                              </Header>
-                              <div className = "ItemList_ModalDescText">
-                                <p><strong>Wymiary:</strong>{item.transform.x}x{item.transform.y}x{item.transform.z}cm</p>
-                                <span><strong>Opis:</strong></span>
-                                <p style={{marginLeft: "20px", lineHeight: "17px"}}>{item.description}</p>
-                              </div>
-                            </Modal.Description>
-                            <Image className="ItemList_ModalImage" wrapped size='medium' src={"http://localhost:8080/downloadFile/"+ item.icon} />
-                        </Modal.Content>
-                      </Modal>
+                                <p className = "ItemList_ModalDescText ItemList_ModalDescText--Bottom"><strong>Dimensions: </strong>{item.transform.x}x{item.transform.y}x{item.transform.z}cm</p>
+                              </Modal.Description>
+      
+                              <Image verticalAlign='middle' className="ItemList_ModalImage" wrapped size='medium' src={"http://localhost:8080/downloadFile/"+ item.icon} />
+      
+                          </Modal.Content>
+                          </Modal>
                 )
                   )}
             </Card.Group>  </div>
@@ -83,8 +84,8 @@ class FavouritesPage extends Component{
         }
         else{
             return(
-                <div>
-                    <h3> Brak ulubionych mebli</h3>
+                <div >
+                    <h3 className = "ItemList_ModalHeaderText"> Brak ulubionych mebli</h3>
                 </div>
             )
         }

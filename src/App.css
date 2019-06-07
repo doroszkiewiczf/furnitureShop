@@ -110,12 +110,20 @@ select:-webkit-autofill:focus {
   margin-top: 7px;
   margin-bottom: 7px;
 }
+.IconFormClass{
+  margin-top: 7px;
+  margin-left: 7px;
+}
+.Icon__IconStyle{
+  /*border: 1px dashed blue;*/
+}
 .DataPage__SideMenuContainer{
   color: white;
   background-color: transparent;
-  width: 15%;
+  width: 250px;
   display: inline-block;
   position: relative;
+  margin-left: 10px;
 }
 .DataPage__SideMenu{
   padding: 1px, 1px, 1px, 1px;
@@ -136,13 +144,13 @@ select:-webkit-autofill:focus {
   margin-bottom: 10px;
 }
 .DataPage_AccountLogo{
-  height: 72px;
-  width: 72px;
-  margin-top: 30px;
+  height: 52px;
+  width: 52px;
+  margin-top: 41px;
   margin-right: 10px;
   border-radius:50%;
   box-shadow: 0 3px 7px 0 rgba(16, 28, 37, 0.5);
-  margin-bottom: 32px;
+  margin-bottom: 41px;
   margin-left: 8px;
 }
 .DataPage_ButtonContainer{
@@ -150,24 +158,24 @@ select:-webkit-autofill:focus {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  padding-top: 36px;
-  padding-left: 62px;
-  border: 1px dashed blue;
+  padding-left: 42px;
 }
 .DataPage_LogoContainer{
   flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px dashed red;
 }
 .DataPage_AccountContainer{
   flex: 1;
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  border: 1px dashed green;
 }
+.ItemList_ImageContainer{
+  height: 100%;
+}
+
 .DataPage_logo{
   margin-top: 10px;
   height: 100px;
@@ -201,11 +209,11 @@ select:-webkit-autofill:focus {
   margin-left: 10px;
   margin-right: 10px;
   background-color: transparent;
+  padding-top: 5px;
   box-sizing: border-box;
   width: 100%;
   height: calc(100vh - 146px);
   padding-left: 6px;
-  border: 1px solid #000000;
 
 }
 .imageHere{
@@ -397,6 +405,31 @@ input#name {
   font-size: 18px;
   line-height: 22px;
 }
+input#category {
+  background-color: transparent;
+  border: none;
+  color: #333;
+  outline: none;
+  box-sizing: border-box;
+  border-bottom: 1px solid #1976D2;
+  box-shadow: 0 4px 4px -4px rgba(33,150,243,0.5);
+  font-family: "Gotham Light";
+  font-size: 18px;
+  line-height: 22px;
+}
+select#selekt {
+  background-color: transparent;
+  border: none;
+  color: #333;
+  outline: none;
+  border-radius: 15px;
+  box-sizing: border-box;
+  border: 0.5px solid #1976D2;
+  box-shadow: 0 4px 4px -4px rgba(33,150,243,0.5);
+  font-family: "Gotham Light";
+  font-size: 18px;
+  line-height: 22px;
+}
 input#num{
   background-color: transparent;
   border: none;
@@ -406,7 +439,7 @@ input#num{
   border: 0.5px solid #1976D2;
   box-shadow: 0 4px 4px 0px rgba(33,150,243,0.5);
   font-family: "Gotham Light";
-  font-size: 18px;
+  font-size: 14px;
   line-height: 22px;
 }
 intput#category{
@@ -442,10 +475,20 @@ input[type="file"] + label {
 
   text-align: center;
 }
+.DataPage__Logout{
+  height: 50px;
+  width: 50px;
+  background-color: #1976D2;
+  padding: 5px;
+  border: solid 2px rgb(13, 98, 184);
+  border-radius: 50%; 
+  box-shadow: 0 3px 5px 0 #1976D2;
+}
 .MebelAddForm_InputLabel{
   font-family: "Gotham Light";
   font-size: 18px;
   line-height: 22px;
+  padding-top: 2px;
 }
 .ui.form .field>label{
   display: none;
@@ -595,8 +638,15 @@ input[type="file"] + label {
 }
 
 a.ui.card.ItemList_CardStyle{
+  margin-top:25px;
+  margin-left: 25px;
+  margin-right: 0px;
   width: 300px;
   height: 300px;
+  margin-bottom: 0;
+  position:relative;
+  box-shadow: 0 6px 14px 0 rgba(33,150,243,0.5);
+
 }
 
 .emptyDivider{
@@ -609,27 +659,36 @@ a.ui.card.ItemList_CardStyle{
   width: 300px;
 }
 .DataPage__AccountText{
-  padding: 50px 0;
+  margin-right: 75px;
+  margin-bottom: 40px;
+  padding: 5px;
   color: #4F4F4F;
   font-family: "Gotham";
+  border-radius: 12px;
   font-size: 16px;
   line-height: 18px;
+  border: 1px solid #1976D2;
+  box-shadow: 0 3px 5px 0 #1976D2;
 }
 .DataPage__AccountLogout{
 
-  color: #4F4F4F;
-  font-family: "Gotham";
-  font-size: 16px;
-  line-height: 18px;
+
   position: absolute;
-  border-bottom: 0.5px solid #1976D2;
   margin-right: 20px;
-  margin-top: 5px;
+  margin-top: 20px;
   top: 0;
   right: 0;
+
 }
 .ItemList_ModalDescText{
   padding: 50px 0;
+  color: #4F4F4F;
+  font-family: "Gotham";
+  font-size: 20px;
+  line-height: 21px;
+}
+.ItemList_ModalDescText--NoPadding{
+  padding-top: 20px;
   color: #4F4F4F;
   font-family: "Gotham";
   font-size: 20px;
@@ -639,14 +698,29 @@ a.ui.card.ItemList_CardStyle{
   font-family: "Gotham Light";
 }
 .ItemList_ModalHeader.header{
-  text-align: center;
-
-}
-.ItemList_ModalHeaderText{
+  display: flex;
   color: #4F4F4F;
   font-size: 36px;
   font-weight: 700;
   font-family: Gotham;
+}
+.ItemList_ModalHeaderText{
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #4F4F4F;
+  font-size: 36px;
+  font-weight: 700;
+  font-family: Gotham;
+  padding-bottom: 10px;
+}
+.ItemList_ModalHeaderIcon{
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin-top: 15px;
+  margin-left: 15px;
 }
 .ItemList_CategoryText{
   color: #4F4F4F;
@@ -687,4 +761,16 @@ a.ui.card.ItemList_CardStyle{
 }
 .DataPage_NavItem.sc-bdVaJa.izmYAl{
   padding: 0;
+}
+.ItemList__DescText{
+  border: 1px solid #1976D2;
+  box-shadow: 0 6px 14px 0 rgba(33,150,243,0.5);
+  border-radius: 10px;
+  margin-right: 10px;
+}
+.ItemList_ModalDescText--Bottom{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  margin-left: 20px;
 }

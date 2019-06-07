@@ -22,7 +22,7 @@ import logo from '../images/Logotyp.png';
 import QRCode from '../images/QR_code.jpg'
 import accountIcon from '../images/Account.png'
 import googlePlay from '../images/googleplay.png'
-
+import logoutIcon from '../images/logout.png'
 
 const AppContainer = styled.div`\
   display: flex;
@@ -274,15 +274,13 @@ class DataPage extends Component{
               </div>
               <div className="DataPage_AccountContainer">
                 <div className = "DataPage__AccountText">
-                  <p style = {{lineHeight: "17px"}}>Logged as:
-                  <br/><b>{JSON.parse(window.sessionStorage.getItem('user')).login}</b> 
+                  <p style = {{lineHeight: "17px"}}>Hello,
+                  <b>{" " + JSON.parse(window.sessionStorage.getItem('user')).login}</b> 
                   </p>
                 </div>
-                
-                <img className = "DataPage_AccountLogo" src={accountIcon}/>
                 <div className = "DataPage__AccountLogout">
                   <Link to="/" onClick={this.logMeOut}>
-                    Wyloguj
+                    <img className = "DataPage__Logout" src={logoutIcon}/>
                   </Link>
                   </div>
               </div>

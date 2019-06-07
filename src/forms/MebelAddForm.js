@@ -74,17 +74,17 @@ fileSelectedHandler = e => {
     let extension = getFileExtension(file.name);
     console.log(extension)
     if  (name === "icon" && extension!=='png' && extension!=='jpg'){
-      target.setCustomValidity("Wamagany plik: .png lub .jpg !!");
+      target.setCustomValidity("Required extensions: .png lub .jpg !!");
     }else if (name === "model" && extension!=='obj') {
-      target.setCustomValidity("Wamagany plik: .obj !!");
+      target.setCustomValidity("Required extension: .obj !!");
     }else if (name === "texture" && extension!=='mtl'){
-      target.setCustomValidity("Wamagany plik .mtl !!");
+      target.setCustomValidity("Required extension .mtl !!");
     }else{
       target.setCustomValidity("");
     }
   }
   else{
-    target.setCustomValidity("Wybierz plik!");
+    target.setCustomValidity("Choose a file!");
   }
 }
 
@@ -94,7 +94,7 @@ componentDidMount(){
   var name = document.getElementById("name");
   name.addEventListener("input", function (event) {
     if (name.validity.patternMismatch) {
-      name.setCustomValidity("Używaj tylko liter.");
+      name.setCustomValidity("Use letters only.");
     } else {
       name.setCustomValidity("");
     }
@@ -122,7 +122,7 @@ render (){
      id="name"
      className="FormField__Input"
      name="name"
-     placeholder="Nazwa"
+     placeholder="Name"
      value={data.name}
      onChange={this.onChange}
      />
@@ -134,7 +134,7 @@ render (){
       id="name"
       name="description"
       required
-      placeholder="Opis"
+      placeholder="Description"
       value={data.description}
       onChange={this.onChange}
      />
@@ -144,7 +144,7 @@ render (){
      <Button primary type="button" class = "ui primary button"active={!this.state.on} onClick={this.dropDownSelected}>Choose</Button>
      <Button primary type="button" class = "ui primary button"active={this.state.on} onClick={this.insertCategorySelected}>New Category</Button>
      <div className='emptyDivider'/>
-     {!this.state.on && <Form.Field> <select id="selekt" style = {{width: "100%"}} placeholder='wybierz kategorię' onChange={this.onChange} name="category">
+     {!this.state.on && <Form.Field> <select id="selekt" style = {{width: "100%"}} onChange={this.onChange} name="category">
 
         {this.props.category.map((category, index) =>
           (index!==0)&&
@@ -158,7 +158,7 @@ render (){
               id="category"
               required
               name="category"
-              placeholder="Podaj nazwę kategorii"
+              placeholder="Enter a custom category"
               value={data.category}
               onChange={this.onChange}
               />
@@ -195,7 +195,7 @@ render (){
 */}
 
 
-           <div className='formaAddMebel'><b>Ikona</b></div>
+           <div className='formaAddMebel'><b>Icon</b></div>
 
         {/* <Form.Field error={!!errors.icon}> */}
         <Form.Field>
@@ -235,7 +235,7 @@ render (){
            {/*   {errors.icon && <InlineError text={errors.icon} />} */}
       </Form.Field>
 
-      <div className='formaAddMebel'><b>Tekstura</b></div>
+      <div className='formaAddMebel'><b>Texture</b></div>
 
       <Form.Field>
            <input
@@ -255,7 +255,7 @@ render (){
           {/*   {errors.icon && <InlineError text={errors.icon} />} */}
      </Form.Field>
 
-      <div className='formaAddMebel'><b>Wymiary</b></div>
+      <div className='formaAddMebel'><b>Dimensions</b></div>
 
       <Form.Group widths='equal'>
     {/*<Form.Field error={!!errors.x}>  */}

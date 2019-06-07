@@ -66,7 +66,8 @@ class IconForm extends Component{
         window.sessionStorage.setItem('user', JSON.stringify(user));
         console.log(user);
         
-        });
+        }); 
+
     }else{
       color = "gray";
       console.log("Dane mebla do usunięcia:");
@@ -102,6 +103,7 @@ class IconForm extends Component{
         console.log(user);
         
         });
+
     }
     this.setState({
       iconColor: color
@@ -112,7 +114,7 @@ class IconForm extends Component{
 
     render(){
         return(
-            <Icon style={{color:this.state.iconColor}} onClick={this.addToFavorite} name='favorite' size='large'/>
+            <Icon style={{color:this.state.iconColor}} className = "Icon__IconStyle"onClick={this.addToFavorite} name='heart' size={this.props.size}/>
         )
     }
 }
