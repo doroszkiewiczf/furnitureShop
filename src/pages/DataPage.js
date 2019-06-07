@@ -344,7 +344,7 @@ class DataPage extends Component{
                         <img className = "InfoModal_Play" src={googlePlay}/>
                       </a>
                       <h1 className = "InfoModal_Header">2. Get QR code</h1>
-                      <a href="https://hltv.org" target="_blank" rel="noopener noreferrer"> 
+                      <a href="http://localhost:8080/downloadFile/QR_code.jpg" target="_blank" rel="noopener noreferrer"> 
                         <img className = "InfoModal_QRCode" src={QRCode}/>
                       </a>
                       <h1 className = "InfoModal_Header">3. Enjoy your interior!</h1>

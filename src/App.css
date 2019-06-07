@@ -774,3 +774,41 @@ a.ui.card.ItemList_CardStyle{
   left: 0;
   margin-left: 20px;
 }
+.ui.animated.button{
+  background-color: white !important;
+  color:#1976D2 !important;
+  font-family: Gotham !important;
+  font-size: 20px !important;
+  font-weight: 300 !important;
+  line-height: 0 !important;
+}
+ 
+.ui.animated.button.signin{
+  background-color: #1976D2 !important;
+  color:#fff !important;
+  font-family: Gotham !important;
+  font-size: 20px !important;
+  font-weight: 300 !important;
+  line-height: 0 !important;
+ 
+}
+ 
+.hidden.content{
+top:85% !important;
+width: 135px !important;
+height: 24px !important;
+}
+ 
+.hidden.content.signin{
+top:85% !important;
+width: 110px !important;
+height: 24px !important;
+}
+ 
+.angle.double.right.icon{
+  color: #fff !important;
+}
+ 
+.user.circle.outline.icon{
+  color:#1976D2 !important;
+}
